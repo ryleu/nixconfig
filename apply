@@ -3,6 +3,7 @@
 set -e
 
 cp -vr ./* /etc/nixos
+cp -vr .applyignore /etc/nixos/.gitignore
 
 echo
 
@@ -16,17 +17,19 @@ git add .
 git config user.name "root"
 git config user.email "root@nixos.local"
 
-if [[ -z "$(git status --porcelain)" ]]; then
-	echo "No changes to commit."
-else
-	git commit -m "derivation $(date)"
-fi
-
 echo
 
 if [[ -z $1 ]]; then
 	nixos-rebuild switch
 else
 	nixos-rebuild switch --flake "/etc/nixos/#$1"
+fi
+
+echo
+
+if [[ -z "$(git status --porcelain)" ]]; then
+	echo "No changes to commit."
+else
+	git commit -m "derivation $(date)"
 fi
 
