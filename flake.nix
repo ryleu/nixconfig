@@ -17,20 +17,29 @@
         ];
     in {
       # default configuration
-      default = nixpkgs.lib.nixosSystem {
+      nixos = nixpkgs.lib.nixosSystem {
         modules = baseModules;
       };
 
       # rectangle's nixos configuration
       rectangle = nixpkgs.lib.nixosSystem {
         modules = baseModules ++ [
-          ./rectangle.nix
+          ./hosts/rectangle.nix
         ];
       };
 
       # mathrock's nixos configuration
-      nixosConfigurations.mathrock = nixpkgs.lib.nixosSystem {
-        modules = baseModules;
+      mathrock = nixpkgs.lib.nixosSystem {
+        modules = baseModules ++ [
+          ./hosts/mathrock.nix
+        ];
+      };
+
+      # barely-better's nixos configuration
+      barely-better = nixpkgs.lib.nixosSystem {
+        modules = baseModules ++ [
+          ./hosts/barely-better.nix
+        ];
       };
     };
   };

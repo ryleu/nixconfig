@@ -15,7 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
-    hostName = pkgs.lib.mkDefault "default";
+    hostName = pkgs.lib.mkDefault "nixos";
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary

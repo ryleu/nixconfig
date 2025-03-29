@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -e
+
+cp -vr ./* /etc/nixos
+
+echo
+
+cd /etc/nixos
+
+if [[ ! -d .git ]]; then
+	git init
+fi
+
+git add .
+git commit -m "derivation $(date)" || true # we don't need to error if this fails
+
+echo
+
+if [[ -z $1 ]]; then
+	nixos-rebuild switch
+else
+	nixos-rebuild switch --flake "/etc/nixos/#$1"
+fi
+
