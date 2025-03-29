@@ -13,7 +13,14 @@ if [[ ! -d .git ]]; then
 fi
 
 git add .
-git commit -m "derivation $(date)" || true # we don't need to error if this fails
+git config user.name "root"
+git config user.email "root@nixos.local"
+
+if [[ -z "$(git status --porcelain)" ]]; then
+	echo "No changes to commit."
+else
+	git commit -m "derivation $(date)"
+fi
 
 echo
 
