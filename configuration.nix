@@ -154,7 +154,10 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+  };
 
   # i like flakes c:
   nix = {
