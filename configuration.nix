@@ -110,7 +110,7 @@
   users.users.ryleu = {
     isNormalUser = true;
     description = "Riley";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
     #  thunderbird
     ];
