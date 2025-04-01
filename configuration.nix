@@ -128,16 +128,6 @@
   ];
 
   # List services that you want to enable:
-
-  # clamav
-  services.clamav = {
-    daemon.enable = true;
-    updater.enable = true;
-    scanner.enable = true;
-    # Provides extra signatures
-    fangfrisch.enable = true;
-  };
-
   services.zerotierone = {
     enable = true;
     joinNetworks = [
