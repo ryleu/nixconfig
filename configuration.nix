@@ -66,42 +66,58 @@
     };
   };
 
-  services.xserver = {
-    # Enable the X11 windowing system.
-    enable = true;
-
-    # Enable the GNOME Desktop Environment.
-    displayManager.gdm = {
-      wayland = true;
+  services = {
+    xserver = {
+      # Enable the X11 windowing system.
       enable = true;
+
+      # Enable the GNOME Desktop Environment.
+      displayManager.gdm = {
+        wayland = true;
+        enable = true;
+      };
+      desktopManager.gnome.enable = true;
     };
-    desktopManager.gnome.enable = true;
-  };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+    # Configure keymap in X11
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+    # Enable CUPS to print documents.
+    printing.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      #jack.enable = true;
+
+      # use the example session manager (no others are packaged yet so this is enabled by default,
+      # no need to redefine it in your config for now)
+      #media-session.enable = true;
+    };
+
+    # List services that you want to enable:
+    zerotierone = {
+      enable = true;
+      joinNetworks = [
+        "8bd5124fd675598e"
+      ];
+    };
+
+    logind.extraConfig = ''
+      # suspend instead of powering off when the power button is pressed
+      HandlePowerKey=suspend
+    '';
+  };
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -126,14 +142,6 @@
     wget
     git
   ];
-
-  # List services that you want to enable:
-  services.zerotierone = {
-    enable = true;
-    joinNetworks = [
-      "8bd5124fd675598e"
-    ];
-  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
