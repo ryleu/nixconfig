@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../conf/laptop.nix
+    ../conf/desktop.nix
   ];
 
   networking.hostName = "rectangle";
