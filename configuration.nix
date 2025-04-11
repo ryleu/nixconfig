@@ -106,6 +106,7 @@
       enable = true;
       joinNetworks = [
         "8bd5124fd675598e"
+        "0cccb752f7705fc4"
       ];
     };
 
