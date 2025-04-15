@@ -138,11 +138,27 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
-  ];
+  environment = {
+    gnome = {
+      excludePackages = with pkgs; [
+        epiphany
+        totem
+        yelp
+        geary
+        gnome-contacts
+        gnome-logs
+        gnome-maps
+        gnome-music
+        gnome-weather
+      ];
+    };
+
+    systemPackages = with pkgs; [
+      vim
+      wget
+      git
+    ];
+  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
