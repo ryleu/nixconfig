@@ -16,6 +16,14 @@
     #   my-secret.file = ./secrets/my-secret.age;
     # they can later be accessed like this
     #   config.age.secrets.my-secret.path
+    id_ed25519-key = {
+      file = ./secrets/id_ed25519-key.age;
+      path = "/home/ryleu/.ssh/id_ed25519";
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
+
     ripi-key = {
       file = ./secrets/ripi-key.age;
       path = "/home/ryleu/.ssh/ripi";
