@@ -6,4 +6,5 @@ let
   systems = [ rectangle ];
 in
 {
+  "ripi-key.age".publicKeys = users ++ systems;
 }

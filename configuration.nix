@@ -16,6 +16,13 @@
     #   my-secret.file = ./secrets/my-secret.age;
     # they can later be accessed like this
     #   config.age.secrets.my-secret.path
+    ripi-key = {
+      file = ./secrets/ripi-key.age;
+      path = "/home/ryleu/.ssh/ripi";
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
   };
 
   networking = {
@@ -157,9 +164,6 @@
     isNormalUser = true;
     description = "Riley";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
   };
 
   # Allow unfree packages
