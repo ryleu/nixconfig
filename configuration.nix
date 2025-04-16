@@ -43,6 +43,18 @@
 
   networking = {
     hostName = pkgs.lib.mkDefault "nixos";
+
+    nameservers = [
+      # tailscale
+      "100.100.100.100"
+
+      # cloudflare
+      "1.1.1.1"
+      "1.0.0.1"
+      "2606:4700:4700::1111"
+      "2606:4700:4700::1001"
+    ];
+    search = [ "fawn-stonecat.ts.net" ];
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary
@@ -94,6 +106,8 @@
   };
 
   services = {
+    tailscale.enable = true;
+
     fail2ban = {
       enable = true;
       # Ban IP after 5 failures
@@ -157,7 +171,6 @@
     zerotierone = {
       enable = true;
       joinNetworks = [
-        "8bd5124fd675598e"
         "0cccb752f7705fc4"
       ];
     };
