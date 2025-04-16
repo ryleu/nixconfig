@@ -24,6 +24,14 @@
       group = "users";
     };
 
+    voron-key = {
+      file = ./secrets/voron-key.age;
+      path = "/home/ryleu/.ssh/voron";
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
+
     ripi-key = {
       file = ./secrets/ripi-key.age;
       path = "/home/ryleu/.ssh/ripi";

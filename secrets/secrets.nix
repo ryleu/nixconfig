@@ -9,5 +9,6 @@ in
 {
   "ripi-key.age".publicKeys = users ++ systems;
   "github-key.age".publicKeys = users ++ systems;
+  "voron-key.age".publicKeys = users ++ systems;
   "id_ed25519-key.age".publicKeys = users ++ systems;
 }
