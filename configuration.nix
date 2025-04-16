@@ -24,6 +24,30 @@
       group = "users";
     };
 
+    redoak-key = {
+      file = ./secrets/redoak-key.age;
+      path = "/home/ryleu/.ssh/redoak";
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
+
+    monument-key = {
+      file = ./secrets/monument-key.age;
+      path = "/home/ryleu/.ssh/monument";
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
+
+    proxy-key = {
+      file = ./secrets/proxy-key.age;
+      path = "/home/ryleu/.ssh/proxy";
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
+
     voron-key = {
       file = ./secrets/voron-key.age;
       path = "/home/ryleu/.ssh/voron";

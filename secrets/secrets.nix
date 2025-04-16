@@ -11,4 +11,7 @@ in
   "github-key.age".publicKeys = users ++ systems;
   "voron-key.age".publicKeys = users ++ systems;
   "id_ed25519-key.age".publicKeys = users ++ systems;
+  "redoak-key.age".publicKeys = users ++ systems;
+  "proxy-key.age".publicKeys = users ++ systems;
+  "monument-key.age".publicKeys = users ++ systems;
 }
