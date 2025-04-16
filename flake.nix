@@ -21,6 +21,7 @@
         system = "x86_64-linux";
         baseModules = [
           ./configuration.nix
+          ./hardware-configuration.nix
           agenix.nixosModules.default
           {
             environment.systemPackages = [ agenix.packages.${system}.default ];

@@ -1,11 +1,6 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -87,13 +82,6 @@
       "2606:4700:4700::1001"
     ];
     search = [ "fawn-stonecat.ts.net" ];
-    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-    # Configure network proxy if necessary
-    # proxy = {
-    #   default = "http://user:password@proxy:port/";
-    #   noProxy = "127.0.0.1,localhost,internal.domain";
-    # };
 
     # Enable networking
     networkmanager.enable = true;
@@ -192,8 +180,7 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      # If you want to use JACK applications, uncomment this
-      #jack.enable = true;
+      jack.enable = true;
 
       # use the example session manager (no others are packaged yet so this is enabled by default,
       # no need to redefine it in your config for now)
@@ -203,6 +190,7 @@
     zerotierone = {
       enable = true;
       joinNetworks = [
+        # network for the voron. todo: move to tailwind
         "0cccb752f7705fc4"
       ];
     };
@@ -217,23 +205,20 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account.
   users.users.ryleu = {
     isNormalUser = true;
     description = "Riley";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
+    # todo: use a password file with agenix
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment = {
     gnome = {
+      # ignore pre-installed gnome stuff
       excludePackages = with pkgs; [
         epiphany
         totem
@@ -247,6 +232,7 @@
       ];
     };
 
+    # basic stuff to operate the system with. most is in home manager
     systemPackages = with pkgs; [
       vim
       wget
@@ -254,14 +240,9 @@
     ];
   };
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   virtualisation = {
     docker.enable = true;
