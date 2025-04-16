@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, ... }:
 
 {
@@ -13,6 +9,14 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # secrets
+  age.secrets = {
+    # when you have secrets, put them here like this
+    #   my-secret.file = ./secrets/my-secret.age;
+    # they can later be accessed like this
+    #   config.age.secrets.my-secret.path
+  };
 
   networking = {
     hostName = pkgs.lib.mkDefault "nixos";
@@ -67,6 +71,32 @@
   };
 
   services = {
+    fail2ban = {
+      enable = true;
+      # Ban IP after 5 failures
+      maxretry = 5;
+      ignoreIP = [
+        "10.25.25.0/24"
+      ];
+      bantime = "24h"; # Ban IPs for one day on the first ban
+      bantime-increment = {
+        enable = true; # Enable increment of bantime after each violation
+        formula = "ban.Time * math.exp(float(ban.Count+1)*banFactor)/math.exp(1*banFactor)";
+        maxtime = "168h"; # Do not ban for more than 1 week
+        overalljails = true; # Calculate the bantime based on all the violations
+      };
+    };
+
+    openssh = {
+      enable = true;
+      ports = [ 22 ];
+      settings = {
+        PasswordAuthentication = false;
+        AllowUsers = [ "ryleu" ];
+        PermitRootLogin = "no";
+      };
+    };
+
     xserver = {
       # Enable the X11 windowing system.
       enable = true;
@@ -101,7 +131,6 @@
       #media-session.enable = true;
     };
 
-    # List services that you want to enable:
     zerotierone = {
       enable = true;
       joinNetworks = [
@@ -188,12 +217,13 @@
     };
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
-
+  system = {
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    stateVersion = "24.11"; # Did you read the comment?
+  };
 }

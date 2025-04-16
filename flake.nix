@@ -7,13 +7,24 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs_unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        darwin.follows = ""; # save some space because nixos not darwin
+      };
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs_unstable, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs_unstable, agenix, ... }@inputs: {
     nixosConfigurations = let
         system = "x86_64-linux";
         baseModules = [
           ./configuration.nix
+          agenix.nixosModules.default
+          {
+            environment.systemPackages = [ agenix.packages.${system}.default ];
+          }
         ];
     in {
       # default configuration
