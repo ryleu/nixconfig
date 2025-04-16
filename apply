@@ -2,6 +2,8 @@
 
 set -e
 
+startpath=$(pwd)
+
 cp -vr ./* /etc/nixos
 cp -vr .applyignore /etc/nixos/.gitignore
 
@@ -27,9 +29,13 @@ fi
 
 echo
 
+git add flake.lock
+
 if [[ -z "$(git status --porcelain)" ]]; then
 	echo "No changes to commit."
 else
 	git commit -m "derivation $(date)"
 fi
 
+cd $startpath
+cp -v /etc/nixos/flake.lock .
