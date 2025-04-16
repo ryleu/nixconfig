@@ -108,6 +108,8 @@
   };
 
   programs = {
+    zsh.enable = true;
+
     # enable hyprland
     hyprland = {
       enable = true;
@@ -210,6 +212,7 @@
     isNormalUser = true;
     description = "Riley";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
+    shell = pkgs.zsh;
     # todo: use a password file with agenix
   };
 
@@ -217,6 +220,10 @@
   nixpkgs.config.allowUnfree = true;
 
   environment = {
+    pathsToLink = [
+      "/share/zsh"
+    ];
+
     gnome = {
       # ignore pre-installed gnome stuff
       excludePackages = with pkgs; [
