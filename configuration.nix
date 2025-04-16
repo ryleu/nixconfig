@@ -23,6 +23,14 @@
       owner = "ryleu";
       group = "users";
     };
+
+    github-key = {
+      file = ./secrets/github-key.age;
+      path = "/home/ryleu/.ssh/github";
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
   };
 
   networking = {

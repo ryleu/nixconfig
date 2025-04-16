@@ -7,4 +7,5 @@ let
 in
 {
   "ripi-key.age".publicKeys = users ++ systems;
+  "github-key.age".publicKeys = users ++ systems;
 }
