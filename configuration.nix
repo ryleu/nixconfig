@@ -115,6 +115,7 @@
       enable = true;
       xwayland.enable = true;
     };
+    hyprlock.enable = true;
 
     steam.enable = true;
 
@@ -205,7 +206,12 @@
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
+  
+  security = {
+    rtkit.enable = true;
+
+    pam.services.hyprlock = {};
+  };
 
   # Define a user account.
   users.users.ryleu = {
