@@ -217,7 +217,7 @@
   users.users.ryleu = {
     isNormalUser = true;
     description = "Riley";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "input" ];
     shell = pkgs.zsh;
     # todo: use a password file with agenix
   };
