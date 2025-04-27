@@ -1,9 +1,13 @@
 { config, pkgs, inputs, ... }:
 
 {
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    # Bootloader.
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
 
   # secrets
   age.secrets = {
@@ -84,7 +88,11 @@
     search = [ "fawn-stonecat.ts.net" ];
 
     # Enable networking
-    networkmanager.enable = true;
+    networkmanager.enable = pkgs.lib.mkDefault true;
+
+    # Open ports in the firewall.
+    # firewall.allowedTCPPorts = [ ... ];
+    # firewall.allowedUDPPorts = [ ... ];
   };
 
   # Set your time zone.
@@ -158,22 +166,23 @@
     };
 
     xserver = {
-      # Enable the X11 windowing system.
-      enable = true;
+      enable = false;
 
-      # Enable the GNOME Desktop Environment.
-      displayManager.gdm = {
-        wayland = true;
-        enable = true;
+      # Configure keymap in X11
+      xkb = {
+        layout = "us";
+        variant = "";
       };
-      desktopManager.gnome.enable = true;
     };
 
-    # Configure keymap in X11
-    xserver.xkb = {
-      layout = "us";
-      variant = "";
+    # enable KDE Plasma
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+
+      settings.General.DisplayServer = "wayland";
     };
+    desktopManager.plasma6.enable = true;
 
     # Enable CUPS to print documents.
     printing.enable = true;
@@ -230,18 +239,16 @@
       "/share/zsh"
     ];
 
-    gnome = {
-      # ignore pre-installed gnome stuff
-      excludePackages = with pkgs; [
-        epiphany
-        totem
-        yelp
-        geary
-        gnome-contacts
-        gnome-logs
-        gnome-maps
-        gnome-music
-        gnome-weather
+    plasma6 = {
+      # exclude pre-installed kde stuff
+      excludePackages = with pkgs.kdePackages; [
+        konsole
+        elisa
+        gwenview
+        kate
+        khelpcenter
+        krdp
+        xwaylandvideobridge
       ];
     };
 
@@ -252,10 +259,6 @@
       git
     ];
   };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
 
   virtualisation = {
     docker.enable = true;
