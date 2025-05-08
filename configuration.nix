@@ -175,14 +175,14 @@
       };
     };
 
-    # enable KDE Plasma
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
 
+      theme = "chili";
+
       settings.General.DisplayServer = "wayland";
     };
-    desktopManager.plasma6.enable = true;
 
     # Enable CUPS to print documents.
     printing.enable = true;
@@ -239,24 +239,12 @@
       "/share/zsh"
     ];
 
-    plasma6 = {
-      # exclude pre-installed kde stuff
-      excludePackages = with pkgs.kdePackages; [
-        konsole
-        elisa
-        gwenview
-        kate
-        khelpcenter
-        krdp
-        xwaylandvideobridge
-      ];
-    };
-
     # basic stuff to operate the system with. most is in home manager
     systemPackages = with pkgs; [
       vim
       wget
       git
+      sddm-chili-theme
     ];
   };
 

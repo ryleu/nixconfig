@@ -4,6 +4,9 @@ set -e
 
 startpath=$(pwd)
 
+hardware_config="$(cat /etc/nixos/hardware-configuration.nix)"
+rm -vr /etc/nixos/*
+echo "$hardware_config" > /etc/nixos/hardware-configuration.nix
 cp -vr ./* /etc/nixos
 cp -vr .applyignore /etc/nixos/.gitignore
 
