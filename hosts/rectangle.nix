@@ -7,11 +7,14 @@
 
   networking.hostName = "rectangle";
 
-  # amdgpu shit
+  # amd shit
   services.xserver = {
     videoDrivers = [ "amdgpu" ];
   };
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot = {
+    initrd.kernelModules = [ "amdgpu" ];
+    kernelModules = [ "i2c-dev" "i2c-piix4" ];
+  };
 
   # additional storage
   fileSystems = {

@@ -2,6 +2,8 @@
 
 {
   boot = {
+  kernelModules = pkgs.lib.mkDefault [ "i2c-dev" ];
+
     # Bootloader.
     loader = {
       systemd-boot.enable = true;
@@ -142,6 +144,13 @@
   };
 
   services = {
+    hardware = {
+      openrgb = {
+        enable = true;
+        package = pkgs.openrgb-with-all-plugins;
+      };
+    };
+
     desktopManager.plasma6.enable = true;
     tailscale.enable = true;
 
@@ -218,6 +227,8 @@
   };
 
   hardware = {
+   i2c.enable = true;
+
     # Enable sound with pipewire.
     pulseaudio.enable = false;
 
@@ -238,7 +249,7 @@
   users.users.ryleu = {
     isNormalUser = true;
     description = "Riley";
-    extraGroups = [ "networkmanager" "wheel" "docker" "input" "kvm" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "input" "kvm" "i2c" ];
     shell = pkgs.zsh;
     # todo: use a password file with agenix
   };
