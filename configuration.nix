@@ -31,6 +31,14 @@
       group = "users";
     };
 
+    clucky-key = {
+      file = ./secrets/clucky-key.age;
+      path = "/home/ryleu/.ssh/clucky";
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
+
     monument-key = {
       file = ./secrets/monument-key.age;
       path = "/home/ryleu/.ssh/monument";

@@ -14,4 +14,5 @@ in
   "redoak-key.age".publicKeys = users ++ systems;
   "proxy-key.age".publicKeys = users ++ systems;
   "monument-key.age".publicKeys = users ++ systems;
+  "clucky-key.age".publicKeys = users ++ systems;
 }
