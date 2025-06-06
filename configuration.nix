@@ -76,9 +76,6 @@
     hostName = pkgs.lib.mkDefault "nixos";
 
     nameservers = [
-      # tailscale
-      "100.100.100.100"
-
       # cloudflare
       "1.1.1.1"
       "1.0.0.1"
@@ -137,7 +134,10 @@
   };
 
   services = {
+    desktopManager.plasma6.enable = true;
     tailscale.enable = true;
+
+    blueman.enable = true;
 
     fail2ban = {
       enable = true;
@@ -201,10 +201,6 @@
 
     zerotierone = {
       enable = true;
-      joinNetworks = [
-        # network for the voron. todo: move to tailwind
-        "0cccb752f7705fc4"
-      ];
     };
 
     logind.extraConfig = ''
@@ -213,8 +209,16 @@
     '';
   };
 
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  hardware = {
+    # Enable sound with pipewire.
+    pulseaudio.enable = false;
+
+    # enable bluetooth
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+  };
   
   security = {
     rtkit.enable = true;
