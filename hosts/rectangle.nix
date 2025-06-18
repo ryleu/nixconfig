@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -6,7 +11,7 @@
   ];
 
   users.users.ryleu.openssh.authorizedKeys.keyFiles = [
-   ../keys/id_ed25519.pub 
+    ../keys/id_ed25519.pub
   ];
 
   networking.hostName = "rectangle";
@@ -17,7 +22,10 @@
   };
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
-    kernelModules = [ "i2c-dev" "i2c-piix4" ];
+    kernelModules = [
+      "i2c-dev"
+      "i2c-piix4"
+    ];
   };
 
   # additional storage
@@ -37,6 +45,21 @@
         "defaults"
         "nofail"
       ];
+    };
+  };
+  programs = {
+    zsh.enable = true;
+
+    # enable hyprland
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+    hyprlock.enable = true;
+
+    steam = {
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
     };
   };
 }

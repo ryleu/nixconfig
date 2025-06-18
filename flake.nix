@@ -16,44 +16,53 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs_unstable, agenix, ... }@inputs: {
-    nixosConfigurations = let
-        system = "x86_64-linux";
-        baseModules = [
-          ./configuration.nix
-          ./hardware-configuration.nix
-          agenix.nixosModules.default
-          {
-            environment.systemPackages = [ agenix.packages.${system}.default ];
-          }
-        ];
-    in {
-      # default configuration
-      nixos = nixpkgs.lib.nixosSystem {
-        modules = baseModules;
-      };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs_unstable,
+      agenix,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations =
+        let
+          system = "x86_64-linux";
+          baseModules = [
+            ./configuration.nix
+            ./hardware-configuration.nix
+            agenix.nixosModules.default
+            {
+              environment.systemPackages = [ agenix.packages.${system}.default ];
+            }
+          ];
+        in
+        {
+          # default configuration
+          nixos = nixpkgs.lib.nixosSystem {
+            modules = baseModules;
+          };
 
-      # rectangle's nixos configuration
-      rectangle = nixpkgs.lib.nixosSystem {
-        modules = baseModules ++ [
-          ./hosts/rectangle.nix
-        ];
-      };
+          # rectangle's nixos configuration
+          rectangle = nixpkgs.lib.nixosSystem {
+            modules = baseModules ++ [
+              ./hosts/rectangle.nix
+            ];
+          };
 
-      # mathrock's nixos configuration
-      mathrock = nixpkgs.lib.nixosSystem {
-        modules = baseModules ++ [
-          ./hosts/mathrock.nix
-        ];
-      };
+          # mathrock's nixos configuration
+          mathrock = nixpkgs.lib.nixosSystem {
+            modules = baseModules ++ [
+              ./hosts/mathrock.nix
+            ];
+          };
 
-      # barely-better's nixos configuration
-      barely-better = nixpkgs.lib.nixosSystem {
-        modules = baseModules ++ [
-          ./hosts/barely-better.nix
-        ];
-      };
+          # barely-better's nixos configuration
+          barely-better = nixpkgs.lib.nixosSystem {
+            modules = baseModules ++ [
+              ./hosts/barely-better.nix
+            ];
+          };
+        };
     };
-  };
 }
-

@@ -1,8 +1,13 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   boot = {
-  kernelModules = pkgs.lib.mkDefault [ "i2c-dev" ];
+    kernelModules = pkgs.lib.mkDefault [ "i2c-dev" ];
 
     # Bootloader.
     loader = {
@@ -132,7 +137,19 @@
     };
     hyprlock.enable = true;
 
-    steam.enable = true;
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = pkgs.lib.mkDefault false;
+      dedicatedServer.openFirewall = pkgs.lib.mkDefault false;
+      package = pkgs.steam.override {
+        extraPkgs =
+          pkgs: with pkgs; [
+            libkrb5
+            keyutils
+            gamescope
+          ];
+      };
+    };
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
@@ -227,7 +244,7 @@
   };
 
   hardware = {
-   i2c.enable = true;
+    i2c.enable = true;
 
     # Enable sound with pipewire.
     pulseaudio.enable = false;
@@ -238,19 +255,26 @@
       powerOnBoot = true;
     };
   };
-  
+
   security = {
     rtkit.enable = true;
     polkit.enable = true;
-    pam.services.hyprlock = {};
+    pam.services.hyprlock = { };
   };
 
   # Define a user account.
   users.users.ryleu = {
     isNormalUser = true;
     description = "Riley";
-    extraGroups = [ "networkmanager" "wheel" "docker" "input" "kvm" "i2c" ];
-    openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "input"
+      "kvm"
+      "i2c"
+    ];
+    openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
     shell = pkgs.zsh;
     # todo: use a password file with agenix
   };

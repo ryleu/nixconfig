@@ -4,7 +4,10 @@ let
   rectangle = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRbbUTDpqCJcomV4S3K63TbF9aV8MpxVQ0fjot98SDs root@rectangle";
   barely-better = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAWotWG7ZQEFVI5qmnsK/VAaqEqaJlhV60NYz4iJACJq root@barely-better";
 
-  systems = [ rectangle barely-better ];
+  systems = [
+    rectangle
+    barely-better
+  ];
 in
 {
   "ripi-key.age".publicKeys = users ++ systems;
