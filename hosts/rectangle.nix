@@ -5,6 +5,10 @@
     ../conf/desktop.nix
   ];
 
+  users.users.ryleu.openssh.authorizedKeys.keyFiles = [
+   ../keys/id_ed25519.pub 
+  ];
+
   networking.hostName = "rectangle";
 
   # amd shit

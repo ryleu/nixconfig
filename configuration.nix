@@ -250,6 +250,7 @@
     isNormalUser = true;
     description = "Riley";
     extraGroups = [ "networkmanager" "wheel" "docker" "input" "kvm" "i2c" ];
+    openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [];
     shell = pkgs.zsh;
     # todo: use a password file with agenix
   };
