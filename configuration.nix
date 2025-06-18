@@ -161,6 +161,9 @@
   };
 
   services = {
+    # Enable sound with pipewire.
+    pulseaudio.enable = false;
+
     hardware = {
       openrgb = {
         enable = true;
@@ -245,9 +248,6 @@
 
   hardware = {
     i2c.enable = true;
-
-    # Enable sound with pipewire.
-    pulseaudio.enable = false;
 
     # enable bluetooth
     bluetooth = {
