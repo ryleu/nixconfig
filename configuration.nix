@@ -236,10 +236,6 @@
       #media-session.enable = true;
     };
 
-    zerotierone = {
-      enable = true;
-    };
-
     logind.extraConfig = ''
       # suspend instead of powering off when the power button is pressed
       HandlePowerKey=suspend
