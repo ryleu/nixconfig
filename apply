@@ -4,9 +4,12 @@ set -e
 
 startpath=$(pwd)
 
+# copy files over while preserving the hardware config
 hardware_config="$(cat /etc/nixos/hardware-configuration.nix)"
+echo "copied hardware-configuration.nix"
 rm -vr /etc/nixos/*
 echo "$hardware_config" > /etc/nixos/hardware-configuration.nix
+echo "pasted hardware-configuration.nix"
 cp -vr ./* /etc/nixos
 cp -vr .applyignore /etc/nixos/.gitignore
 
@@ -14,16 +17,19 @@ echo
 
 cd /etc/nixos
 
+# git init if we haven't already
 if [[ ! -d .git ]]; then
 	git init
 fi
 
+# make sure everything is set up to commit
 git add .
 git config user.name "root"
 git config user.email "root@nixos.local"
 
 echo
 
+# either use the default for the system, or use the one for a specified hostname
 if [[ -z $1 ]]; then
 	nixos-rebuild switch
 else
@@ -32,8 +38,10 @@ fi
 
 echo
 
+# flake.lock can get created by the rebuild, so make sure to add it
 git add flake.lock
 
+# check git status for changes before attempting to commit
 if [[ -z "$(git status --porcelain)" ]]; then
 	echo "No changes to commit."
 else
@@ -41,4 +49,7 @@ else
 fi
 
 cd $startpath
+# copy the lock file back over in case it changed
 cp -v /etc/nixos/flake.lock .
+# update the permissions of the lock file to match the repo's
+chown $(stat -c "%U:%G" .) flake.lock
