@@ -7,6 +7,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs_unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    hardware.url = "github:nixos/nixos-hardware";
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
@@ -31,6 +32,7 @@
           baseModules = [
             ./configuration.nix
             ./hardware-configuration.nix
+            inputs.hardware.nixosModules.common-pc-ssd
             agenix.nixosModules.default
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
@@ -47,6 +49,7 @@
           rectangle = nixpkgs.lib.nixosSystem {
             modules = baseModules ++ [
               ./hosts/rectangle.nix
+              inputs.hardware.nixosModules.common-gpu-amd
             ];
           };
 
