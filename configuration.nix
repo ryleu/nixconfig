@@ -285,6 +285,7 @@
 
     # basic stuff to operate the system with. most is in home manager
     systemPackages = with pkgs; [
+      docker-buildx
       vim
       wget
       git
