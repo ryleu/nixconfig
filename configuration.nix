@@ -7,7 +7,7 @@
 
 {
   boot = {
-    kernelModules = pkgs.lib.mkDefault [ "i2c-dev" ];
+    kernelModules = pkgs.lib.mkDefault [ "i2c-dev" "hid-playstation" "hidp" ];
 
     # Bootloader.
     loader = {
@@ -249,6 +249,12 @@
     bluetooth = {
       enable = true;
       powerOnBoot = true;
+      settings = {
+        General = {
+          ControllerMode = "dual";
+          Experimental = true;
+        };
+      };
     };
   };
 
