@@ -130,6 +130,8 @@
   programs = {
     zsh.enable = true;
 
+    dconf.enable = true;
+
     # enable hyprland
     hyprland = {
       enable = true;
@@ -171,7 +173,8 @@
       };
     };
 
-    desktopManager.plasma6.enable = true;
+    gnome.core-apps.enable = false;
+
     tailscale.enable = true;
 
     blueman.enable = true;
@@ -210,15 +213,12 @@
         layout = "us";
         variant = "";
       };
-    };
 
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-
-      theme = "chili";
-
-      settings.General.DisplayServer = "wayland";
+      displayManager.gdm = {
+        enable = true;
+        wayland = true;
+      };
+      desktopManager.gnome.enable = true;
     };
 
     # Enable CUPS to print documents.
@@ -296,8 +296,6 @@
       vim
       wget
       git
-      sddm-chili-theme
-      gsettings-desktop-schemas
     ];
   };
 
