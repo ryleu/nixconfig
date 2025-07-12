@@ -7,7 +7,11 @@
 
 {
   boot = {
-    kernelModules = pkgs.lib.mkDefault [ "i2c-dev" "hid-playstation" "hidp" ];
+    kernelModules = pkgs.lib.mkDefault [
+      "i2c-dev"
+      "hid-playstation"
+      "hidp"
+    ];
 
     # Bootloader.
     loader = {
