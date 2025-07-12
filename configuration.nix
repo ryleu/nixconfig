@@ -297,6 +297,7 @@
       wget
       git
       sddm-chili-theme
+      gsettings-desktop-schemas
     ];
   };
 
