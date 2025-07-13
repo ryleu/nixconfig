@@ -295,6 +295,7 @@
 
     # basic stuff to operate the system with. most is in home manager
     systemPackages = with pkgs; [
+      nautilus
       usbutils
       docker-buildx
       vim
