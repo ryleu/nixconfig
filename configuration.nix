@@ -177,7 +177,10 @@
       };
     };
 
-    gnome.core-apps.enable = false;
+    gnome = {
+      core-apps.enable = false;
+      gnome-keyring.enable = true;
+    };
 
     tailscale.enable = true;
 
@@ -295,6 +298,8 @@
 
     # basic stuff to operate the system with. most is in home manager
     systemPackages = with pkgs; [
+      seahorse
+      gnome-keyring
       nautilus
       usbutils
       docker-buildx
