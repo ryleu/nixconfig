@@ -25,7 +25,7 @@ fi
 # make sure everything is set up to commit
 git add .
 git config user.name "root"
-git config user.email "root@nixos.local"
+git config user.email "root@$(hostname).local"
 
 echo
 
