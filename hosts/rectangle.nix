@@ -10,9 +10,16 @@
     ../conf/desktop.nix
   ];
 
-  users.users.ryleu.openssh.authorizedKeys.keyFiles = [
-    ../keys/id_ed25519.pub
+  environment.systemPackages = with pkgs; [
+    lact
   ];
+  systemd = {
+    services.lactd.enable = true;
+
+    packages = with pkgs; [
+      lact
+    ];
+  };
 
   networking.hostName = "rectangle";
 
