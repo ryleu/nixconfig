@@ -272,20 +272,23 @@
   };
 
   # Define a user account.
-  users.users.ryleu = {
-    isNormalUser = true;
-    description = "Riley";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "docker"
-      "input"
-      "kvm"
-      "i2c"
-    ];
-    openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
-    shell = pkgs.zsh;
-    # todo: use a password file with agenix
+  users = {
+    users.ryleu = {
+      isNormalUser = true;
+      description = "Riley";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+        "input"
+        "kvm"
+        "i2c"
+        "libvirtd"
+      ];
+      openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
+      shell = pkgs.zsh;
+      # todo: use a password file with agenix
+    };
   };
 
   # Allow unfree packages
@@ -300,6 +303,9 @@
     systemPackages = with pkgs; [
       seahorse
       gnome-keyring
+      gnome-boxes
+      dnsmasq
+      phodav
       nautilus
       usbutils
       docker-buildx
@@ -311,7 +317,16 @@
 
   virtualisation = {
     docker.enable = true;
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+
+      qemu = {
+        swtpm.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+      };
+
+    };
+    spiceUSBRedirection.enable = true;
   };
 
   # i like flakes c:
