@@ -10,6 +10,12 @@
     ../conf/desktop.nix
   ];
 
+  services = {
+    udev.extraRules = ''
+      SUBSYSTEM=="usb", ATTRS{idVendor}=="8087", ATTRS{idProduct}=="0029", GROUP="plugdev", MODE="0660", TAG+="uaccess"
+    '';
+  };
+
   environment.systemPackages = with pkgs; [
     lact
   ];

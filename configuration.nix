@@ -284,6 +284,7 @@
         "kvm"
         "i2c"
         "libvirtd"
+        "plugdev"
       ];
       openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
       shell = pkgs.zsh;
