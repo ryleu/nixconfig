@@ -101,7 +101,10 @@
       "2606:4700:4700::1111"
       "2606:4700:4700::1001"
     ];
-    search = [ "fawn-stonecat.ts.net" ];
+    search = [
+      "fawn-stonecat.ts.net"
+      "tail08389.ts.net"
+    ];
 
     # Enable networking
     networkmanager.enable = pkgs.lib.mkDefault true;
@@ -191,7 +194,7 @@
       # Ban IP after 5 failures
       maxretry = 5;
       ignoreIP = [
-        "10.25.25.0/24"
+        "100.109.0.71/32"
       ];
       bantime = "24h"; # Ban IPs for one day on the first ban
       bantime-increment = {

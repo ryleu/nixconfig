@@ -16,6 +16,8 @@
     '';
   };
 
+  users.users.ryleu.openssh.authorizedKeys.keys = import ./secrets/authorized_keys
+
   environment.systemPackages = with pkgs; [
     lact
   ];
