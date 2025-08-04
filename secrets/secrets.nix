@@ -1,5 +1,5 @@
 let
-  users = import ./authorized_keys;
+  users = import ./authorized_keys.nix;
 
   rectangle = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRbbUTDpqCJcomV4S3K63TbF9aV8MpxVQ0fjot98SDs root@rectangle";
   barely-better = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAWotWG7ZQEFVI5qmnsK/VAaqEqaJlhV60NYz4iJACJq root@barely-better";
