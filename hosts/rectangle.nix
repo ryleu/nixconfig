@@ -18,9 +18,15 @@
 
   users.users.ryleu.openssh.authorizedKeys.keys = import ../secrets/authorized_keys.nix;
 
-  environment.systemPackages = with pkgs; [
-    lact
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      lact
+    ];
+    variables = {
+      RUSTICL_ENABLE = "radeonsi";
+    };
+  };
+
   systemd = {
     services.lactd.enable = true;
 
@@ -36,6 +42,7 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
+      mesa.opencl
       amdvlk
       amf
     ];
