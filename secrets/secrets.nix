@@ -18,4 +18,5 @@ in
   "proxy-key.age".publicKeys = users ++ systems;
   "monument-key.age".publicKeys = users ++ systems;
   "clucky-key.age".publicKeys = users ++ systems;
+  "remotebuild.age".publicKeys = users ++ systems;
 }

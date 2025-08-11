@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  inputs,
   ...
 }:
 
@@ -88,6 +86,14 @@
       mode = "600";
       owner = "ryleu";
       group = "users";
+    };
+
+    remotebuild-key = {
+      file = ./secrets/remotebuild-key.age;
+      path = "/root/.ssh/remotebuild";
+      mode = "600";
+      owner = "root";
+      group = "root";
     };
   };
 
