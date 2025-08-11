@@ -37,6 +37,7 @@
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }
+	    ./remotebuild/config.nix
           ];
         in
         {
