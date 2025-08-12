@@ -3,7 +3,8 @@
   users.groups.remotebuild = { };
   users.users.remotebuild = {
     isNormalUser = true;
-    createHome = false;
+    createHome = true;
+    home = "/opt/remotebuild";
     group = "remotebuild";
 
     openssh.authorizedKeys.keyFiles = [ ./remotebuild.pub ];

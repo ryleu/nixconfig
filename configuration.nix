@@ -216,7 +216,7 @@
       ports = [ 22 ];
       settings = {
         PasswordAuthentication = false;
-        AllowUsers = [ "ryleu" ];
+        AllowUsers = [ "ryleu" "remotebuild" ];
         PermitRootLogin = "no";
       };
     };
@@ -349,7 +349,9 @@
       trusted-users = [
         "root"
         "ryleu"
+        "remotebuild"
       ];
+
     };
   };
 
