@@ -7,13 +7,21 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs_unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    hardware.url = "github:nixos/nixos-hardware";
+    hardware = {
+      url = "github:nixos/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        darwin.follows = ""; # save some space because nixos not darwin
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -23,6 +31,8 @@
       nixpkgs,
       nixpkgs_unstable,
       agenix,
+      zen-browser,
+      home-manager,
       ...
     }@inputs:
     {
@@ -37,7 +47,7 @@
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }
-	    ./remotebuild/config.nix
+            ./remotebuild/config.nix
           ];
         in
         {
