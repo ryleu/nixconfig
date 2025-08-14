@@ -19,6 +19,7 @@
         hostName = "rectangle";
         sshUser = "remotebuild";
         sshKey = "/root/.ssh/remotebuild";
+        protocol = "ssh";
         system = pkgs.stdenv.hostPlatform.system;
         supportedFeatures = [
           "nixos-test"
