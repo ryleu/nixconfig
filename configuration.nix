@@ -322,6 +322,7 @@
       vim
       wget
       git
+      qmk-udev-rules
     ];
   };
 
