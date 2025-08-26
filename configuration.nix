@@ -179,6 +179,8 @@
     # Enable sound with pipewire.
     pulseaudio.enable = false;
 
+    udev.packages = with pkgs; [ via ];
+
     hardware = {
       openrgb = {
         enable = true;
@@ -259,6 +261,8 @@
   };
 
   hardware = {
+    keyboard.qmk.enable = true;
+
     i2c.enable = true;
 
     # enable bluetooth
@@ -322,7 +326,8 @@
       vim
       wget
       git
-      qmk-udev-rules
+      qmk
+      via
     ];
   };
 
