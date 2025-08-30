@@ -315,6 +315,7 @@
 
     # basic stuff to operate the system with. most is in home manager
     systemPackages = with pkgs; [
+      gnomeExtensions.blur-my-shell
       seahorse
       gnome-keyring
       gnome-boxes
