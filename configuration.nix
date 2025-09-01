@@ -358,8 +358,9 @@
         "ryleu"
         "remotebuild"
       ];
-
     };
+
+    optimise.automatic = true;
   };
 
   system = {
