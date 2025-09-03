@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  inputs,
   ...
 }:
 
@@ -78,15 +76,6 @@
     };
   };
   programs = {
-    zsh.enable = true;
-
-    # enable hyprland
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };
-    hyprlock.enable = true;
-
     steam = {
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
