@@ -29,11 +29,16 @@ git config user.email "root@$(hostname).local"
 
 echo
 
-# either use the default for the system, or use the one for a specified hostname
 if [[ -z $1 ]]; then
+	echo "No mode selected. See man nixos-rebuild for options."
+	exit 1
+fi
+
+# either use the default for the system, or use the one for a specified hostname
+if [[ -z $2 ]]; then
 	nixos-rebuild switch
 else
-	nixos-rebuild switch --flake "/etc/nixos/#$1"
+	nixos-rebuild switch --flake "/etc/nixos/#$2"
 fi
 
 echo
