@@ -179,7 +179,7 @@
     # Enable sound with pipewire.
     pulseaudio.enable = false;
 
-    udev.packages = with pkgs; [ via usb-blaster-udev-rules ];
+    udev.packages = with pkgs; [ via ];
 
     hardware = {
       openrgb = {
