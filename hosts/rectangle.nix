@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   ...
 }:
@@ -12,6 +13,16 @@
     udev.extraRules = ''
       SUBSYSTEM=="usb", ATTRS{idVendor}=="8087", ATTRS{idProduct}=="0029", GROUP="plugdev", MODE="0660", TAG+="uaccess"
     '';
+
+    foundryvtt = {
+      enable = true;
+      hostName = "ryleu";
+      minifyStaticFiles = true;
+      proxyPort = 443;
+      proxySSL = true;
+      upnp = false;
+      package = inputs.foundryvtt.packages.${pkgs.system}.foundryvtt_13;
+    };
   };
 
   users.users.ryleu.openssh.authorizedKeys.keys = import ../secrets/authorized_keys.nix;

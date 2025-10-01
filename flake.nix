@@ -8,6 +8,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs_unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     hardware.url = "github:nixos/nixos-hardware";
+    foundryvtt.url = "github:reckenrode/nix-foundryvtt";
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
@@ -22,6 +23,7 @@
       self,
       nixpkgs,
       nixpkgs_unstable,
+      foundryvtt,
       agenix,
       ...
     }@inputs:
@@ -48,9 +50,13 @@
 
           # rectangle's nixos configuration
           rectangle = nixpkgs.lib.nixosSystem {
+	    specialArgs = {
+	      inherit inputs;
+	    };
             modules = baseModules ++ [
               ./hosts/rectangle.nix
               inputs.hardware.nixosModules.common-gpu-amd
+	      inputs.foundryvtt.nixosModules.foundryvtt
             ];
           };
 
