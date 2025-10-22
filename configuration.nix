@@ -179,7 +179,11 @@
     # Enable sound with pipewire.
     pulseaudio.enable = false;
 
-    udev.packages = with pkgs; [ via ];
+    udev.packages = with pkgs; [
+      via
+      platformio-core
+      openocd
+    ];
 
     hardware = {
       openrgb = {
@@ -218,7 +222,10 @@
       ports = [ 22 ];
       settings = {
         PasswordAuthentication = false;
-        AllowUsers = [ "ryleu" "remotebuild" ];
+        AllowUsers = [
+          "ryleu"
+          "remotebuild"
+        ];
         PermitRootLogin = "no";
       };
     };
