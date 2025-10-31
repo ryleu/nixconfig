@@ -98,6 +98,7 @@
   };
 
   networking = {
+    firewall.enable = true;
     hostName = pkgs.lib.mkDefault "nixos";
 
     nameservers = [
@@ -183,14 +184,8 @@
       via
       platformio-core
       openocd
+      steam-devices-udev-rules
     ];
-
-    hardware = {
-      openrgb = {
-        enable = true;
-        package = pkgs.openrgb-with-all-plugins;
-      };
-    };
 
     gnome = {
       core-apps.enable = false;
@@ -304,7 +299,7 @@
         "kvm"
         "i2c"
         "libvirtd"
-        "plugdev"
+	"dialout"
       ];
       openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
       shell = pkgs.zsh;
