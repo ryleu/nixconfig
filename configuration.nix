@@ -95,10 +95,31 @@
       owner = "root";
       group = "root";
     };
+
+    cosign-key = {
+      file = ./secrets/cosign-key.age;
+      path = "/home/ryleu/.cosign/cosign.key";
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
   };
 
   networking = {
-    firewall.enable = true;
+    firewall =
+      let
+        portRanges = [
+          {
+            from = 7400;
+            to = 7999;
+          }
+        ];
+      in
+      {
+        enable = true;
+        allowedTCPPortRanges = portRanges;
+        allowedUDPPortRanges = portRanges;
+      };
     hostName = pkgs.lib.mkDefault "nixos";
 
     nameservers = [
@@ -299,7 +320,7 @@
         "kvm"
         "i2c"
         "libvirtd"
-	"dialout"
+        "dialout"
       ];
       openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
       shell = pkgs.zsh;
@@ -346,6 +367,7 @@
 
     };
     spiceUSBRedirection.enable = true;
+    waydroid.enable = true;
   };
 
   # i like flakes c:

@@ -19,4 +19,5 @@ in
   "monument-key.age".publicKeys = users ++ systems;
   "clucky-key.age".publicKeys = users ++ systems;
   "remotebuild-key.age".publicKeys = users ++ systems;
+  "cosign-key.age".publicKeys = users ++ systems;
 }
