@@ -143,7 +143,7 @@
   };
 
   # Set your time zone.
-  time.timeZone = "America/Chicago";
+  time.timeZone = pkgs.lib.mkForce null;
 
   # Select internationalisation properties.
   i18n = {
@@ -212,6 +212,14 @@
       core-apps.enable = false;
       gnome-keyring.enable = true;
     };
+    
+    automatic-timezoned.enable = true;
+    geoclue2 = {
+      geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
+      enableDemoAgent = pkgs.lib.mkForce true;
+      enableWifi = true;
+    };
+
 
     tailscale.enable = true;
 
