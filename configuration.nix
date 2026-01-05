@@ -262,13 +262,14 @@
         layout = "us";
         variant = "";
       };
-
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-      };
-      desktopManager.gnome.enable = true;
     };
+
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+
+    desktopManager.gnome.enable = true;
 
     # Enable CUPS to print documents.
     printing.enable = true;
@@ -285,10 +286,10 @@
       #media-session.enable = true;
     };
 
-    logind.extraConfig = ''
-      # suspend instead of powering off when the power button is pressed
-      HandlePowerKey=suspend
-    '';
+    logind.settings.Login = {
+      # Suspend instead of powering off when the power button is pressed
+      HandlePowerKey = "suspend";
+    };
   };
 
   hardware = {
@@ -368,10 +369,7 @@
     libvirtd = {
       enable = true;
 
-      qemu = {
-        swtpm.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
-      };
+      qemu.swtpm.enable = true;
 
     };
     spiceUSBRedirection.enable = true;
