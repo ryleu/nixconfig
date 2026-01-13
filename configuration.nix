@@ -163,6 +163,9 @@
   };
 
   programs = {
+    ssh.startAgent = false;
+    gnupg.agent.enable = false;
+
     zsh.enable = true;
 
     dconf.enable = true;
@@ -191,10 +194,6 @@
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
   };
 
   services = {
@@ -212,14 +211,13 @@
       core-apps.enable = false;
       gnome-keyring.enable = true;
     };
-    
+
     automatic-timezoned.enable = true;
     geoclue2 = {
       geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
       enableDemoAgent = pkgs.lib.mkForce true;
       enableWifi = true;
     };
-
 
     tailscale.enable = true;
 
@@ -337,8 +335,20 @@
     };
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    overlays = [
+      (final: prev: {
+        gnome-keyring = prev.gnome-keyring.overrideAttrs (oldAttrs: {
+          mesonFlags = (builtins.filter (flag: flag != "-Dssh-agent=true") oldAttrs.mesonFlags) ++ [
+            "-Dssh-agent=false"
+          ];
+        });
+      })
+    ];
+
+    # Allow unfree packages
+    config.allowUnfree = true;
+  };
 
   environment = {
     pathsToLink = [
