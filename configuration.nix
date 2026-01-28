@@ -316,6 +316,7 @@
 
   # Define a user account.
   users = {
+    mutableUsers = false;
     users.ryleu = {
       isNormalUser = true;
       description = "Riley";
@@ -331,7 +332,7 @@
       ];
       openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
       shell = pkgs.zsh;
-      # todo: use a password file with agenix
+      hashedPassword = "$y$j9T$zyMzCj7.LtjPiuCS5.XQK.$oGM3MZxbn99H0xWx7mdBcAX.RqiDS5FStYMNcCIM0v3";
     };
   };
 
