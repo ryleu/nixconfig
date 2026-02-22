@@ -409,16 +409,6 @@
 
     distributedBuilds = true;
     settings.builders-use-substitutes = true;
-
-    buildMachines = [
-      {
-        hostName = "remotebuild.ryleu.me:2222";
-	system = "x86_64-linux";
-	protocol = "ssh-ng";
-	sshUser = "nixremote";
-	supportedFeatures = [ "nixos-test" "big-parallel" ];
-      }
-    ];
   };
 
   system = {
