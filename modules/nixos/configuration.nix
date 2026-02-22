@@ -251,6 +251,7 @@
       git
       qmk
       via
+      tree
     ];
   };
 
