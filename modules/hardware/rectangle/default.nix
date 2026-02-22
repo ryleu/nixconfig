@@ -5,16 +5,13 @@
 
 {
   imports = [
-    ../conf/desktop.nix
+    ../desktop.nix
   ];
 
-  services = {
-    udev.extraRules = ''
-      SUBSYSTEM=="usb", ATTRS{idVendor}=="8087", ATTRS{idProduct}=="0029", GROUP="plugdev", MODE="0660", TAG+="uaccess"
-    '';
-  };
-
-  users.users.ryleu.openssh.authorizedKeys.keys = import ../secrets/authorized_keys.nix;
+  # allow access to the usb bluetooth adapter
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="8087", ATTRS{idProduct}=="0029", GROUP="plugdev", MODE="0660", TAG+="uaccess"
+  '';
 
   environment = {
     systemPackages = with pkgs; [
@@ -32,8 +29,6 @@
       lact
     ];
   };
-
-  networking.hostName = "rectangle";
 
   # amd shit
   hardware.graphics = {

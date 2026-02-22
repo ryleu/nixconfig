@@ -30,41 +30,31 @@
         let
           system = "x86_64-linux";
           baseModules = [
-            ./configuration.nix
-            ./hardware-configuration.nix
-            inputs.hardware.nixosModules.common-pc-ssd
+	    ./modules/nixos
             agenix.nixosModules.default
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }
           ];
+	  specialArgs = {
+	    inherit inputs;
+	  };
         in
         {
-          # default configuration
-          nixos = nixpkgs.lib.nixosSystem {
-            modules = baseModules;
-          };
-
           # rectangle's nixos configuration
           rectangle = nixpkgs.lib.nixosSystem {
             modules = baseModules ++ [
-              ./hosts/rectangle.nix
-              inputs.hardware.nixosModules.common-gpu-amd
+              ./modules/hardware/rectangle
             ];
-          };
-
-          # mathrock's nixos configuration
-          mathrock = nixpkgs.lib.nixosSystem {
-            modules = baseModules ++ [
-              ./hosts/mathrock.nix
-            ];
+	    inherit specialArgs;
           };
 
           # barely-better's nixos configuration
           barely-better = nixpkgs.lib.nixosSystem {
             modules = baseModules ++ [
-              ./hosts/barely-better.nix
+              ./modules/hardware/barely-better
             ];
+	    inherit specialArgs;
           };
         };
     };

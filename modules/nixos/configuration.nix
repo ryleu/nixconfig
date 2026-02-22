@@ -2,7 +2,6 @@
   pkgs,
   ...
 }:
-
 {
   boot = {
     kernelModules = pkgs.lib.mkDefault [
@@ -18,96 +17,10 @@
     };
   };
 
-  # secrets
-  age.secrets = {
-    # when you have secrets, put them here like this
-    #   my-secret.file = ./secrets/my-secret.age;
-    # they can later be accessed like this
-    #   config.age.secrets.my-secret.path
-    id_ed25519-key = {
-      file = ./secrets/id_ed25519-key.age;
-      path = "/home/ryleu/.ssh/id_ed25519";
-      mode = "600";
-      owner = "ryleu";
-      group = "users";
-    };
-
-    redoak-key = {
-      file = ./secrets/redoak-key.age;
-      path = "/home/ryleu/.ssh/redoak";
-      mode = "600";
-      owner = "ryleu";
-      group = "users";
-    };
-
-    clucky-key = {
-      file = ./secrets/clucky-key.age;
-      path = "/home/ryleu/.ssh/clucky";
-      mode = "600";
-      owner = "ryleu";
-      group = "users";
-    };
-
-    monument-key = {
-      file = ./secrets/monument-key.age;
-      path = "/home/ryleu/.ssh/monument";
-      mode = "600";
-      owner = "ryleu";
-      group = "users";
-    };
-
-    proxy-key = {
-      file = ./secrets/proxy-key.age;
-      path = "/home/ryleu/.ssh/proxy";
-      mode = "600";
-      owner = "ryleu";
-      group = "users";
-    };
-
-    voron-key = {
-      file = ./secrets/voron-key.age;
-      path = "/home/ryleu/.ssh/voron";
-      mode = "600";
-      owner = "ryleu";
-      group = "users";
-    };
-
-    ripi-key = {
-      file = ./secrets/ripi-key.age;
-      path = "/home/ryleu/.ssh/ripi";
-      mode = "600";
-      owner = "ryleu";
-      group = "users";
-    };
-
-    github-key = {
-      file = ./secrets/github-key.age;
-      path = "/home/ryleu/.ssh/github";
-      mode = "600";
-      owner = "ryleu";
-      group = "users";
-    };
-
-    remotebuild-key = {
-      file = ./secrets/remotebuild-key.age;
-      path = "/root/.ssh/remotebuild";
-      mode = "600";
-      owner = "root";
-      group = "root";
-    };
-
-    cosign-key = {
-      file = ./secrets/cosign-key.age;
-      path = "/home/ryleu/.cosign/cosign.key";
-      mode = "600";
-      owner = "ryleu";
-      group = "users";
-    };
-  };
-
   networking = {
     firewall =
       let
+        # open ports for ROS2
         portRanges = [
           {
             from = 7400;
@@ -126,6 +39,7 @@
       # cloudflare
       "1.1.1.3"
       "1.0.0.3"
+      # magicdns for tailscale
       "2606:4700:4700::1113"
       "2606:4700:4700::1003"
     ];
@@ -136,30 +50,6 @@
 
     # Enable networking
     networkmanager.enable = pkgs.lib.mkDefault true;
-
-    # Open ports in the firewall.
-    # firewall.allowedTCPPorts = [ ... ];
-    # firewall.allowedUDPPorts = [ ... ];
-  };
-
-  # Set your time zone.
-  time.timeZone = pkgs.lib.mkForce null;
-
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-    };
   };
 
   programs = {
@@ -214,13 +104,6 @@
       gnome-keyring.enable = true;
     };
 
-    automatic-timezoned.enable = true;
-    geoclue2 = {
-      geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
-      enableDemoAgent = pkgs.lib.mkForce true;
-      enableWifi = true;
-    };
-
     tailscale.enable = true;
 
     blueman.enable = true;
@@ -254,15 +137,7 @@
       };
     };
 
-    xserver = {
-      enable = false;
-
-      # Configure keymap in X11
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-    };
+    xserver.enable = false;
 
     displayManager.gdm = {
       enable = true;
