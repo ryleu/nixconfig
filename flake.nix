@@ -7,6 +7,7 @@
   inputs =
     {
       nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+      master_pkgs.url = "github:NixOS/nixpkgs/master";
 
       hardware.url = "github:nixos/nixos-hardware";
       agenix = {
@@ -17,19 +18,19 @@
         };
       };
 
-      # home-manager = {
-      #   url = "github:nix-community/home-manager/release-25.11";
-      #   inputs.nixpkgs.follows = "nixpkgs";
-      # };
+      home-manager = {
+        url = "github:nix-community/home-manager/release-25.11";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
 
-      # zen-browser = {
-      #   url = "github:0xc000022070/zen-browser-flake";
-      #   inputs.nixpkgs.follows = "nixpkgs";
-      # };
-      # firefox-addons = {
-      #   url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      #   inputs.nixpkgs.follows = "nixpkgs";
-      # };
+      zen-browser = {
+        url = "github:0xc000022070/zen-browser-flake";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+      firefox-addons = {
+        url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
     };
 
   outputs =
@@ -43,7 +44,12 @@
         let
           baseModules = [
             ./modules/nixos
-	    #./modules/home-manager
+	    ./modules/home-manager
+	    {
+	      nixpkgs.overlays = [
+	        inputs.firefox-addons.overlays.default
+	      ];
+	    }
           ];
           specialArgs = {
             inherit inputs;

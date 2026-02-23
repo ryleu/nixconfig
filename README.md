@@ -11,15 +11,13 @@ here's a breakdown of what goes where:
 - [`./modules/hardware`](./modules/hardware) -- device / hardware-specific
   configuration. `hardware-configuration.nix` goes here, along with kernel modules
   and other related things.
-- [`./modules/home-manager`](./modules/home-manager) -- home manager stuff. empty
-  for the time being. check out <https://github.com/ryleu/home>.
+- [`./modules/home-manager`](./modules/home-manager) -- home manager stuff.
 - [`./modules/nixos`](./modules/nixos) -- nixos modules go here.
 
 ## general ideas
 
 - i use flakes.
 - i have multiple very disperate machines (some graphical, some not).
-- i want to merge in my home manager configuration eventually.
 - it should be intuitive to navigate.
 - it should be easy to add more users in the future.
 
