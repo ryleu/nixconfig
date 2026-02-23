@@ -53,13 +53,13 @@
   programs.zsh.initContent = ''
     export RY_NOTES_DIR="$HOME/Documents/Notes"
     export RY_TODO_PATH="$HOME/Documents/todo.md"
-    
+
     alias todo="vim $RY_TODO_PATH"
     function note {
       mkdir -p "$RY_NOTES_DIR"
       header="Note $(date -I)"
       file="$RY_NOTES_DIR/$header.md"
-    
+
       if [[ ! -f "$file" ]]
       then
       	vim "$file" +"0read !echo \"\# $header\""
@@ -67,11 +67,11 @@
       	vim "$file"
       fi
     }
-    
+
     function notes {
       vim "$RY_NOTES_DIR"
     }
-    
+
     function rmnote {
       rm -i "$RY_NOTES_DIR/Note $(date -I).md"
     }
@@ -83,7 +83,7 @@
       else
         inst=0
       fi
-    
+
       hyprctl --instance $inst 'keyword misc:allow_session_lock_restore 1'
       hyprctl --instance $inst 'dispatch exec hyprlock'
     }

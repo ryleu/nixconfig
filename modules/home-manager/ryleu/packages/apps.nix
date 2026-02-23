@@ -21,7 +21,7 @@ in
       vscode-fhs
       (python312.withPackages (py: [
         py.bpython
-	ncurses
+        ncurses
         py.numpy
         py.jupyter
         py.uv

@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # basic home manager stuff
   home = {
     username = "ryleu";
