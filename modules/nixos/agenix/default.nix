@@ -1,5 +1,13 @@
-{ ... }:
+{ inputs, pkgs, ... }:
 {
+  imports = [
+    inputs.agenix.nixosModules.default
+  ];
+
+  environment.systemPackages = [
+    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
+
   age.secrets = {
     # when you have secrets, put them here like this
     #   my-secret.file = ./my-secret.age;
