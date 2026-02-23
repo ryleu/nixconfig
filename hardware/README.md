@@ -32,9 +32,10 @@ moment in time. here's a list:
     [custom fork of bazzite](https://github.com/ryleu/ryzzite).
   - the name comes from a play on the hostname of my brother's handheld. in his naming
     brilliance, he decided that the valve steam deck should simply be called `deck`.
-    though simple on the surface, the name actually harkens back to a time when people
-    called things what they were. when a pair of scissors was simply "scissors". when
-    a blanket was called "Blanket", or perhaps "Blue Blanket" instead of some
+    though simple on the surface, the moniker actually harkens back to a time when
+    people called things what they were.
+    when a pair of scissors was simply "scissors".
+    when a blanket was called "Blanket", or perhaps "Blue Blanket" instead of some
     keyword-filled god-forsaken garble of search terms like "Fleece Plush Throw Blanket
     Navy Blue(50 by 60 Inches),Super Soft Fuzzy Cozy Flannel Blanket for Couch
     Sofa.Microfiber Blanket Lightweight". it is an omage to what it is: a deck.
