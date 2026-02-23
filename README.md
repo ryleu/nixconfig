@@ -1,10 +1,12 @@
 # nixconfig
 
-nixos & eventually home manager configuration for my machines.
+nixos & home manager configuration for my machines.
 
 ## contents
 
 most of the relevant stuff is in [`./modules`](./modules).
+
+you can read up on my hardware [here](./hardware/README.md).
 
 here's a breakdown of what goes where:
 
@@ -20,6 +22,7 @@ here's a breakdown of what goes where:
 - i have multiple very disperate machines (some graphical, some not).
 - it should be intuitive to navigate.
 - it should be easy to add more users in the future.
+- it should support nix darwin
 
 i execute on very few of these.
 
