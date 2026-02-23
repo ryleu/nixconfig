@@ -1,4 +1,9 @@
 { lib, pkgs, ... }:
+let
+  hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
+  loginctl = "${pkgs.systemd}/bin/loginctl";
+  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+in
 {
   # This file handles power management and auto locking
 
@@ -8,9 +13,9 @@
 
       settings = {
         general = {
-          lock_cmd = "pidof hyprlock || hyprlock --immediate";
-          before_sleep_cmd = "loginctl lock-session";
-          after_sleep_cmd = "hyprctl dispatch dpms on";
+          lock_cmd = "pidof hyprlock || ${hyprlock} --immediate";
+          before_sleep_cmd = "${loginctl} lock-session";
+          after_sleep_cmd = "${hyprctl} dispatch dpms on";
         };
 
         listener = lib.mkDefault [
@@ -57,8 +62,4 @@
       };
     }; # end hyprlock
   }; # end programs
-
-  home.packages = with pkgs; [
-    playerctl
-  ];
 }

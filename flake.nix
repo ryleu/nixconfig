@@ -12,15 +12,9 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    systems = {
-      url = "github:nix-systems/default";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    systems.url = "github:nix-systems/default";
 
-    hardware = {
-      url = "github:nixos/nixos-hardware";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    hardware.url = "github:nixos/nixos-hardware";
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
