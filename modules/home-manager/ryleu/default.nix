@@ -8,6 +8,7 @@
   };
 
   imports = [
+    ./browser.nix
     ./desktop
     ./editor.nix
     ./font.nix
@@ -15,6 +16,5 @@
     ./packages
     ./shell.nix # has zsh / shell configuration
     ./ssh.nix
-    ./zen.nix
   ];
 }
