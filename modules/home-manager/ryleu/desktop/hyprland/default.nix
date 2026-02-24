@@ -5,7 +5,7 @@
 {
   imports = [
     ./binds.nix
-    ./power-management.nix
+    ./lock.nix
     ./waybar
     ./look-and-feel.nix
     ./devices.nix

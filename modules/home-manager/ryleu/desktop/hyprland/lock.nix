@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
   loginctl = "${pkgs.systemd}/bin/loginctl";
@@ -33,30 +33,48 @@ in
           disable_loading_bar = true;
           grace = 60;
           hide_cursor = true;
-          no_fade_in = false;
+          no_fade_in = true;
+          immediate_render = true;
         };
 
         background = [
           {
-            path = "~/Pictures/Wallpapers/bg.png";
-            blur_passes = 3;
-            blur_size = 4;
+            color = "rgb(000000)";
           }
         ];
 
         input-field = [
           {
-            size = "200, 50";
-            position = "0, -80";
+            size = "50%, 50%";
+            position = "0, 0";
             monitor = "";
+
             dots_center = true;
-            fade_on_empty = false;
-            font_color = "rgb(202, 211, 245)";
-            inner_color = "rgb(91, 96, 120)";
-            outer_color = "rgb(24, 25, 38)";
-            outline_thickness = 5;
-            placeholder_text = "<span foreground=\"##cad3f5\">Password...</span>";
-            shadow_passes = 2;
+            dots_text_format = "*";
+            dots_size = 0.2;
+            dots_spacing = 0.2;
+
+            font_color = "rgb(7F7F7F)";
+            inner_color = "rgb(000000)";
+            outer_color = "rgb(000000)";
+            placeholder_text = "";
+            rounding = 0;
+            font_family = builtins.head config.fonts.fontconfig.defaultFonts.monospace;
+
+	    fade_on_empty = true; # oled
+	    fade_timeout = 5 * 60 * 1000; # 5 mins
+
+            numlock_color = "rgb(000000)";
+            capslock_color = "rgb(7F007F)";
+            bothlock_color = "rgb(7F007F)";
+
+            fail_color = "rgb(FF0000)";
+            fail_text = "";
+
+	    check_color = "rgb(00FFFF)";
+
+            halign = "center";
+            valign = "center";
           }
         ];
       };
