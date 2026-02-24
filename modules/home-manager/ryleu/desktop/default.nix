@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./font.nix
     ./hyprland
     ./images
     ./cursor.nix
