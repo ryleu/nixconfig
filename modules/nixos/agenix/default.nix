@@ -1,4 +1,13 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+let
+  hostName = "${config.networking.hostName}";
+in
 {
   imports = [
     inputs.agenix.nixosModules.default
@@ -88,6 +97,27 @@
     cosign-key = {
       file = ./cosign-key.age;
       path = "/home/ryleu/.cosign/cosign.key";
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
+
+    syncthing-password = {
+      file = ./syncthing-password.age;
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
+
+    syncthing-cert = lib.mkIf (builtins.pathExists ./syncthing-cert-${hostName}.age) {
+      file = ./syncthing-cert-${hostName}.age;
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
+
+    syncthing-key = lib.mkIf (builtins.pathExists ./syncthing-key-${hostName}.age) {
+      file = ./syncthing-key-${hostName}.age;
       mode = "600";
       owner = "ryleu";
       group = "users";

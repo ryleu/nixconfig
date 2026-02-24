@@ -16,5 +16,6 @@
     ./packages
     ./shell.nix # has zsh / shell configuration
     ./ssh.nix
+    ./syncthing.nix
   ];
 }

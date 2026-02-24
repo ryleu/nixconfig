@@ -52,7 +52,7 @@
         "windowsOut, 1, 1, emphasizedAccel"
         "windowsMove, 1, 1, standard"
         "workspaces, 1, 1, standard"
-        "specialWorkspace, 1, 1, specialWorkSwitch, slidevert 15%"
+        "specialWorkspace, 0, 0, specialWorkSwitch, slidevert 15%"
         "fade, 1, 1, standard"
         "fadeDim, 1, 1, standard"
         "border, 1, 1, standard"
