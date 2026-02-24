@@ -73,10 +73,10 @@ in
             capslock_color = "rgb(7F007F)";
             bothlock_color = "rgb(7F007F)";
 
-            fail_color = "rgb(FF0000)";
+            fail_color = "rgb(7F0000)";
             fail_text = "";
 
-            check_color = "rgb(00FFFF)";
+            check_color = "rgb(007F7F)";
 
             halign = "center";
             valign = "center";
