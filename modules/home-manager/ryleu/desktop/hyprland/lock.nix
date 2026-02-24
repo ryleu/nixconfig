@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
   loginctl = "${pkgs.systemd}/bin/loginctl";
@@ -61,8 +66,8 @@ in
             rounding = 0;
             font_family = builtins.head config.fonts.fontconfig.defaultFonts.monospace;
 
-	    fade_on_empty = true; # oled
-	    fade_timeout = 5 * 60 * 1000; # 5 mins
+            fade_on_empty = true; # oled
+            fade_timeout = 5 * 60 * 1000; # 5 mins
 
             numlock_color = "rgb(000000)";
             capslock_color = "rgb(7F007F)";
@@ -71,7 +76,7 @@ in
             fail_color = "rgb(FF0000)";
             fail_text = "";
 
-	    check_color = "rgb(00FFFF)";
+            check_color = "rgb(00FFFF)";
 
             halign = "center";
             valign = "center";
