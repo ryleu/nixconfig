@@ -8,37 +8,45 @@ in
 {
   home = {
     packages = with pkgs; [
-      qdirstat
-      calibre
+      # communication
       signal-desktop
-      qbittorrent
-      krita
-      vlc
-      spotify
-      prismlauncher
-      master_pkgs.zed-editor-fhs
+      master_pkgs.stoat-desktop
       vesktop
+
+      # code
       vscode-fhs
-      (python312.withPackages (py: [
-        py.bpython
-        ncurses
-        py.numpy
-        py.jupyter
-        py.uv
-        py.pip
-        py.matplotlib
+      (python312.withPackages (py: with py; [
+        bpython
+        numpy
+        jupyter
+        uv
+        pip
+        matplotlib
       ]))
-      hugin
-      qgis
-      logseq
-      gabutdm
+
+      # media
+      vlc # videos
+      spotify # music
+      picard # music metadata
+      calibre # book metadata
+      krita # photos
+      libreoffice
+
+      # 3D print slicers
       prusa-slicer
       orca-slicer
       bambu-studio
+
+      # utilities
       pavucontrol
       bottles
-      picard
-      master_pkgs.stoat-desktop
+      qdirstat
+      qbittorrent
+      hugin # panoramas for URC
+      logseq # D&D notes
+
+      # games
+      prismlauncher
     ];
   };
 

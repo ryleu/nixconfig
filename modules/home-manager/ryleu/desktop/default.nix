@@ -6,5 +6,6 @@
     ./images
     ./cursor.nix
     ./icons.nix
+    ./qt.nix
   ];
 }
