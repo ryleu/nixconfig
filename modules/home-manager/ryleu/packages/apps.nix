@@ -28,9 +28,10 @@ in
       vlc # videos
       spotify # music
       picard # music metadata
+      audacity # music editing
       calibre # book metadata
       krita # photos
-      libreoffice
+      libreoffice # docs
 
       # 3D print slicers
       prusa-slicer

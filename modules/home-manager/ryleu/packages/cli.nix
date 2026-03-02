@@ -18,6 +18,7 @@
     fastfetch
     btop
     aria2
+    yt-dlp
     tmux
     packwiz
     blahaj
