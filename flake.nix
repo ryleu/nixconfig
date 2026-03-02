@@ -84,6 +84,14 @@
             ];
             inherit specialArgs;
           };
+
+          # ethernet-port's nixos configuration
+          ethernet-port = nixpkgs.lib.nixosSystem {
+            modules = baseModules ++ [
+              ./modules/hardware/ethernet-port
+            ];
+            inherit specialArgs;
+          };
         };
 
       # for nix fmt
