@@ -9,6 +9,7 @@
     ./waybar
     ./look-and-feel.nix
     ./devices.nix
+    ./ethernet-port.nix
   ];
 
   wayland.windowManager.hyprland = {

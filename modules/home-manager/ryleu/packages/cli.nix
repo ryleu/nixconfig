@@ -16,7 +16,7 @@
     ffmpeg-full
     wl-clipboard
     fastfetch
-    btop
+    btop-rocm
     aria2
     yt-dlp
     tmux

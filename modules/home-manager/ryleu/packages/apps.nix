@@ -15,14 +15,16 @@ in
 
       # code
       vscode-fhs
-      (python312.withPackages (py: with py; [
-        bpython
-        numpy
-        jupyter
-        uv
-        pip
-        matplotlib
-      ]))
+      (python312.withPackages (
+        py: with py; [
+          bpython
+          numpy
+          jupyter
+          uv
+          pip
+          matplotlib
+        ]
+      ))
 
       # media
       vlc # videos
