@@ -10,6 +10,7 @@ in
     # ensure we have the required key and cert
     enable = lib.mkIf enableSyncthing true;
 
+    # https://wiki.nixos.org/wiki/Syncthing#Declarative_node_IDs
     cert = "/run/agenix/syncthing-cert";
     key = "/run/agenix/syncthing-key";
 

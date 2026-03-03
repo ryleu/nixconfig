@@ -27,4 +27,8 @@ in
   # barely better specific
   "syncthing-cert-barely-better.age".publicKeys = users ++ [ barely-better ];
   "syncthing-key-barely-better.age".publicKeys = users ++ [ barely-better ];
+
+  # ethernet-port specific
+  "syncthing-cert-ethernet-port.age".publicKeys = users ++ [ ethernet-port ];
+  "syncthing-key-ethernet-port.age".publicKeys = users ++ [ ethernet-port ];
 }
