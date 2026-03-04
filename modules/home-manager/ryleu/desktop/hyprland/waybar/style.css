@@ -36,7 +36,7 @@ window#waybar.hidden {
 #battery.warning,
 #clock,
 #submap {
-  font-family: FiraCode;
+  font-family: ${font-family}, monospace;
   font-size: 12px;
   font-weight: 800;
   color: #282828;

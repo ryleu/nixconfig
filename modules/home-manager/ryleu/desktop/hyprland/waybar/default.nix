@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
@@ -9,7 +9,15 @@ in
   programs.waybar = {
     enable = true;
 
-    style = builtins.readFile ./style.css;
+    style =
+      builtins.replaceStrings
+        [ "\${font-family}" ]
+        [
+          "${builtins.concatStringsSep ", " (
+            map (s: "\"${s}\"") config.fonts.fontconfig.defaultFonts.monospace
+          )}"
+        ]
+        (builtins.readFile ./style.css);
 
     settings = {
       mainBar = {
