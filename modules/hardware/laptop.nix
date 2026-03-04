@@ -9,9 +9,9 @@
 
   services.logind = {
     settings.Login = {
-      HandleLidSwitch = "hibernate";
+      HandleLidSwitch = "suspend";
       HandleLidSwitchDocked = "ignore";
-      HandleLidSwitchExternalPower = "hibernate";
+      HandleLidSwitchExternalPower = "suspend";
     };
   };
 }
