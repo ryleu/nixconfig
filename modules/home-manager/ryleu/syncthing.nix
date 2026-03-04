@@ -33,7 +33,7 @@ in
                     encryptionPasswordFile = "/run/agenix/syncthing-password";
                   }
                 ];
-		type = "sendonly";
+                type = "sendonly";
               };
             }
           )
