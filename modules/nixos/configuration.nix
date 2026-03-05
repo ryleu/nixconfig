@@ -176,7 +176,7 @@
 
     logind.settings.Login = {
       # Suspend instead of powering off when the power button is pressed
-      HandlePowerKey = "suspend";
+      HandlePowerKey = "hibernate";
     };
   };
 
