@@ -28,5 +28,7 @@
 
     # tui
     spotify-player
+    impala
+    bluetui
   ];
 }

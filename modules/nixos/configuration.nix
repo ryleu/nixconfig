@@ -20,14 +20,20 @@
   # Enable networking
   systemd.network.enable = true;
   networking = {
+    networkmanager.enable = false;
+    useDHCP = false; # iwd will manage this
+
+    wireless.enable = false; # disable wpa supplicant
     wireless.iwd = {
       enable = true;
       settings = {
         IPv6.Enabled = true;
-        Settings.AutoConnect = true;
+        Settings = {
+          AutoConnect = true;
+          ControlPortOverNL80211 = false;
+        };
       };
     };
-    useNetworkd = true;
 
     firewall =
       let
