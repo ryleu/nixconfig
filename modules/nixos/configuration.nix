@@ -17,7 +17,18 @@
     };
   };
 
+  # Enable networking
+  systemd.network.enable = true;
   networking = {
+    wireless.iwd = {
+      enable = true;
+      settings = {
+        IPv6.Enabled = true;
+        Settings.AutoConnect = true;
+      };
+    };
+    useNetworkd = true;
+
     firewall =
       let
         # open ports for ROS2
@@ -32,6 +43,9 @@
         enable = true;
         allowedTCPPortRanges = portRanges;
         allowedUDPPortRanges = portRanges;
+        allowedTCPPorts = [
+          25565 # minecraft
+        ];
       };
     hostName = pkgs.lib.mkDefault "nixos";
 
@@ -47,9 +61,6 @@
       "fawn-stonecat.ts.net"
       "tail08389.ts.net"
     ];
-
-    # Enable networking
-    networkmanager.enable = pkgs.lib.mkDefault true;
   };
 
   programs = {
@@ -106,7 +117,7 @@
       gnome-keyring.enable = true;
     };
 
-    tailscale.enable = true;
+    tailscale.enable = false;
 
     blueman.enable = true;
 
@@ -200,7 +211,6 @@
       isNormalUser = true;
       description = "Riley";
       extraGroups = [
-        "networkmanager"
         "wheel"
         "docker"
         "input"
@@ -258,7 +268,7 @@
   };
 
   virtualisation = {
-    docker.enable = true;
+    #docker.enable = true;
     libvirtd = {
       enable = true;
 

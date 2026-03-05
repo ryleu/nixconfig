@@ -23,5 +23,7 @@
     packwiz
     blahaj
     whipper
+    dig
+    pciutils
   ];
 }
