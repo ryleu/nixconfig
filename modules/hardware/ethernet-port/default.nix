@@ -14,9 +14,10 @@
     "10-enp195s0f0-dhcp.network" = {
       name = "enp195s0f0";
       networkConfig.DHCP = "ipv4";
+      linkConfig.RequiredForOnline = "no";
     };
-    "10-wlp194s0-dhcp.network" = {
-      name = "wlp194s0";
+    "10-wlan0-dhcp.network" = {
+      name = "wlan0";
       networkConfig.DHCP = "ipv4";
     };
   };
