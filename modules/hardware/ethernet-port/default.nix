@@ -12,12 +12,12 @@
   networking.hostName = "ethernet-port";
   systemd.network.networks = {
     "10-enp195s0f0-dhcp.network" = {
-      name = "enp195s0f0";
+      matchConfig.Name = "enp195s0f0";
       networkConfig.DHCP = "ipv4";
       linkConfig.RequiredForOnline = "no";
     };
     "10-wlan0-dhcp.network" = {
-      name = "wlan0";
+      matchConfig.Name = "wlan0";
       networkConfig.DHCP = "ipv4";
     };
   };
