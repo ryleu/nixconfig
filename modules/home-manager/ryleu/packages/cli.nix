@@ -25,5 +25,8 @@
     whipper
     dig
     pciutils
+
+    # tui
+    spotify-player
   ];
 }
