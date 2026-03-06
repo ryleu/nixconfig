@@ -35,6 +35,8 @@
   environment.systemPackages = with pkgs; [
     pcsclite
     pcsc-tools
+    opensc
+    cacert
   ];
 
   # fingerprint scanner
