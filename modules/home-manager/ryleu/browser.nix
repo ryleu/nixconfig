@@ -75,6 +75,7 @@
           ublock-origin
           sponsorblock
           youtube-recommended-videos
+          return-youtube-dislikes
         ];
       };
     };
