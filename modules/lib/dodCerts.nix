@@ -8,14 +8,17 @@ let
 
   grep = "${pkgs.gnugrep}/bin/grep";
   openssl = "${pkgs.openssl}/bin/openssl";
-in
 
-pkgs.runCommandLocal "dod-certs" { buildInputs = [ pkgs.openssl ]; } ''
-  for cert in ${dodCerts}/*.cer; do
-    if ${grep} -q "BEGIN CERTIFICATE" "$cert" 2>/dev/null; then
-      cat "$cert"
-    else
-      ${openssl} x509 -inform DER -in "$cert" -outform PEM 2>/dev/null
-    fi
-  done > $out
-''
+  certDir = pkgs.runCommandLocal "dod-certs-dir" { } ''
+    mkdir -p $out
+    for cert in ${dodCerts}/*.cer; do
+      name=$(basename "$cert" .cer)
+      if ${grep} -q "BEGIN CERTIFICATE" "$cert" 2>/dev/null; then
+        cp "$cert" "$out/$name.pem"
+      else
+        ${openssl} x509 -inform DER -in "$cert" -outform PEM 2>/dev/null > "$out/$name.pem"
+      fi
+    done
+  '';
+in
+map (name: "${certDir}/${name}") (builtins.attrNames (builtins.readDir certDir))

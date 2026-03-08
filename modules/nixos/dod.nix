@@ -1,7 +1,5 @@
 { pkgs, ... }:
 
 {
-  security.pki.certificateFiles = [
-    "${import ../lib/dodCerts.nix pkgs}"
-  ];
+  security.pki.certificateFiles = import ../lib/dodCerts.nix pkgs;
 }

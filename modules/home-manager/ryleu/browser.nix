@@ -38,22 +38,7 @@
 
         SecurityDevices.CAC-Device = "${pkgs.opensc}/lib/opensc-pkcs11.so";
 
-        Certificates =
-          let
-            bundle = import ../../lib/dodCerts.nix pkgs;
-            pemText = builtins.readFile bundle;
-            # Split on the END marker, filter empty strings, then re-append the marker
-            chunks = builtins.filter (s: builtins.isString s && builtins.stringLength s > 10) (
-              builtins.split "-----END CERTIFICATE-----" pemText
-            );
-            certList = map (
-              s: builtins.unsafeDiscardStringContext (lib.strings.trim s) + "\n-----END CERTIFICATE-----\n"
-            ) chunks;
-            certFiles = map (cert: pkgs.writeText "dod-cert.pem" cert) certList;
-          in
-          {
-            Install = certFiles;
-          };
+        Certificates.Install = import ../../lib/dodCerts.nix pkgs;
 
         SearchEngines = {
           Add = [
