@@ -14,13 +14,10 @@ in
 {
   "ripi-key.age".publicKeys = users ++ systems;
   "github-key.age".publicKeys = users ++ systems;
-  "voron-key.age".publicKeys = users ++ systems;
   "id_ed25519-key.age".publicKeys = users ++ systems;
   "redoak-key.age".publicKeys = users ++ systems;
   "proxy-key.age".publicKeys = users ++ systems;
   "monument-key.age".publicKeys = users ++ systems;
-  "clucky-key.age".publicKeys = users ++ systems;
-  "remotebuild-key.age".publicKeys = users ++ systems;
   "cosign-key.age".publicKeys = users ++ systems;
   "syncthing-password.age".publicKeys = users ++ systems;
 

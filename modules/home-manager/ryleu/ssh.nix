@@ -53,8 +53,6 @@
       "clucky" = {
         hostname = "192.168.1.69";
         user = "clucky";
-        identityFile = "~/.ssh/clucky";
-        identitiesOnly = true;
       };
 
       "spotipi" = {

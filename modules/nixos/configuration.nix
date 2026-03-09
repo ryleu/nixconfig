@@ -150,6 +150,7 @@
         PasswordAuthentication = false;
         AllowUsers = [
           "ryleu"
+          "wyleu"
           "remotebuild"
         ];
         PermitRootLogin = "no";
@@ -224,6 +225,20 @@
         "i2c"
         "libvirtd"
         "dialout"
+      ];
+      openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
+      shell = pkgs.zsh;
+      hashedPassword = "$y$j9T$G2.gK6JpQ18SsfAJ3xe7r0$l37UsbpiRZ7Q1VsYDcfSsAFHy97ZhIWXG7y4t1yRZcA";
+    };
+    users.wyleu = {
+      isNormalUser = true;
+      description = "Riley (Work)";
+      extraGroups = [
+        "wheel"
+        "docker"
+        "input"
+        "kvm"
+        "libvirtd"
       ];
       openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
       shell = pkgs.zsh;

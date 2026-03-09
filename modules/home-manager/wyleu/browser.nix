@@ -1,4 +1,4 @@
-pkgs:
+{ inputs, pkgs, ... }:
 let
   dodCerts = pkgs.fetchzip {
     url = "https://militarycac.com/maccerts/AllCerts.zip";
@@ -20,5 +20,20 @@ let
       fi
     done
   '';
+
+  certList = map (name: "${certDir}/${name}") (builtins.attrNames (builtins.readDir certDir));
 in
-map (name: "${certDir}/${name}") (builtins.attrNames (builtins.readDir certDir))
+{
+  programs.zen-browser = {
+    policies = {
+    SecurityDevices.CAC-Device = "${pkgs.opensc}/lib/opensc-pkcs11.so";
+    Certificates.Install = certList;
+    };
+
+    profiles.default = {
+      extensions.packages = with pkgs.firefox-addons; [
+        bitwarden
+      ];
+    };
+  };
+}

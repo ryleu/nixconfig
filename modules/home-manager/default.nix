@@ -1,4 +1,17 @@
 { config, inputs, ... }:
+let
+  withShared =
+    module:
+    (
+      { ... }:
+      {
+        imports = [
+          ./shared
+          module
+        ];
+      }
+    );
+in
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -11,7 +24,8 @@
       };
 
       # by-user
-      home-manager.users.ryleu = ./ryleu;
+      home-manager.users.ryleu = withShared ./ryleu;
+      home-manager.users.wyleu = withShared ./wyleu;
     }
   ];
 }

@@ -6,71 +6,26 @@ let
   };
 in
 {
-  home = {
-    packages = with pkgs; [
-      # communication
-      signal-desktop
-      master_pkgs.stoat-desktop
-      vesktop
+  home.packages = with pkgs; [
+    # comms
+    signal-desktop
+    master_pkgs.stoat-desktop
+    vesktop
 
-      # code
-      vscode-fhs
-      (python312.withPackages (
-        py: with py; [
-          bpython
-          numpy
-          jupyter
-          uv
-          pip
-          matplotlib
-        ]
-      ))
+    # games
+    prismlauncher
 
-      # media
-      vlc # videos
-      spotify # music
-      picard # music metadata
-      audacity # music editing
-      calibre # book metadata
-      krita # photos
-      libreoffice # docs
+    # 3D print slicers
+    prusa-slicer
+    orca-slicer
+    bambu-studio
 
-      # 3D print slicers
-      prusa-slicer
-      orca-slicer
-      bambu-studio
+    # utilities
+    qbittorrent
+    hugin # panoramas for URC
 
-      # utilities
-      pavucontrol
-      bottles
-      qdirstat
-      qbittorrent
-      hugin # panoramas for URC
-      logseq # D&D notes
-
-      # games
-      prismlauncher
-    ];
-  };
-
-  programs = {
-    obs-studio = {
-      enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-        wlrobs
-        obs-vkcapture
-        obs-pipewire-audio-capture
-      ];
-    };
-
-    kitty = {
-      enable = true;
-      settings = {
-        notify_on_cmd_finish = "invisible";
-      };
-      shellIntegration = {
-        enableZshIntegration = true;
-      };
-    };
-  };
+    # media
+    picard # music metadata
+    audacity # music editing
+  ];
 }
