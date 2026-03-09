@@ -12,5 +12,8 @@ in
 
     # utilities
     dbeaver-bin
+
+    # cli
+    glab
   ];
 }

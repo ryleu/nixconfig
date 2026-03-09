@@ -70,7 +70,7 @@
   };
 
   programs = {
-    ssh.startAgent = false;
+    ssh.startAgent = true;
     gnupg.agent.enable = false;
 
     zsh.enable = true;
@@ -121,6 +121,7 @@
     gnome = {
       core-apps.enable = false;
       gnome-keyring.enable = true;
+      gcr-ssh-agent.enable = false;
     };
 
     tailscale.enable = false;
@@ -247,16 +248,6 @@
   };
 
   nixpkgs = {
-    overlays = [
-      (final: prev: {
-        gnome-keyring = prev.gnome-keyring.overrideAttrs (oldAttrs: {
-          mesonFlags = (builtins.filter (flag: flag != "-Dssh-agent=true") oldAttrs.mesonFlags) ++ [
-            "-Dssh-agent=false"
-          ];
-        });
-      })
-    ];
-
     # Allow unfree packages
     config.allowUnfree = true;
   };
@@ -265,6 +256,10 @@
     pathsToLink = [
       "/share/zsh"
     ];
+
+    sessionVariables = {
+      GSM_SKIP_SSH_AGENT_WORKAROUND = "1";
+    };
 
     # basic stuff to operate the system with. most is in home manager
     systemPackages = with pkgs; [

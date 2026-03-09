@@ -8,8 +8,8 @@
   };
 
   imports = [
-    # personal configuration
     ./browser.nix
     ./packages.nix
+    ./ssh.nix
   ];
 }

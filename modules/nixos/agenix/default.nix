@@ -2,6 +2,7 @@
 {
   imports = [
     ./ryleu
+    ./wyleu
   ];
 
   environment.systemPackages = [

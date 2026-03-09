@@ -17,7 +17,7 @@ in
     #   my-secret.file = ./my-secret.age;
     # they can later be accessed like this
     #   config.age.secrets.my-secret.path
-    id_ed25519-key = {
+    id_ed25519-key-ryleu = {
       file = ./id_ed25519-key.age;
       path = "/home/ryleu/.ssh/id_ed25519";
       mode = "600";
@@ -25,7 +25,7 @@ in
       group = "users";
     };
 
-    redoak-key = {
+    redoak-key-ryleu = {
       file = ./redoak-key.age;
       path = "/home/ryleu/.ssh/redoak";
       mode = "600";
@@ -33,7 +33,7 @@ in
       group = "users";
     };
 
-    monument-key = {
+    monument-key-ryleu = {
       file = ./monument-key.age;
       path = "/home/ryleu/.ssh/monument";
       mode = "600";
@@ -41,7 +41,7 @@ in
       group = "users";
     };
 
-    proxy-key = {
+    proxy-key-ryleu = {
       file = ./proxy-key.age;
       path = "/home/ryleu/.ssh/proxy";
       mode = "600";
@@ -49,7 +49,7 @@ in
       group = "users";
     };
 
-    ripi-key = {
+    ripi-key-ryleu = {
       file = ./ripi-key.age;
       path = "/home/ryleu/.ssh/ripi";
       mode = "600";
@@ -57,7 +57,7 @@ in
       group = "users";
     };
 
-    github-key = {
+    github-key-ryleu = {
       file = ./github-key.age;
       path = "/home/ryleu/.ssh/github";
       mode = "600";
@@ -65,7 +65,7 @@ in
       group = "users";
     };
 
-    cosign-key = {
+    cosign-key-ryleu = {
       file = ./cosign-key.age;
       path = "/home/ryleu/.cosign/cosign.key";
       mode = "600";
@@ -73,21 +73,21 @@ in
       group = "users";
     };
 
-    syncthing-password = {
+    syncthing-password-ryleu = {
       file = ./syncthing-password.age;
       mode = "600";
       owner = "ryleu";
       group = "users";
     };
 
-    syncthing-cert = lib.mkIf (builtins.pathExists ./syncthing-cert-${hostName}.age) {
+    syncthing-cert-ryleu = lib.mkIf (builtins.pathExists ./syncthing-cert-${hostName}.age) {
       file = ./syncthing-cert-${hostName}.age;
       mode = "600";
       owner = "ryleu";
       group = "users";
     };
 
-    syncthing-key = lib.mkIf (builtins.pathExists ./syncthing-key-${hostName}.age) {
+    syncthing-key-ryleu = lib.mkIf (builtins.pathExists ./syncthing-key-${hostName}.age) {
       file = ./syncthing-key-${hostName}.age;
       mode = "600";
       owner = "ryleu";

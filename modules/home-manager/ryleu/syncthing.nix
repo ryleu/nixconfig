@@ -11,8 +11,8 @@ in
     enable = lib.mkIf enableSyncthing true;
 
     # https://wiki.nixos.org/wiki/Syncthing#Declarative_node_IDs
-    cert = "/run/agenix/syncthing-cert";
-    key = "/run/agenix/syncthing-key";
+    cert = "/run/agenix/syncthing-cert-ryleu";
+    key = "/run/agenix/syncthing-key-ryleu";
 
     settings = {
       devices = {
@@ -30,7 +30,7 @@ in
                 devices = [
                   {
                     name = "monument";
-                    encryptionPasswordFile = "/run/agenix/syncthing-password";
+                    encryptionPasswordFile = "/run/agenix/syncthing-password-ryleu";
                   }
                 ];
                 type = "sendonly";
