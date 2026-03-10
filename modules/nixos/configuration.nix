@@ -186,6 +186,9 @@
       # Suspend instead of powering off when the power button is pressed
       HandlePowerKey = "hibernate";
     };
+
+    # firmware updater
+    fwupd.enable = true;
   };
 
   hardware = {
