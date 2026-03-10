@@ -20,6 +20,7 @@
     tmux
     dig
     pciutils
+    bat
 
     # tui
     spotify-player
