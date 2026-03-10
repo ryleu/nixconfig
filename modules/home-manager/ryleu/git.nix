@@ -2,7 +2,6 @@
 {
   programs = {
     git = {
-      enable = true;
       settings = {
         commit.gpgsign = true;
         gpg.format = "ssh";
@@ -11,13 +10,7 @@
           email = "69326171+ryleu@users.noreply.github.com";
           name = "ryleu";
         };
-        init.defaultBranch = "main";
       };
-    };
-
-    delta = {
-      enable = true;
-      enableGitIntegration = true;
     };
   };
 }
