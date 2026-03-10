@@ -15,5 +15,7 @@ in
 
     # cli
     glab
+    master_pkgs.claude-code
+    docker-buildx # better docker builder
   ];
 }

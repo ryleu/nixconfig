@@ -26,8 +26,8 @@ in
 {
   programs.zen-browser = {
     policies = {
-    SecurityDevices.CAC-Device = "${pkgs.opensc}/lib/opensc-pkcs11.so";
-    Certificates.Install = certList;
+      SecurityDevices.CAC-Device = "${pkgs.opensc}/lib/opensc-pkcs11.so";
+      Certificates.Install = certList;
     };
 
     profiles.default = {
