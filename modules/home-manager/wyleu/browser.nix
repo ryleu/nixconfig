@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 let
   dodCerts = pkgs.fetchzip {
     url = "https://militarycac.com/maccerts/AllCerts.zip";
