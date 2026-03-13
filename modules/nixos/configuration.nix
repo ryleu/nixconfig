@@ -1,7 +1,14 @@
 {
   pkgs,
+  inputs,
   ...
 }:
+let
+  master_pkgs = import inputs.master_pkgs {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
+in
 {
   boot = {
     kernelModules = pkgs.lib.mkDefault [
@@ -192,6 +199,9 @@
   };
 
   hardware = {
+    firmware = [
+      master_pkgs.linux-firmware
+    ];
     keyboard.qmk.enable = true;
 
     i2c.enable = true;
