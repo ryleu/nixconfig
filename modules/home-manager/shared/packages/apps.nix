@@ -16,8 +16,7 @@
       ))
 
       # media
-      vlc # videos
-      mpv # videos (again)
+      mpv # videos
       spotify # music
       calibre # book metadata
       krita # photos

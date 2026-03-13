@@ -17,58 +17,6 @@
     };
   };
 
-  # Enable networking
-  systemd.network.enable = true;
-  networking = {
-    networkmanager.enable = false;
-    useDHCP = false; # iwd will manage this
-
-    wireless.enable = false; # disable wpa supplicant
-    wireless.iwd = {
-      enable = true;
-      settings = {
-        IPv6.Enabled = true;
-        Settings = {
-          AutoConnect = true;
-          ControlPortOverNL80211 = false;
-        };
-      };
-    };
-
-    firewall =
-      let
-        # open ports for ROS2
-        portRanges = [
-          {
-            from = 7400;
-            to = 7999;
-          }
-        ];
-      in
-      {
-        enable = true;
-        allowedTCPPortRanges = portRanges;
-        allowedUDPPortRanges = portRanges;
-        allowedTCPPorts = [
-          25565 # minecraft
-        ];
-      };
-    hostName = pkgs.lib.mkDefault "nixos";
-
-    nameservers = [
-      # cloudflare
-      "1.1.1.3"
-      "1.0.0.3"
-      # magicdns for tailscale
-      "2606:4700:4700::1113"
-      "2606:4700:4700::1003"
-    ];
-    search = [
-      "fawn-stonecat.ts.net"
-      "tail08389.ts.net"
-    ];
-  };
-
   programs = {
     ssh.startAgent = true;
     gnupg.agent.enable = false;
@@ -98,8 +46,6 @@
       };
     };
 
-    nh.enable = true;
-
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     mtr.enable = true;
@@ -123,8 +69,6 @@
       gnome-keyring.enable = true;
       gcr-ssh-agent.enable = false;
     };
-
-    tailscale.enable = false;
 
     blueman.enable = true;
 
@@ -292,10 +236,8 @@
       enable = true;
 
       qemu.swtpm.enable = true;
-
     };
     spiceUSBRedirection.enable = true;
-    waydroid.enable = true;
   };
 
   # i like flakes c:
