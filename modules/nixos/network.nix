@@ -49,7 +49,6 @@
       }
     );
 
-    services.tailscale.enable = true;
     nameservers = [
       # cloudflare
       "1.1.1.3"
@@ -64,4 +63,5 @@
       "tail08389.ts.net"
     ];
   };
+  services.tailscale.enable = true;
 }

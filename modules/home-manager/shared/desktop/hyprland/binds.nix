@@ -7,9 +7,10 @@ let
   hyprshot = "${pkgs.hyprshot}/bin/hyprshot";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
-  terminal = "${pkgs.kitty}/bin/kitty";
+  kitty = "${pkgs.kitty}/bin/kitty";
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   file-manager = "${pkgs.nautilus}/bin/nautilus";
+  hyprmon = "${pkgs.hyprmon}/bin/hyprmon";
 
   # custom scripts
   toggle-touchpad-disable = "${pkgs.writeShellScriptBin "toggle" ''
@@ -43,15 +44,15 @@ in
   wayland.windowManager.hyprland.settings = {
     # See https://wiki.hyprland.org/Configuring/Binds/ for more
     bind = [
-      "SUPER, RETURN, exec, ${terminal}"
+      "SUPER, RETURN, exec, ${kitty}"
       "SUPER, C, killactive,"
       "SUPER, S, toggleSpecialWorkspace, magic"
       "SUPER SHIFT, S, movetoworkspace, special:magic"
       "SUPER SHIFT, ESCAPE, exit,"
       "SUPER, E, exec, ${file-manager}"
       "SUPER, V, togglefloating,"
-      "SUPER, M, fullscreen, 1"
-      "SUPER, F, fullscreen, 0"
+      "SUPER, F, fullscreen, 1"
+      "SUPER SHIFT, F, fullscreen, 0"
       "SUPER, ESCAPE, exec, ${hyprlock} --immediate"
       "SUPER, T, exec, ${toggle-touchpad-disable}"
 
@@ -67,6 +68,9 @@ in
 
       # app runner
       "SUPER, R, exec, ${rofi} -show drun"
+
+      # monitor control
+      "SUPER, M, exec, [float] ${kitty} -o confirm_os_window_close=0 --name Hyprmon ${hyprmon}"
 
       # screenshot
       "     , PRINT, exec, ${hyprshot} -z -m output -m active --clipboard-only"
