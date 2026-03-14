@@ -68,6 +68,7 @@ in
 
       # app runner
       "SUPER, R, exec, ${rofi} -show drun"
+      "SUPER SHIFT, 201, exec, ${rofi} -show drun"
 
       # monitor control
       "SUPER, M, exec, [float] ${kitty} -o confirm_os_window_close=0 --name Hyprmon ${hyprmon}"
