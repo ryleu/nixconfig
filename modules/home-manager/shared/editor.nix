@@ -42,6 +42,12 @@
               filetypes = [ "rust" ];
             };
 
+            typst = {
+              command = "${pkgs.tinymist}/bin/tinymist";
+              args = [ ];
+              filetypes = [ "tpy" ];
+            };
+
             nix = {
               command = "${pkgs.nil}/bin/nil";
               args = [ ];
