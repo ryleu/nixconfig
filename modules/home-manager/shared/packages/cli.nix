@@ -21,6 +21,7 @@
     dig
     pciutils
     bat
+    copyparty
 
     # tui
     spotify-player
