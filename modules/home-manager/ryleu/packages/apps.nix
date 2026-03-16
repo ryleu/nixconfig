@@ -10,7 +10,7 @@ in
     # comms
     signal-desktop
     master_pkgs.stoat-desktop
-    vesktop
+    master_pkgs.vesktop
 
     # games
     prismlauncher

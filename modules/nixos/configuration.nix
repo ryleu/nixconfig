@@ -10,6 +10,8 @@
       "hidp"
     ];
 
+    kernel.sysctl."kernel.sysrq" = 1;
+
     # Bootloader.
     loader = {
       systemd-boot.enable = true;
