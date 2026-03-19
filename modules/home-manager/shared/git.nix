@@ -10,5 +10,7 @@
       enable = true;
       enableGitIntegration = true;
     };
+
+    mergiraf.enable = true;
   };
 }
