@@ -208,6 +208,7 @@
 
     sessionVariables = {
       GSM_SKIP_SSH_AGENT_WORKAROUND = "1";
+      PROTON_ENABLE_WAYLAND = "1";
     };
 
     # basic stuff to operate the system with. most is in home manager

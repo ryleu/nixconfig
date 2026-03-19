@@ -1,7 +1,9 @@
 { inputs, pkgs, ... }:
 let
+  system = pkgs.stdenv.hostPlatform.system;
+
   master_pkgs = import inputs.master_pkgs {
-    system = pkgs.stdenv.hostPlatform.system;
+    inherit system;
     config.allowUnfree = true;
   };
 in
@@ -17,5 +19,8 @@ in
     glab
     master_pkgs.claude-code
     docker-buildx # better docker builder
+
+    # apps
+    inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
   ];
 }
