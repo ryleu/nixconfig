@@ -6,9 +6,12 @@
       settings.init.defaultBranch = "main";
     };
 
-    delta = {
+    difftastic = {
       enable = true;
-      enableGitIntegration = true;
+      git = {
+        enable = true;
+        diffToolMode = true;
+      };
     };
 
     mergiraf.enable = true;
