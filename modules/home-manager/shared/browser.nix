@@ -52,6 +52,9 @@
           "browser.tabs.warnOnClose" = false;
           "middlemouse.paste" = false;
           "browser.tabs.inTitlebar" = 0;
+          # disable swipe to go back gesture
+          "browser.gesture.swipe.left" = "scrollLeft";
+          "browser.gesture.swipe.right" = "scrollRight";
         };
         Permissions = {
           Autoplay = {
