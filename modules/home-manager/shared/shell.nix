@@ -17,6 +17,7 @@
   };
   home.sessionVariables = {
     HYPHEN_INSENSITIVE = "true";
+    PAGER = "${pkgs.less}/bin/less --mouse";
   };
 
   ## PROMPT ##
