@@ -2,8 +2,8 @@
 let
   hostName = nixos-config.networking.hostName;
   enableSyncthing =
-    (builtins.pathExists ../../nixos/agenix/syncthing-cert-${hostName}.age)
-    && (builtins.pathExists ../../nixos/agenix/syncthing-key-${hostName}.age);
+    (builtins.pathExists ../../nixos/agenix/ryleu/syncthing-cert-${hostName}.age)
+    && (builtins.pathExists ../../nixos/agenix/ryleu/syncthing-key-${hostName}.age);
 in
 {
   services.syncthing = {
