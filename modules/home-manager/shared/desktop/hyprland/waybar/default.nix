@@ -48,9 +48,7 @@ in
         # Modules configuration
         # --------------------------------------------------
         "hyprland/workspaces" = {
-          persistent-workspaces = {
-            "*" = 1;
-          };
+          separate-outputs = true;
         };
 
         "hyprland/submap" = {
