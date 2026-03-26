@@ -40,6 +40,7 @@ in
           { }
           [
             # folders i care about
+            "Code"
             "Desktop"
             "Documents"
             "Music"
