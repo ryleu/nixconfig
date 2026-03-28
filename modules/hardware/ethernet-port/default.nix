@@ -8,7 +8,17 @@
     inputs.hardware.nixosModules.lenovo-thinkpad-p14s-amd-gen5
   ];
 
+  boot.kernelModules = [
+    "mhi"
+    "mhi_pci_generic"
+    "qrtr"
+    "qmi_wwan"
+  ];
+
   # networking
+  networking.modemmanager = {
+    enable = true;
+  };
   networking.hostName = "ethernet-port";
   systemd.network.wait-online.enable = false; # don't need networking to boot a laptop
   systemd.network.networks = {
