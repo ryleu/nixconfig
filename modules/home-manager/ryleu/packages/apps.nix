@@ -11,6 +11,7 @@ in
     signal-desktop
     master_pkgs.stoat-desktop
     master_pkgs.vesktop
+    master_pkgs.teamspeak6-client
 
     # games
     prismlauncher
