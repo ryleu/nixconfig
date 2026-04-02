@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     undollar
+    comma
     silver-searcher
     ripgrep
     unzip
