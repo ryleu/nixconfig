@@ -7,6 +7,8 @@
   ];
 
   xdg = {
+    userDirs.enable = true;
+
     portal = {
       enable = true;
       config = {
