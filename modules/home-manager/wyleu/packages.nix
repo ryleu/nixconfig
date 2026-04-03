@@ -19,6 +19,7 @@ in
     glab
     master_pkgs.claude-code
     docker-buildx # better docker builder
+    master_pkgs.liteparse
 
     # apps
     inputs.claude-desktop.packages.${system}.claude-desktop-with-fhs
