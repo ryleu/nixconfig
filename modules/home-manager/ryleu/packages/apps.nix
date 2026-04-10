@@ -13,7 +13,7 @@ in
     master_pkgs.teamspeak6-client
 
     # games
-    prismlauncher
+    master_pkgs.prismlauncher
 
     # 3D print slicers
     prusa-slicer
