@@ -5,7 +5,7 @@
     inputs.hardware.nixosModules.common-pc-ssd
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   services.logind = {
     settings.Login = {
