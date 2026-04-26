@@ -263,6 +263,10 @@
     settings.builders-use-substitutes = true;
   };
 
+  # memory management
+  zramSwap.enable = true;
+  systemd.oomd.enable = true;
+
   system = {
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
