@@ -33,7 +33,7 @@ in
                     encryptionPasswordFile = "/run/agenix/syncthing-password-ryleu";
                   }
                 ];
-                type = "sendonly";
+                type = "sendreceive";
               };
             }
           )
