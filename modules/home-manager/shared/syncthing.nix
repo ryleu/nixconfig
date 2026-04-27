@@ -1,11 +1,16 @@
-{ config, lib, osConfig, ... }:
+{
+  config,
+  lib,
+  osConfig,
+  ...
+}:
 let
-  hostName = osConfig.networking.hostName;
+  hostname = osConfig.networking.hostName;
   user = config.home.username;
   home = config.home.homeDirectory;
   enableSyncthing =
-    (builtins.pathExists ../../nixos/agenix/${user}/syncthing-cert-${hostName}.age)
-    && (builtins.pathExists ../../nixos/agenix/${user}/syncthing-key-${hostName}.age);
+    (builtins.pathExists ../../nixos/agenix/${user}/syncthing-cert-${hostname}.age)
+    && (builtins.pathExists ../../nixos/agenix/${user}/syncthing-key-${hostname}.age);
 in
 {
   services.syncthing = {
@@ -17,38 +22,56 @@ in
     key = "/run/agenix/syncthing-key-${user}";
 
     settings = {
-      devices = {
-        "monument".id = "XJSOXJB-CWXBQKK-Y55S4JK-MRHTP3Q-3G7M5CX-ELBQYOG-3VREJX6-DTPB5AY";
-      };
+      devices."monument".id = "XJSOXJB-CWXBQKK-Y55S4JK-MRHTP3Q-3G7M5CX-ELBQYOG-3VREJX6-DTPB5AY";
 
-      folders =
-        builtins.foldl'
-          (
-            prev: dir:
-            prev
-            // {
-              "${hostName}-${dir}" = {
-                path = "${home}/${dir}";
-                devices = [
-                  {
-                    name = "monument";
-                    encryptionPasswordFile = "/run/agenix/syncthing-password-${user}";
-                  }
-                ];
-                type = "sendreceive";
-              };
+      folders = {
+        # device-specific
+        "${user}-${hostname}" = {
+          path = "${home}";
+          devices = [
+            {
+              name = "monument";
+              encryptionPasswordFile = "/run/agenix/syncthing-password-${user}";
             }
-          )
-          { }
-          [
-            # folders i care about
-            "Code"
-            "Desktop"
-            "Documents"
-            "Music"
-            "Pictures"
-            "Videos"
           ];
+          type = "sendonly";
+        };
+
+        # shared across all devices
+        "${user}" = {
+          path = "${home}/Sync";
+          devices = [
+            {
+              name = "monument";
+              encryptionPasswordFile = "/run/agenix/syncthing-password-${user}";
+            }
+          ];
+          type = "sendreceive";
+        };
+      };
     };
+  };
+
+  home.file.".stignore" = {
+    enable = enableSyncthing;
+    force = true;
+    text = ''
+      // folders i want to keep
+      !/Code
+      !/Documents
+      !/Music
+      !/Pictures
+      !/Videos
+      !/.local/share/PrismLauncher/instances
+      !/.config/zen/default
+
+      // ignore things that can cause issues to sync
+      (?d).direnv
+      (?d).stfolder
+      /Sync
+
+      // ignore everything else
+      /**
+    '';
   };
 }
