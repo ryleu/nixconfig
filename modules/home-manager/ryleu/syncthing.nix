@@ -1,6 +1,6 @@
-{ nixos-config, lib, ... }:
+{ osConfig, lib, ... }:
 let
-  hostName = nixos-config.networking.hostName;
+  hostName = osConfig.networking.hostName;
   enableSyncthing =
     (builtins.pathExists ../../nixos/agenix/ryleu/syncthing-cert-${hostName}.age)
     && (builtins.pathExists ../../nixos/agenix/ryleu/syncthing-key-${hostName}.age);

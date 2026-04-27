@@ -21,7 +21,6 @@ in
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = {
         inherit inputs;
-        nixos-config = config;
       };
 
       # by-user
