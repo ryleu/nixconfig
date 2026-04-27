@@ -1,9 +1,11 @@
-{ osConfig, lib, ... }:
+{ config, lib, osConfig, ... }:
 let
   hostName = osConfig.networking.hostName;
+  user = config.home.username;
+  home = config.home.homeDirectory;
   enableSyncthing =
-    (builtins.pathExists ../../nixos/agenix/ryleu/syncthing-cert-${hostName}.age)
-    && (builtins.pathExists ../../nixos/agenix/ryleu/syncthing-key-${hostName}.age);
+    (builtins.pathExists ../../nixos/agenix/${user}/syncthing-cert-${hostName}.age)
+    && (builtins.pathExists ../../nixos/agenix/${user}/syncthing-key-${hostName}.age);
 in
 {
   services.syncthing = {
@@ -11,8 +13,8 @@ in
     enable = lib.mkIf enableSyncthing true;
 
     # https://wiki.nixos.org/wiki/Syncthing#Declarative_node_IDs
-    cert = "/run/agenix/syncthing-cert-ryleu";
-    key = "/run/agenix/syncthing-key-ryleu";
+    cert = "/run/agenix/syncthing-cert-${user}";
+    key = "/run/agenix/syncthing-key-${user}";
 
     settings = {
       devices = {
@@ -26,11 +28,11 @@ in
             prev
             // {
               "${hostName}-${dir}" = {
-                path = "/home/ryleu/${dir}";
+                path = "${home}/${dir}";
                 devices = [
                   {
                     name = "monument";
-                    encryptionPasswordFile = "/run/agenix/syncthing-password-ryleu";
+                    encryptionPasswordFile = "/run/agenix/syncthing-password-${user}";
                   }
                 ];
                 type = "sendreceive";

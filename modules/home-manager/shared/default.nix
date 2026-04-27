@@ -8,5 +8,6 @@
     ./music.nix
     ./packages
     ./shell.nix
+    ./syncthing.nix
   ];
 }

@@ -13,6 +13,5 @@
     ./git.nix
     ./packages
     ./ssh.nix
-    ./syncthing.nix
   ];
 }
