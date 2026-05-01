@@ -17,6 +17,10 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+
+    # copyfail mitigation
+    blacklistedKernelModules = [ "algif_aead" ];
+    extraModprobeConfig = "install algif_aead /bin/false";
   };
 
   programs = {
