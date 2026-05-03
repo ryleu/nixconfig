@@ -10,6 +10,11 @@
           email = "69326171+ryleu@users.noreply.github.com";
           name = "ryleu";
         };
+        url = {
+          "ssh://git@github.com" = {
+            insteadOf = "https://github.com";
+          };
+        };
       };
     };
   };
