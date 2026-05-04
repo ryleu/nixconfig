@@ -10,6 +10,7 @@
   imports = [
     ./browser.nix
     ./git.nix
+    ./hyprland.nix
     ./packages.nix
     ./ssh.nix
   ];
