@@ -3,7 +3,7 @@
   imports = [
     ./agenix
     ./configuration.nix
-    #./k3s.nix
+    ./work.nix
     ./locale.nix
     ./network.nix
   ];
