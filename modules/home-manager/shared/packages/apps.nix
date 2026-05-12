@@ -21,6 +21,7 @@
       calibre # book metadata
       krita # photos
       libreoffice # docs
+      blender # 3d models
 
       # utilities
       pavucontrol
