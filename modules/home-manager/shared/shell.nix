@@ -49,6 +49,12 @@
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
+  xdg.configFile."direnv/direnv.toml".text = ''
+    # https://esham.io/2023/10/direnv
+    [global]
+    log_format = "\u001B[2mdirenv: %s\u001B[0m"
+    hide_env_diff = true
+  '';
 
   ## ZSH EXTRAS ##
   programs.zsh.initContent = ''
