@@ -19,7 +19,12 @@
     };
 
     # copyfail mitigation
-    blacklistedKernelModules = [ "algif_aead" "esp4" "esp6" "rxrpc" ];
+    blacklistedKernelModules = [
+      "algif_aead"
+      "esp4"
+      "esp6"
+      "rxrpc"
+    ];
     extraModprobeConfig = ''
       install algif_aead /bin/false
       install esp4 /bin/false
