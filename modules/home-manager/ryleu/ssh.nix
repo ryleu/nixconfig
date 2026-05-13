@@ -30,10 +30,10 @@
       };
 
       "redoak" = {
-        hostname = "redoak";
-        user = "ryleu";
+        hostname = "100.65.152.98";
+        user = "willow";
         identityFile = "~/.ssh/redoak";
-        identitiesOnly = true;
+        identitiesOnly = false;
       };
 
       "proxy" = {
