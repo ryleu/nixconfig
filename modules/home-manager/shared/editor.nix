@@ -24,10 +24,19 @@
         coc-json
         coc-docker
         coc-git
-        render-markdown-nvim
 
         nvim-treesitter.withAllGrammars
+
+        nvim-colorizer-lua
       ];
+
+      extraLuaConfig = ''
+        	    require'colorizer'.setup({
+        		  user_default_options = {
+        		    names = false,
+        		  }
+        		})
+      '';
 
       coc = {
         enable = true;
