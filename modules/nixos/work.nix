@@ -6,6 +6,7 @@
     kind
     tilt
     k9s
+    helm-ls
   ];
 
   networking.firewall.allowedTCPPorts = [

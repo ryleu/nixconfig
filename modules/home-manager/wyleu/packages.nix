@@ -10,7 +10,7 @@ in
 {
   home.packages = with pkgs; [
     # code editor
-    master_pkgs.code-cursor
+    master_pkgs.zed-editor-fhs
 
     # utilities
     dbeaver-bin
