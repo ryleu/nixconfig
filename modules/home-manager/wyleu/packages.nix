@@ -2,6 +2,11 @@
 let
   system = pkgs.stdenv.hostPlatform.system;
 
+  unstable_pkgs = import inputs.unstable_pkgs {
+    inherit system;
+    config.allowUnfree = true;
+  };
+
   master_pkgs = import inputs.master_pkgs {
     inherit system;
     config.allowUnfree = true;
@@ -10,7 +15,7 @@ in
 {
   home.packages = with pkgs; [
     # code editor
-    master_pkgs.zed-editor-fhs
+    unstable_pkgs.zed-editor-fhs
 
     # utilities
     dbeaver-bin

@@ -9,8 +9,8 @@ in
   home.packages = with pkgs; [
     # comms
     signal-desktop
-    master_pkgs.vesktop
-    master_pkgs.teamspeak6-client
+    vesktop
+    teamspeak6-client
 
     # games
     master_pkgs.prismlauncher

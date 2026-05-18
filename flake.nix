@@ -6,6 +6,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    unstable_pkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     master_pkgs.url = "github:NixOS/nixpkgs/master";
 
     treefmt-nix = {
