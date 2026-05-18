@@ -28,6 +28,8 @@
     enable = true;
     port = 5000;
     listenAddress = "127.0.0.1";
+    enableGarbageCollect = true;
+    garbageCollectDates = "weekly";
   };
 
   # tell k3s to pull from it
