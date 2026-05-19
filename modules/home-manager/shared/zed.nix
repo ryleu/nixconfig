@@ -32,6 +32,7 @@ in
     ];
 
     userSettings = {
+      vim_mode = true;
       node = {
         path = "${pkgs.nodejs}/bin/node";
         npm_path = "${pkgs.nodejs}/bin/npm";
