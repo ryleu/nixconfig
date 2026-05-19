@@ -55,6 +55,7 @@
     log_format = "\u001B[2mdirenv: %s\u001B[0m"
     hide_env_diff = true
   '';
+  programs.zoxide.enable = true;
 
   ## ZSH EXTRAS ##
   programs.zsh.initContent = ''
