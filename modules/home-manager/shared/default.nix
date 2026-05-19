@@ -9,5 +9,6 @@
     ./packages
     ./shell.nix
     ./syncthing.nix
+    ./zed.nix
   ];
 }
