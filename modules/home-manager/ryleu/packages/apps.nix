@@ -14,6 +14,7 @@ in
 
     # games
     master_pkgs.prismlauncher
+    alvr
 
     # 3D print slicers
     prusa-slicer
@@ -23,6 +24,7 @@ in
     # utilities
     qbittorrent
     hugin # panoramas for URC
+    kicad # pcb viewing
 
     # media
     picard # music metadata
