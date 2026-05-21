@@ -38,4 +38,5 @@
       ];
     }; # end settings
   }; # end wayland.windowManager.hyprland
+  services.hyprpolkitagent.enable = true;
 }
