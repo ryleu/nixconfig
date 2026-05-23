@@ -6,5 +6,6 @@
     blahaj
     whipper
     bun
+    xwayland-satellite
   ];
 }
