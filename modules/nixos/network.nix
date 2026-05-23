@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, lib, ... }:
 {
   ## NETWORKING ##
   # enable systemd networkd
@@ -65,4 +65,10 @@
     ];
   };
   services.tailscale.enable = true;
+
+  services.udev.extraRules = lib.mkOrder 1000 ''
+    SUBSYSTEM=="net", ACTION=="add", KERNEL=="can*", \
+      RUN+="${pkgs.iproute2}/bin/ip link set %k type can bitrate 1000000", \
+      RUN+="${pkgs.iproute2}/bin/ip link set up %k"
+  '';
 }
