@@ -227,6 +227,8 @@ in
   };
 
   home.packages = with pkgs; [
+    pkgs.brightnessctl
+
     # not enabled but still defined in the config
     playerctl
     power-profiles-daemon
