@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   ## TIMEZONE ##
   # ensure tz is not managed by nix
-  time.timeZone = pkgs.lib.mkForce null;
+  time.timeZone = lib.mkForce null;
 
   services = {
     automatic-timezoned.enable = true;
