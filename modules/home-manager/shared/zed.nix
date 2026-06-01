@@ -4,6 +4,10 @@ let
     system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
+  master_pkgs = import inputs.master_pkgs {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
 in
 {
   programs.zed-editor = {
@@ -195,6 +199,11 @@ in
           path = "${pkgs.helm-ls}/bin/helm_ls";
           arguments = [ "serve" ];
         };
+      };
+
+      agent_servers.claude-acp = {
+        type = "registry";
+        env.CLAUDE_CODE_EXECUTABLE = "${master_pkgs.claude-code}/bin/claude";
       };
     };
   };

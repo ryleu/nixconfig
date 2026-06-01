@@ -13,6 +13,5 @@
     ./hyprland.nix
     ./packages.nix
     ./ssh.nix
-    ./zed.nix
   ];
 }

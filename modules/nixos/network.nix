@@ -65,6 +65,12 @@
     ];
   };
   services.tailscale.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    nssmdns6 = true;
+    openFirewall = true;
+  };
 
   services.udev.extraRules = lib.mkOrder 1000 ''
     SUBSYSTEM=="net", ACTION=="add", KERNEL=="can*", \
