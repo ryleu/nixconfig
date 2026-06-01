@@ -28,6 +28,7 @@
       bottles
       qdirstat
       logseq
+      ungoogled-chromium # good to have kicking around
     ];
   };
 
