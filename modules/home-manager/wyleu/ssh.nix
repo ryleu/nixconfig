@@ -9,18 +9,18 @@
       IdentitiesOnly true
       IdentityFile ~/.ssh/id_ed25519
     '';
-    matchBlocks = {
+    settings = {
       "*" = {
-        addKeysToAgent = "yes";
-        forwardAgent = true;
-        compression = true;
+        AddKeysToAgent = "yes";
+        ForwardAgent = true;
+        Compression = true;
       };
 
       "gitlab.com" = {
-        hostname = "gitlab.com";
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519";
-        identitiesOnly = true;
+        HostName = "gitlab.com";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519";
+        IdentitiesOnly = true;
       };
     };
   };

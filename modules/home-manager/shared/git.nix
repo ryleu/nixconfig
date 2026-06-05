@@ -20,7 +20,10 @@
       };
     };
 
-    mergiraf.enable = true;
+    mergiraf = {
+      enable = true;
+      enableGitIntegration = true;
+    };
   };
 
   programs.gpg.enable = true;

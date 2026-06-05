@@ -9,64 +9,64 @@
       IdentitiesOnly true
       IdentityFile ~/.ssh/id_ed25519
     '';
-    matchBlocks = {
+    settings = {
       "*" = {
-        addKeysToAgent = "yes";
-        forwardAgent = true;
-        compression = true;
+        AddKeysToAgent = "yes";
+        ForwardAgent = true;
+        Compression = true;
       };
       "github.com" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/github";
-        identitiesOnly = true;
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/github";
+        IdentitiesOnly = true;
       };
 
       "ripi" = {
-        hostname = "ripi";
-        user = "ryleu";
-        identityFile = "~/.ssh/ripi";
-        identitiesOnly = true;
+        HostName = "ripi";
+        User = "ryleu";
+        IdentityFile = "~/.ssh/ripi";
+        IdentitiesOnly = true;
       };
 
       "redoak" = {
-        hostname = "100.65.152.98";
-        user = "willow";
-        identityFile = "~/.ssh/redoak";
-        identitiesOnly = false;
+        HostName = "100.65.152.98";
+        User = "willow";
+        IdentityFile = "~/.ssh/redoak";
+        IdentitiesOnly = false;
       };
 
       "proxy" = {
-        hostname = "proxy";
-        user = "ryleu";
-        identityFile = "~/.ssh/proxy";
-        identitiesOnly = true;
+        HostName = "proxy";
+        User = "ryleu";
+        IdentityFile = "~/.ssh/proxy";
+        IdentitiesOnly = true;
       };
 
       "monument.lan" = {
-        hostname = "192.168.1.210";
-        user = "truenas_admin";
-        identityFile = "~/.ssh/monument";
-        identitiesOnly = true;
+        HostName = "192.168.1.210";
+        User = "truenas_admin";
+        IdentityFile = "~/.ssh/monument";
+        IdentitiesOnly = true;
       };
 
       "clucky" = {
-        hostname = "192.168.1.69";
-        user = "clucky";
+        HostName = "192.168.1.69";
+        User = "clucky";
       };
 
       "spotipi" = {
-        hostname = "spotipi";
-        user = "ryleu";
-        identityFile = "~/.ssh/github";
-        identitiesOnly = true;
+        HostName = "spotipi";
+        User = "ryleu";
+        IdentityFile = "~/.ssh/github";
+        IdentitiesOnly = true;
       };
 
       "rectangle" = {
-        hostname = "rectangle";
-        user = "ryleu";
-        identityFile = "~/.ssh/id_ed25519";
-        identitiesOnly = true;
+        HostName = "rectangle";
+        User = "ryleu";
+        IdentityFile = "~/.ssh/id_ed25519";
+        IdentitiesOnly = true;
       };
     };
   };

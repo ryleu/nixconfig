@@ -12,6 +12,9 @@
       vimAlias = true;
       vimdiffAlias = true;
 
+      withRuby = true;
+      withPython3 = true;
+
       plugins = with pkgs.vimPlugins; [
         # web
         coc-html
@@ -30,7 +33,7 @@
         nvim-colorizer-lua
       ];
 
-      extraLuaConfig = ''
+      initLua = ''
         require'colorizer'.setup({
           user_default_options = {
             names = false,

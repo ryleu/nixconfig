@@ -12,7 +12,7 @@
     nix-index
     wget
     nix-search
-    nixfmt-rfc-style
+    nixfmt
     ffmpeg-full
     wl-clipboard
     fastfetch
