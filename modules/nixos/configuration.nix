@@ -122,7 +122,6 @@
 
     displayManager.gdm = {
       enable = true;
-      wayland = true;
     };
 
     desktopManager.gnome.enable = true;
@@ -211,8 +210,12 @@
   };
 
   nixpkgs = {
-    # Allow unfree packages
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "electron-39.8.10"
+      ];
+    };
   };
 
   environment = {

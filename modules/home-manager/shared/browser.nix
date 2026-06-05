@@ -20,7 +20,7 @@
     {
       enable = true;
 
-      nativeMessagingHosts = [ pkgs.firefoxpwa ];
+      nativeMessagingHosts = [ pkgs.firefoxpwa-unwrapped ];
 
       policies = {
         AutofillAddressEnabled = false;
