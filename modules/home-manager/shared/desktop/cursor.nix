@@ -5,10 +5,6 @@ let
   size = 32;
 in
 {
-  wayland.windowManager.hyprland.settings.exec-once = [
-    "hyprctl setcursor '${name}' ${builtins.toString size}"
-  ];
-
   home.sessionVariables = {
     XCURSOR_SIZE = size;
     HYPRCURSOR_SIZE = size;

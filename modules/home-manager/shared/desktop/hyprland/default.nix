@@ -1,42 +1,57 @@
 {
+  config,
   pkgs,
   ...
 }:
+let
+  # map lua placeholders to store paths
+  paths = {
+    kitty = "${pkgs.kitty}/bin/kitty";
+    rofi = "${pkgs.rofi}/bin/rofi";
+    hyprshot = "${pkgs.hyprshot}/bin/hyprshot";
+    playerctl = "${pkgs.playerctl}/bin/playerctl";
+    brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+    hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
+    file_manager = "${pkgs.nautilus}/bin/nautilus";
+    hyprmon = "${pkgs.hyprmon}/bin/hyprmon";
+    wpctl = "${pkgs.wireplumber}/bin/wpctl";
+    hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+    cursor_name = "'${config.home.pointerCursor.name}'";
+    cursor_size = toString config.home.pointerCursor.size;
+    toggle_touchpad = "${pkgs.writeShellScriptBin "toggle" ''
+      if ${pkgs.hyprland}/bin/hyprctl getoption input:touchpad:disable_while_typing | grep -q "int: 1"; then
+        ${pkgs.hyprland}/bin/hyprctl keyword input:touchpad:disable_while_typing false
+      else
+        ${pkgs.hyprland}/bin/hyprctl keyword input:touchpad:disable_while_typing true
+      fi
+    ''}/bin/toggle";
+  };
+
+  substitute =
+    template:
+    builtins.replaceStrings (map (n: "@${n}@") (
+      builtins.attrNames paths
+    )) (builtins.attrValues paths) template;
+in
 {
   imports = [
-    ./binds.nix
     ./lock.nix
     ./waybar
-    ./look-and-feel.nix
-    ./devices.nix
     ./ethernet-port.nix
   ];
 
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
+    configType = "lua";
 
-    settings = {
-      # the default for monitors to be automatic
-      monitor = pkgs.lib.mkDefault [
-        ", preferred, auto, 1"
-      ];
+    extraConfig = substitute (builtins.readFile ./hyprland.lua);
+  };
 
-      # makes some electron apps work a bit better
-      env = [
-        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
-      ];
+  programs.rofi = {
+    enable = true;
+    theme = "gruvbox-dark-soft";
+  };
 
-      # see https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-      # see https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
-      windowrule = [
-        # ignore maximize requests from apps
-        "suppressevent maximize, class:.*"
-
-        # fix some dragging issues with xwayland
-        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-      ];
-    }; # end settings
-  }; # end wayland.windowManager.hyprland
   services.hyprpolkitagent.enable = true;
 }
