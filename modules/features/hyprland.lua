@@ -1,0 +1,207 @@
+-- paths.* and cursor.* are from a Nix-generated header thing
+-- (see modules/hyprland.nix).
+
+-- compositor settings
+
+hl.config({
+    general = {
+        gaps_in = 0,
+        gaps_out = 0,
+        border_size = 1,
+    },
+
+    decoration = {
+        rounding = 0,
+        rounding_power = 0,
+    },
+
+    misc = {
+        force_default_wallpaper = 1, -- no anime girl
+        disable_hyprland_logo = true,
+        enable_anr_dialog = false, -- no application-not-responding dialog
+        middle_click_paste = false,
+    },
+
+    -- see https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
+    dwindle = {
+        preserve_split = false,
+        force_split = 2,
+        split_width_multiplier = 1.5, -- 16:9
+    },
+
+    -- see https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
+    master = {
+        new_status = "master",
+    },
+
+    -- https://wiki.hypr.land/Configuring/Basics/Variables/#input
+    input = {
+        kb_layout = "us",
+        kb_variant = "",
+        kb_model = "",
+        kb_options = "",
+        kb_rules = "",
+
+        follow_mouse = 1,
+        accel_profile = "adaptive",
+        sensitivity = 0.2,
+
+        touchpad = {
+            natural_scroll = true,
+            clickfinger_behavior = true,
+            tap_to_click = true,
+            -- keep the trackpad live while typing (for gaming on the trackpad)
+            disable_while_typing = false,
+        },
+    },
+
+    animations = {
+        enabled = true,
+    },
+})
+
+-- bezier curves
+-- slow animations are for unixporn, not for real people
+
+hl.curve("specialWorkSwitch", { type = "bezier", points = { { 0.05, 0.5 }, { 0.1, 1 } } })
+hl.curve("emphasizedAccel", { type = "bezier", points = { { 0.3, 0 }, { 0.5, 0.15 } } })
+hl.curve("emphasizedDecel", { type = "bezier", points = { { 0.05, 0.5 }, { 0.1, 1 } } })
+hl.curve("standard", { type = "bezier", points = { { 0.2, 0 }, { 0, 1 } } })
+
+-- animations
+
+hl.animation({ leaf = "layersIn", enabled = true, speed = 1, bezier = "emphasizedDecel", style = "slide" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 1, bezier = "emphasizedAccel", style = "slide" })
+hl.animation({ leaf = "fadeLayers", enabled = true, speed = 1, bezier = "standard" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 1, bezier = "emphasizedDecel" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 1, bezier = "emphasizedAccel" })
+hl.animation({ leaf = "windowsMove", enabled = true, speed = 1, bezier = "standard" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 1, bezier = "standard" })
+hl.animation({
+    leaf = "specialWorkspace",
+    enabled = false,
+    speed = 0,
+    bezier = "specialWorkSwitch",
+    style = "slidevert 15%",
+})
+hl.animation({ leaf = "fade", enabled = true, speed = 1, bezier = "standard" })
+hl.animation({ leaf = "fadeDim", enabled = true, speed = 1, bezier = "standard" })
+hl.animation({ leaf = "border", enabled = true, speed = 1, bezier = "standard" })
+
+-- monitor / env / windowrule
+
+-- default monitor configuration
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
+
+-- makes some electron apps work a bit better
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
+
+-- see https://wiki.hypr.land/Configuring/Basics/Window-Rules/ for more
+hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
+-- fix some dragging issues with xwayland
+hl.window_rule({
+    match = {
+        class = "^$",
+        title = "^$",
+        xwayland = true,
+        float = true,
+        fullscreen = false,
+        pin = false,
+    },
+    no_focus = true,
+})
+
+-- devices
+
+-- evil mouse at work that moves at 1 pixel per mile
+hl.device({ name = "logitech-optical-usb-mouse", sensitivity = 1.0 })
+
+-- gestures
+-- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Gestures/
+
+hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
+
+-- keybinds
+-- See https://wiki.hypr.land/Configuring/Basics/Binds/ for more
+
+hl.bind("SUPER + RETURN", hl.dsp.exec_cmd(paths.kitty))
+hl.bind("SUPER + C", hl.dsp.window.close())
+hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("magic"))
+hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind("SUPER + SHIFT + ESCAPE", hl.dsp.exit())
+hl.bind("SUPER + E", hl.dsp.exec_cmd(paths.file_manager))
+hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd(paths.hyprlock .. " --immediate-render --no-fade-in"))
+
+-- move focus with mainMod + H J K L
+hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))
+hl.bind("SUPER + J", hl.dsp.focus({ direction = "down" }))
+hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
+hl.bind("SUPER + L", hl.dsp.focus({ direction = "right" }))
+
+-- scroll through existing workspaces with mainMod + scroll
+hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind("SUPER + mouse_up", hl.dsp.focus({ workspace = "e+1" }))
+
+-- app runner
+hl.bind("SUPER + R", hl.dsp.exec_cmd(paths.rofi .. " -show drun"))
+hl.bind("SUPER + SHIFT + code:201", hl.dsp.exec_cmd(paths.rofi .. " -show drun"))
+
+-- monitor control
+hl.bind(
+    "SUPER + M",
+    hl.dsp.exec_cmd(paths.kitty .. " -o confirm_os_window_close=0 --name Hyprmon " .. paths.hyprmon, { float = true })
+)
+
+-- screenshot
+hl.bind("PRINT", hl.dsp.exec_cmd(paths.hyprshot .. " -z -m output -m active --clipboard-only"))
+hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(paths.hyprshot .. " -m region --clipboard-only"))
+hl.bind("CTRL + PRINT", hl.dsp.exec_cmd(paths.hyprshot .. " -z -m window --clipboard-only"))
+
+-- workspaces 1-10 on SUPER+[1-0], 11-20 on SUPER+ALT+[1-0]
+for n = 1, 10 do
+    local key = n % 10
+    hl.bind("SUPER + " .. key, hl.dsp.focus({ workspace = n }))
+    hl.bind("SUPER + SHIFT + " .. key, hl.dsp.window.move({ workspace = n, follow = false }))
+    hl.bind("SUPER + ALT + " .. key, hl.dsp.focus({ workspace = n + 10 }))
+    hl.bind("SUPER + ALT + SHIFT + " .. key, hl.dsp.window.move({ workspace = n + 10, follow = false }))
+end
+
+-- mouse binds
+hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
+
+-- multimedia (work when locked)
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd(paths.playerctl .. " next"), { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd(paths.playerctl .. " play-pause"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(paths.playerctl .. " play-pause"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(paths.playerctl .. " previous"), { locked = true })
+
+hl.bind(
+    "XF86AudioRaiseVolume",
+    hl.dsp.exec_cmd(paths.wpctl .. " set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
+    { locked = true, repeating = true }
+)
+hl.bind(
+    "XF86AudioLowerVolume",
+    hl.dsp.exec_cmd(paths.wpctl .. " set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+    { locked = true, repeating = true }
+)
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(paths.wpctl .. " set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
+hl.bind(
+    "XF86AudioMicMute",
+    hl.dsp.exec_cmd(paths.wpctl .. " set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
+    { locked = true }
+)
+
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(paths.brightnessctl .. " s 10%+"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(paths.brightnessctl .. " s 10%-"), { locked = true, repeating = true })
+
+-- startup
+
+-- apply hyprcursor theme/size on session start
+hl.on("hyprland.start", function()
+    hl.exec_cmd(paths.hyprctl .. " setcursor " .. cursor.name .. " " .. tostring(cursor.size))
+end)
