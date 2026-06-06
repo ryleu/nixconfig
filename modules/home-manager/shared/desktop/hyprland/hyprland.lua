@@ -49,6 +49,7 @@ hl.config({
             natural_scroll = true,
             clickfinger_behavior = true,
             tap_to_click = true,
+            disable_while_typing = false,
         },
     },
 
@@ -74,7 +75,13 @@ hl.animation({ leaf = "windowsIn", enabled = true, speed = 1, bezier = "emphasiz
 hl.animation({ leaf = "windowsOut", enabled = true, speed = 1, bezier = "emphasizedAccel" })
 hl.animation({ leaf = "windowsMove", enabled = true, speed = 1, bezier = "standard" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 1, bezier = "standard" })
-hl.animation({ leaf = "specialWorkspace", enabled = false, speed = 0, bezier = "specialWorkSwitch", style = "slidevert 15%" })
+hl.animation({
+    leaf = "specialWorkspace",
+    enabled = false,
+    speed = 0,
+    bezier = "specialWorkSwitch",
+    style = "slidevert 15%",
+})
 hl.animation({ leaf = "fade", enabled = true, speed = 1, bezier = "standard" })
 hl.animation({ leaf = "fadeDim", enabled = true, speed = 1, bezier = "standard" })
 hl.animation({ leaf = "border", enabled = true, speed = 1, bezier = "standard" })
@@ -124,8 +131,7 @@ hl.bind("SUPER + E", hl.dsp.exec_cmd("@file_manager@"))
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("@hyprlock@ --immediate"))
-hl.bind("SUPER + T", hl.dsp.exec_cmd("@toggle_touchpad@"))
+hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("@hyprlock@ --grace 0"))
 
 -- move focus with mainMod + H J K L
 hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))
@@ -142,10 +148,7 @@ hl.bind("SUPER + R", hl.dsp.exec_cmd("@rofi@ -show drun"))
 hl.bind("SUPER + SHIFT + code:201", hl.dsp.exec_cmd("@rofi@ -show drun"))
 
 -- monitor control
-hl.bind(
-    "SUPER + M",
-    hl.dsp.exec_cmd("@kitty@ -o confirm_os_window_close=0 --name Hyprmon @hyprmon@", { float = true })
-)
+hl.bind("SUPER + M", hl.dsp.exec_cmd("@kitty@ -o confirm_os_window_close=0 --name Hyprmon @hyprmon@", { float = true }))
 
 -- screenshot
 hl.bind("PRINT", hl.dsp.exec_cmd("@hyprshot@ -z -m output -m active --clipboard-only"))
@@ -171,8 +174,16 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("@playerctl@ play-pause"), { locked = 
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("@playerctl@ play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("@playerctl@ previous"), { locked = true })
 
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("@wpctl@ set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("@wpctl@ set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
+hl.bind(
+    "XF86AudioRaiseVolume",
+    hl.dsp.exec_cmd("@wpctl@ set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
+    { locked = true, repeating = true }
+)
+hl.bind(
+    "XF86AudioLowerVolume",
+    hl.dsp.exec_cmd("@wpctl@ set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+    { locked = true, repeating = true }
+)
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("@wpctl@ set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("@wpctl@ set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
 

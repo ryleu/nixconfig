@@ -18,7 +18,7 @@ in
 
       settings = {
         general = {
-          lock_cmd = "pidof hyprlock || ${hyprlock} --immediate";
+          lock_cmd = "pidof hyprlock || ${hyprlock} --grace 0";
           before_sleep_cmd = "${loginctl} lock-session";
           after_sleep_cmd = "${hyprctl} dispatch dpms on";
         };
@@ -35,10 +35,7 @@ in
 
       settings = {
         general = {
-          disable_loading_bar = true;
-          grace = 60;
           hide_cursor = true;
-          no_fade_in = true;
           immediate_render = true;
         };
 

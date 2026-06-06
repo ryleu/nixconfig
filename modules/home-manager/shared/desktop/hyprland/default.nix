@@ -18,13 +18,6 @@ let
     hyprctl = "${pkgs.hyprland}/bin/hyprctl";
     cursor_name = "'${config.home.pointerCursor.name}'";
     cursor_size = toString config.home.pointerCursor.size;
-    toggle_touchpad = "${pkgs.writeShellScriptBin "toggle" ''
-      if ${pkgs.hyprland}/bin/hyprctl getoption input:touchpad:disable_while_typing | grep -q "int: 1"; then
-        ${pkgs.hyprland}/bin/hyprctl keyword input:touchpad:disable_while_typing false
-      else
-        ${pkgs.hyprland}/bin/hyprctl keyword input:touchpad:disable_while_typing true
-      fi
-    ''}/bin/toggle";
   };
 
   substitute =
