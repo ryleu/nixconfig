@@ -10,6 +10,12 @@ in
     enable = true;
     systemd.enable = false;
 
+    # patch to use new lua dispatcher syntax
+    # https://github.com/Alexays/Waybar/issues/5008
+    package = pkgs.waybar.overrideAttrs (old: {
+      patches = (old.patches or [ ]) ++ [ ./hyprland-lua-dispatch.patch ];
+    });
+
     style =
       builtins.replaceStrings
         [ "\${font-family}" ]
@@ -217,7 +223,7 @@ in
     };
 
     Service = {
-      ExecStart = "${pkgs.waybar}/bin/waybar";
+      ExecStart = "${config.programs.waybar.package}/bin/waybar";
       Restart = "on-failure";
       RestartSec = 1;
     };
