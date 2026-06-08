@@ -59,8 +59,8 @@ in
         ];
         Python.language_servers = [
           "ruff"
-	  "!ty"
-	  "!pyright"
+          "!ty"
+          "!pyright"
           "..."
         ];
         Nix.language_servers = [
