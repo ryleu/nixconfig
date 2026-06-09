@@ -114,11 +114,6 @@ hl.window_rule({
 -- evil mouse at work that moves at 1 pixel per mile
 hl.device({ name = "logitech-optical-usb-mouse", sensitivity = 1.0 })
 
--- gestures
--- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Gestures/
-
-hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
-
 -- keybinds
 -- See https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 
@@ -140,8 +135,26 @@ hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
 hl.bind("SUPER + L", hl.dsp.focus({ direction = "right" }))
 
 -- scroll through existing workspaces with mainMod + scroll
-hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e-1" }))
-hl.bind("SUPER + mouse_up", hl.dsp.focus({ workspace = "e+1" }))
+-- also gestures for swiping left or right
+-- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Gestures/
+
+hl.bind("SUPER + mouse_up", hl.dsp.focus({ workspace = "-1" }))
+hl.gesture({
+    fingers = 3,
+    direction = "right",
+    action = function()
+        hl.dispatch(hl.dsp.focus({ workspace = "-1" }))
+    end,
+})
+
+hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "+1" }))
+hl.gesture({
+    fingers = 3,
+    direction = "left",
+    action = function()
+        hl.dispatch(hl.dsp.focus({ workspace = "+1" }))
+    end,
+})
 
 -- app runner
 hl.bind("SUPER + R", hl.dsp.exec_cmd("@rofi@ -show drun"))

@@ -65,6 +65,7 @@ in
         ];
         Nix.language_servers = [
           "nixd"
+          "!nil"
           "..."
         ];
         Go.language_servers = [
