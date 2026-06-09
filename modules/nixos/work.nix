@@ -5,7 +5,6 @@
     kubectl
     kind
     tilt
-    k3d
     k9s
     helm-ls
   ];
