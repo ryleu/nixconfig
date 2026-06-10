@@ -29,4 +29,6 @@
     impala
     bluetui
   ];
+
+  programs.distrobox.enable = true;
 }

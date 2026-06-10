@@ -17,5 +17,6 @@ in
     master_pkgs.claude-code
     docker-buildx # better docker builder
     master_pkgs.liteparse
+    nodejs_latest
   ];
 }

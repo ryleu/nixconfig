@@ -230,6 +230,7 @@
 
     # basic stuff to operate the system with. most is in home manager
     systemPackages = with pkgs; [
+      distrobox
       libimobiledevice
       ifuse
       gnomeExtensions.blur-my-shell
