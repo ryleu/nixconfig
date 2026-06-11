@@ -50,6 +50,9 @@
       shellIntegration = {
         enableZshIntegration = true;
       };
+      keybindings = {
+        "ctrl+shift+n" = "new_os_window_with_cwd";
+      };
     };
   };
 }
