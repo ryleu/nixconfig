@@ -12,7 +12,7 @@ let
     playerctl = "${pkgs.playerctl}/bin/playerctl";
     brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
     hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
-    file_manager = "${pkgs.nautilus}/bin/nautilus";
+    file_manager = "${pkgs.kitty}/bin/kitty --class yazi ${pkgs.yazi}/bin/yazi";
     hyprmon = "${pkgs.hyprmon}/bin/hyprmon";
     wpctl = "${pkgs.wireplumber}/bin/wpctl";
     hyprctl = "${pkgs.hyprland}/bin/hyprctl";
@@ -31,6 +31,7 @@ in
     ./lock.nix
     ./waybar
     ./ethernet-port.nix
+    ./portals.nix
   ];
 
   wayland.windowManager.hyprland = {

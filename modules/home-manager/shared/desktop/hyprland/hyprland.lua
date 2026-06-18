@@ -96,6 +96,11 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 
 -- see https://wiki.hypr.land/Configuring/Basics/Window-Rules/ for more
 hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
+-- float and center the file picker
+hl.window_rule({ match = { class = "yazi-picker" }, float = true })
+hl.window_rule({ match = { class = "yazi-picker" }, size = "960 540" })
+hl.window_rule({ match = { class = "yazi-picker" }, center = true })
+
 -- fix some dragging issues with xwayland
 hl.window_rule({
     match = {

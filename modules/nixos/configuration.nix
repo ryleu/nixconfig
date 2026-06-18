@@ -81,12 +81,9 @@
     ];
 
     gnome = {
-      core-apps.enable = false;
       gnome-keyring.enable = true;
       gcr-ssh-agent.enable = false;
     };
-
-    blueman.enable = true;
 
     fail2ban = {
       enable = true;
@@ -120,11 +117,18 @@
 
     xserver.enable = false;
 
-    displayManager.gdm = {
+    greetd = {
       enable = true;
+      settings.default_session.command = builtins.replaceStrings [ "\n" ] [ "" ] ''
+        ${pkgs.tuigreet}/bin/tuigreet
+          --time
+          --remember
+          --remember-user-session
+          --user-menu
+          --asterisks
+          --cmd ${pkgs.hyprland}/bin/start-hyprland
+      '';
     };
-
-    desktopManager.gnome.enable = true;
 
     # Enable CUPS to print documents.
     printing.enable = true;
@@ -233,13 +237,10 @@
       distrobox
       libimobiledevice
       ifuse
-      gnomeExtensions.blur-my-shell
-      seahorse
       gnome-keyring
       gnome-boxes
       dnsmasq
       phodav
-      nautilus
       usbutils
       docker-buildx
       vim

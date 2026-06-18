@@ -71,12 +71,12 @@
         in
         {
           # rectangle's nixos configuration
-          rectangle = nixpkgs.lib.nixosSystem {
-            modules = baseModules ++ [
-              ./modules/hardware/rectangle
-            ];
-            inherit specialArgs;
-          };
+          # rectangle = nixpkgs.lib.nixosSystem {
+          #   modules = baseModules ++ [
+          #     ./modules/hardware/rectangle
+          #   ];
+          #   inherit specialArgs;
+          # };
 
           # barely-better's nixos configuration
           barely-better = nixpkgs.lib.nixosSystem {

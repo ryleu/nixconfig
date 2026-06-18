@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, mkTuiLauncher, ... }:
 
 {
   home.packages = with pkgs; [
@@ -29,6 +29,13 @@
     impala
     bluetui
   ];
+
+  xdg.desktopEntries = {
+    spotify-player = mkTuiLauncher pkgs.spotify-player;
+    impala = mkTuiLauncher pkgs.impala;
+    bluetui = mkTuiLauncher pkgs.bluetui;
+    btop = mkTuiLauncher pkgs.btop-rocm;
+  };
 
   programs.distrobox.enable = true;
 }

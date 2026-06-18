@@ -19,16 +19,17 @@
       mpv # videos
       spotify # music
       calibre # book metadata
+      imv # image viewer
       krita # photos
       libreoffice # docs
       blender # 3d models
 
       # utilities
-      pavucontrol
-      bottles
-      qdirstat
       logseq
       ungoogled-chromium # good to have kicking around
+      yazi # tui file manager
+      wiremix # tui audio mixer
+      gdu # tui disk usage
     ];
   };
 
