@@ -9,7 +9,6 @@ in
   home.packages = with pkgs; [
     # comms
     signal-desktop
-    vesktop
     teamspeak6-client
 
     # games
@@ -30,4 +29,8 @@ in
     picard # music metadata
     audacity # music editing
   ];
+
+  programs = {
+    vesktop.enable = true;
+  };
 }

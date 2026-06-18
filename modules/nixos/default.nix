@@ -6,5 +6,6 @@
     ./work.nix
     ./locale.nix
     ./network.nix
+    ./stylix.nix
   ];
 }

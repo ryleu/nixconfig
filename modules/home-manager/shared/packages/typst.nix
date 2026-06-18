@@ -4,6 +4,7 @@
     typst
     typstyle
     typst-live
-    zathura
   ];
+
+  programs.zathura.enable = true;
 }

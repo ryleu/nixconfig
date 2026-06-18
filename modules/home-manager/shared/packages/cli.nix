@@ -5,27 +5,17 @@
     undollar
     comma
     silver-searcher
-    ripgrep
     unzip
-    jq
-    gh
-    nix-index
-    wget
     nix-search
     nixfmt
     ffmpeg-full
     wl-clipboard
-    fastfetch
-    btop-rocm
-    aria2
-    tmux
+    wget
     dig
     pciutils
-    bat
     copyparty
 
     # tui
-    spotify-player
     impala
     bluetui
   ];
@@ -37,5 +27,20 @@
     btop = mkTuiLauncher "System Monitor" pkgs.btop-rocm;
   };
 
-  programs.distrobox.enable = true;
+  programs = {
+    distrobox.enable = true;
+    aria2.enable = true;
+    ripgrep.enable = true;
+    jq.enable = true;
+    gh.enable = true;
+    nix-index.enable = true;
+    fastfetch.enable = true;
+    tmux.enable = true;
+    bat.enable = true;
+    spotify-player.enable = true;
+    btop = {
+      enable = true;
+      package = pkgs.btop-rocm;
+    };
+  };
 }

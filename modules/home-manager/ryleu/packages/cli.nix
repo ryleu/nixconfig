@@ -1,13 +1,14 @@
 { pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
-    yt-dlp
     packwiz
     blahaj
     whipper
-    bun
     xwayland-satellite
   ];
+
+  programs.yt-dlp.enable = true;
+  programs.bun.enable = true;
 
   programs.zsh.completionInit = lib.mkAfter ''
     eval `${pkgs.packwiz}/bin/packwiz completion zsh`

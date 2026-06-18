@@ -42,10 +42,5 @@ in
     extraConfig = substitute (builtins.readFile ./hyprland.lua);
   };
 
-  programs.rofi = {
-    enable = true;
-    theme = "gruvbox-dark-soft";
-  };
-
   services.hyprpolkitagent.enable = true;
 }

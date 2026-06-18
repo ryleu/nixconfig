@@ -16,7 +16,6 @@
       ))
 
       # media
-      mpv # videos
       calibre # book metadata
       imv # image viewer
       krita # photos
@@ -26,13 +25,18 @@
       # utilities
       logseq
       ungoogled-chromium # good to have kicking around
-      yazi # tui file manager
       wiremix # tui audio mixer
       gdu # tui disk usage
     ];
   };
 
   programs = {
+    mpv.enable = true;
+    yazi = {
+      enable = true;
+      shellWrapperName = "y";
+    };
+
     obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [

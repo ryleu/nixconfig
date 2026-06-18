@@ -9,6 +9,12 @@
     unstable_pkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     master_pkgs.url = "github:NixOS/nixpkgs/master";
 
+    stylix = {
+      url = "github:nix-community/stylix/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+    };
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,6 +70,7 @@
                 inputs.firefox-addons.overlays.default
               ];
             }
+	    inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
             inherit inputs;
