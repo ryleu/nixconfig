@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   # map lua placeholders to store paths
   paths = {
@@ -36,7 +36,13 @@ in
     extraConfig = substitute (builtins.readFile ./hyprland.lua);
   };
 
-  programs.rofi.enable = true;
+  programs.rofi = {
+    enable = true;
+    theme.window = {
+      border = config.lib.formats.rasi.mkLiteral "1px";
+      border-color = config.lib.formats.rasi.mkLiteral "@blue";
+    };
+  };
 
   services.hyprpolkitagent.enable = true;
 }
