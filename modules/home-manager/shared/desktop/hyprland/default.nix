@@ -36,5 +36,7 @@ in
     extraConfig = substitute (builtins.readFile ./hyprland.lua);
   };
 
+  programs.rofi.enable = true;
+
   services.hyprpolkitagent.enable = true;
 }
