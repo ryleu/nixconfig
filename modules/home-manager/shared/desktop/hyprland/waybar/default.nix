@@ -6,6 +6,8 @@ let
 
 in
 {
+  stylix.targets.waybar.addCss = false;
+
   programs.waybar = {
     enable = true;
     systemd.enable = false;

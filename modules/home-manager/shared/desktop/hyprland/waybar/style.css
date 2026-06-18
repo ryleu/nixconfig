@@ -10,7 +10,7 @@
 }
 
 window#waybar {
-  background: #282828;
+  background: @base00;
 }
 
 window#waybar.hidden {
@@ -39,9 +39,9 @@ window#waybar.hidden {
   font-family: ${font-family}, monospace;
   font-size: 12px;
   font-weight: 800;
-  color: #282828;
-  /* background: #282828; */
-  /* border: 4px solid #282828; */
+  color: @base00;
+  /* background: @base00; */
+  /* border: 4px solid @base00; */
   /* border-radius: 0px; */
 }
 #window,
@@ -54,7 +54,7 @@ window#waybar.hidden {
 #battery.critical,
 #battery.warning,
 #memory {
-  margin-right: 5px; 
+  margin-right: 5px;
   margin-left: 5px;
   /* all modules depend on this for some reason */
 }
@@ -62,10 +62,10 @@ window#waybar.hidden {
 /* ================================= */
 
 tooltip {
-  background-color: #282828;
-  color: #ebdbb2;
+  background-color: @base00;
+  color: @base05;
   padding: 5px 10px;
-  border: 1px solid #504945;
+  border: 1px solid @base02;
   border-radius: 2px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
@@ -73,7 +73,7 @@ tooltip {
 /* ================================= */
 
 #workspaces button {
-  color: #ebdbb2;
+  color: @base05;
   border-radius: 0px;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -83,52 +83,52 @@ tooltip {
 }
 
 #workspaces button:hover {
-  background: #83a598;
+  background: @base0D;
 }
 
 #workspaces button.visible {
-  background: #83a598;
+  background: @base0D;
 }
 
 #workspaces button.visible:hover {
-  background: #83a598;
+  background: @base0D;
 }
 
 #workspaces button.active {
-  background: #83a598;
+  background: @base0D;
 }
 
 #workspaces button.active:hover {
-  background: #83a598;
+  background: @base0D;
 }
 
 #workspaces button.urgent {
-  background: #ea6962;
+  background: @base08;
 }
 
 /* ================================= */
 
 #workspaces button.special {
-  background-color: #d65d0e;
+  background-color: @base0F;
 }
 
 #workspaces button.special:hover {
-  background-color: #83a598;
+  background-color: @base0D;
 }
 
 #workspaces button.special.active {
-  background-color: #fe8019;
+  background-color: @base09;
 }
 
 #workspaces button.special.active:hover {
-  background-color: #83a598;
+  background-color: @base0D;
 }
 
 /* ================================= */
 
 #window {
-  color: #282828;
-  background: #83a598;
+  color: @base00;
+  background: @base0D;
   border-radius: 0.7px;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -150,69 +150,69 @@ window#waybar.empty #window {
 /* ================================= */
 
 #backlight {
-  color: #d8a657;
+  color: @base0A;
 }
 
 /* ================================= */
 
 #memory {
-  color: #b8bb26;
+  color: @base0B;
 }
 
 /* ================================= */
 
 #pulseaudio {
-  color: #83a598;
+  color: @base0D;
 }
 
 #pulseaudio.muted {
-  color: #ea6962;
+  color: @base08;
 }
 
 /* ================================= */
 
 #battery {
-  color: #b8bb26;
+  color: @base0B;
 }
 
 #battery.critical {
-  color: #cc241d;
+  color: @base08;
 }
 
 #battery.warning {
-  color: #fe8019;
+  color: @base09;
 }
 
 #battery.full {
-  color: #b8bb26;
+  color: @base0B;
 }
 
 #battery.charging {
-  color: #98971a;
+  color: @base0B;
 }
 
 #battery.plugged {
-  color: #98971a;
+  color: @base0B;
 }
 
 #battery.charging.warning {
-  color: #d79921;
+  color: @base0A;
 }
 
 #battery.charging.critical {
-  color: #cc241d;
+  color: @base08;
 }
 
 /* ================================= */
 
 #clock {
-  color: #ebdbb2;
+  color: @base05;
 }
 
 /* ================================= */
 
 #submap {
-  background: #d79921;
+  background: @base0A;
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: 4px;
