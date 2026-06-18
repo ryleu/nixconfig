@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 let
   # map lua placeholders to store paths
   paths = {
@@ -16,8 +12,6 @@ let
     hyprmon = "${pkgs.hyprmon}/bin/hyprmon";
     wpctl = "${pkgs.wireplumber}/bin/wpctl";
     hyprctl = "${pkgs.hyprland}/bin/hyprctl";
-    cursor_name = "'${config.home.pointerCursor.name}'";
-    cursor_size = toString config.home.pointerCursor.size;
   };
 
   substitute =

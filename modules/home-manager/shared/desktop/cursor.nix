@@ -1,26 +1,12 @@
-{ pkgs, ... }:
-let
-  name = "phinger-cursors-light";
-  package = pkgs.phinger-cursors;
-  size = 32;
-in
+{ config, ... }:
 {
-  home.sessionVariables = {
-    XCURSOR_SIZE = size;
-    HYPRCURSOR_SIZE = size;
-  };
+  home.sessionVariables.HYPRCURSOR_SIZE = config.home.pointerCursor.size;
 
   home.pointerCursor = {
-    enable = true;
-    inherit package;
-    dotIcons.enable = true;
-    gtk.enable = true;
     hyprcursor = {
       enable = true;
-      inherit size;
+      size = config.home.pointerCursor.size;
     };
-    inherit name;
-    inherit size;
-    x11.enable = true;
+    dotIcons.enable = true;
   };
 }

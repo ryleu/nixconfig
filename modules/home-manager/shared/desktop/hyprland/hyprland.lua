@@ -207,10 +207,3 @@ hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("@wpctl@ set-mute @DEFAULT_AUDIO_SOU
 
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("@brightnessctl@ s 10%+"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("@brightnessctl@ s 10%-"), { locked = true, repeating = true })
-
--- startup
-
--- apply hyprcursor theme/size on session start
-hl.on("hyprland.start", function()
-    hl.exec_cmd("@hyprctl@ setcursor @cursor_name@ @cursor_size@")
-end)

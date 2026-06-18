@@ -8,6 +8,8 @@
     inputs.zen-browser.homeModules.twilight
   ];
 
+  stylix.targets.zen-browser.profileNames = [ "default" ];
+
   programs.zen-browser =
     let
       mkLockedAttrs = builtins.mapAttrs (

@@ -4,7 +4,7 @@
     ./hyprland
     ./images
     ./cursor.nix
-    ./icons.nix
+    ./fonts.nix
     ./mime.nix
     ./tui-launchers.nix
   ];
