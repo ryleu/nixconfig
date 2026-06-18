@@ -31,10 +31,10 @@
   ];
 
   xdg.desktopEntries = {
-    spotify-player = mkTuiLauncher pkgs.spotify-player;
-    impala = mkTuiLauncher pkgs.impala;
-    bluetui = mkTuiLauncher pkgs.bluetui;
-    btop = mkTuiLauncher pkgs.btop-rocm;
+    spotify-player = mkTuiLauncher "Spotify" pkgs.spotify-player;
+    impala = mkTuiLauncher "Wi-Fi" pkgs.impala;
+    bluetui = mkTuiLauncher "Bluetooth" pkgs.bluetui;
+    btop = mkTuiLauncher "System Monitor" pkgs.btop-rocm;
   };
 
   programs.distrobox.enable = true;
