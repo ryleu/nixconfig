@@ -17,8 +17,14 @@ hl.config({
     misc = {
         force_default_wallpaper = 1, -- no anime girl
         disable_hyprland_logo = true,
+        disable_splash_rendering = true, -- no random text on default wallpaper
         enable_anr_dialog = false, -- no application-not-responding dialog
         middle_click_paste = false,
+    },
+
+    ecosystem = {
+        no_update_news = true,
+        no_donation_nag = true,
     },
 
     -- see https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
