@@ -17,7 +17,6 @@
 
       # media
       mpv # videos
-      spotify # music
       calibre # book metadata
       imv # image viewer
       krita # photos
