@@ -27,6 +27,7 @@
       ungoogled-chromium # good to have kicking around
       wiremix # tui audio mixer
       gdu # tui disk usage
+      drawy # infinite whiteboard
     ];
   };
 
