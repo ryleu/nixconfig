@@ -58,6 +58,8 @@ in
         # --------------------------------------------------
         "hyprland/workspaces" = {
           separate-outputs = true;
+	  show-special = true;
+	  special-visible-only = true;
         };
 
         "hyprland/submap" = {
