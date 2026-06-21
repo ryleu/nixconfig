@@ -4,6 +4,7 @@ let
   paths = {
     kitty = "${pkgs.kitty}/bin/kitty";
     rofi = "${pkgs.rofi}/bin/rofi";
+    rofimoji = "${pkgs.rofimoji}/bin/rofimoji";
     hyprshot = "${pkgs.hyprshot}/bin/hyprshot";
     playerctl = "${pkgs.playerctl}/bin/playerctl";
     brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
