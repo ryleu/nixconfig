@@ -70,7 +70,7 @@
                 inputs.firefox-addons.overlays.default
               ];
             }
-	    inputs.stylix.nixosModules.stylix
+            inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
             inherit inputs;
