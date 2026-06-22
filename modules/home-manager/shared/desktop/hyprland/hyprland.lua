@@ -139,7 +139,7 @@ hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("@hyprlock@ --grace 0"))
 -- emoji picker
-hl.bind("SUPER + PERIOD", hl.dsp.exec_cmd("@rofimoji@"));
+hl.bind("SUPER + PERIOD", hl.dsp.exec_cmd("@rofimoji@"))
 
 -- move focus with mainMod + H J K L
 hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))

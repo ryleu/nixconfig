@@ -16,7 +16,14 @@ let
   calc = "calc.desktop";
   impress = "impress.desktop";
 
-  forAll = mime: app: builtins.listToAttrs (map (m: { name = m; value = app; }) mime);
+  forAll =
+    mime: app:
+    builtins.listToAttrs (
+      map (m: {
+        name = m;
+        value = app;
+      }) mime
+    );
 in
 {
   xdg.mimeApps = {
