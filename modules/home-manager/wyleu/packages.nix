@@ -18,5 +18,6 @@ in
     docker-buildx # better docker builder
     master_pkgs.liteparse
     nodejs_latest
+    biome # nodejs toolchain
   ];
 }
