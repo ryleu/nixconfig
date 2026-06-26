@@ -24,6 +24,13 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+    settings = {
+      gcloud.disabled = true;
+      aws.disabled = true;
+      azure.disabled = true;
+      openstack.disabled = true;
+      kubernetes.disabled = true;
+    };
   };
   programs.zsh.syntaxHighlighting.enable = true;
 
