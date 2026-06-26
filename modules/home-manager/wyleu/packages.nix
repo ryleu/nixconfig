@@ -13,6 +13,7 @@ in
     dbeaver-bin
 
     # cli
+    google-cloud-sdk # provides gcloud cli
     glab
     master_pkgs.claude-code
     docker-buildx # better docker builder
