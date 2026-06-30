@@ -27,8 +27,10 @@
     };
 
     cursor = {
-      name = "phinger-cursors-light";
-      package = pkgs.phinger-cursors;
+      #name = "phinger-cursors-light";
+      #package = pkgs.phinger-cursors;
+      name = "Bibata-Modern-Ice";
+      package = pkgs.bibata-cursors;
       size = 32;
     };
 

@@ -23,7 +23,7 @@
       blender # 3d models
 
       # utilities
-      logseq
+      #logseq
       ungoogled-chromium # good to have kicking around
       wiremix # tui audio mixer
       gdu # tui disk usage
