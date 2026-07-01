@@ -57,7 +57,6 @@
           pkgs: with pkgs; [
             libkrb5
             keyutils
-            gamescope
           ];
       };
     };

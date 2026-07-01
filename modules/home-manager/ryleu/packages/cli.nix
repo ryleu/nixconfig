@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     packwiz
-    blahaj
     whipper
     xwayland-satellite
   ];

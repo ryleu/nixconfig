@@ -9,11 +9,9 @@ in
   home.packages = with pkgs; [
     # comms
     signal-desktop
-    teamspeak6-client
 
     # games
     master_pkgs.prismlauncher
-    alvr
 
     # 3D print slicers
     prusa-slicer
