@@ -1,5 +1,11 @@
 { pkgs, config, ... }:
 let
+  # patch to use new lua dispatcher syntax
+  # https://wiki.hypr.land/Configuring/Basics/Dispatchers/
+  hyprmon = pkgs.hyprmon.overrideAttrs (old: {
+    patches = (old.patches or [ ]) ++ [ ./hyprmon-lua-dispatch.patch ];
+  });
+
   # map lua placeholders to store paths
   paths = {
     kitty = "${pkgs.kitty}/bin/kitty";
@@ -10,7 +16,7 @@ let
     brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
     hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
     file_manager = "${pkgs.kitty}/bin/kitty --class yazi ${pkgs.yazi}/bin/yazi";
-    hyprmon = "${pkgs.hyprmon}/bin/hyprmon";
+    hyprmon = "${hyprmon}/bin/hyprmon";
     wpctl = "${pkgs.wireplumber}/bin/wpctl";
     hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   };

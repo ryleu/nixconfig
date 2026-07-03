@@ -1,0 +1,104 @@
+Use Hyprland's new Lua dispatchers so hyprmon works under `configType = "lua"`
+
+diff --git a/hyprland.go b/hyprland.go
+--- a/hyprland.go
++++ b/hyprland.go
+@@ -320,58 +320,58 @@
+ 		return fmt.Errorf("invalid color mode: %s", m.ColorMode)
+ 	}
+ 
+-	var cmd string
++	var lua string
+ 	if m.Active {
+ 		if m.IsMirrored && m.MirrorSource != "" {
+ 			// Validate mirror source name
+ 			if !isValidMonitorName(m.MirrorSource) {
+ 				return fmt.Errorf("invalid mirror source name: %s", m.MirrorSource)
+ 			}
+-			// Mirror syntax: monitor=NAME,resolution,position,scale,mirror,SOURCE_MONITOR
+-			cmd = fmt.Sprintf("hyprctl keyword monitor \"%s,%dx%d@%.2f,%dx%d,%.2f,mirror,%s\"",
++			// Mirror: hl.monitor({output=..., mode=..., position=..., scale=..., mirror=SRC})
++			lua = fmt.Sprintf("hl.monitor({output=%q, mode=\"%dx%d@%.2f\", position=\"%dx%d\", scale=%.2f, mirror=%q, disabled=false})",
+ 				m.Name, m.PxW, m.PxH, m.Hz, m.X, m.Y, m.Scale, m.MirrorSource)
+ 		} else {
+-			// Build base command for regular monitor
+-			cmd = fmt.Sprintf("hyprctl keyword monitor \"%s,%dx%d@%.2f,%dx%d,%.2f",
++			// Build base spec for regular monitor
++			lua = fmt.Sprintf("hl.monitor({output=%q, mode=\"%dx%d@%.2f\", position=\"%dx%d\", scale=%.2f, disabled=false",
+ 				m.Name, m.PxW, m.PxH, m.Hz, m.X, m.Y, m.Scale)
+ 
+ 			// Add advanced settings (only for non-mirrored monitors)
+ 			if m.BitDepth == 10 {
+-				cmd += ",bitdepth,10"
++				lua += ", bitdepth=10"
+ 			}
+ 
+ 			if m.ColorMode != "" && m.ColorMode != "srgb" {
+-				cmd += fmt.Sprintf(",cm,%s", m.ColorMode)
++				lua += fmt.Sprintf(", cm=%q", m.ColorMode)
+ 			}
+ 
+ 			// SDR settings only apply when in HDR mode
+ 			if m.ColorMode == "hdr" || m.ColorMode == "hdredid" {
+ 				if m.SDRBrightness != 0 && m.SDRBrightness != 1.0 {
+-					cmd += fmt.Sprintf(",sdrbrightness,%.2f", m.SDRBrightness)
++					lua += fmt.Sprintf(", sdrbrightness=%.2f", m.SDRBrightness)
+ 				}
+ 				if m.SDRSaturation != 0 && m.SDRSaturation != 1.0 {
+-					cmd += fmt.Sprintf(",sdrsaturation,%.2f", m.SDRSaturation)
++					lua += fmt.Sprintf(", sdrsaturation=%.2f", m.SDRSaturation)
+ 				}
+ 			}
+ 
+ 			if m.VRR > 0 {
+-				cmd += fmt.Sprintf(",vrr,%d", m.VRR)
++				lua += fmt.Sprintf(", vrr=%d", m.VRR)
+ 			}
+ 
+ 			if m.Transform > 0 {
+-				cmd += fmt.Sprintf(",transform,%d", m.Transform)
++				lua += fmt.Sprintf(", transform=%d", m.Transform)
+ 			}
+ 
+-			cmd += "\""
++			lua += "})"
+ 		}
+ 	} else {
+-		cmd = fmt.Sprintf("hyprctl keyword monitor \"%s,disable\"", m.Name)
++		lua = fmt.Sprintf("hl.monitor({output=%q, disabled=true})", m.Name)
+ 	}
+ 
+ 	ctx, cancel := context.WithTimeout(context.Background(), hyprctlTimeout)
+ 	defer cancel()
+ 
+-	return exec.CommandContext(ctx, "sh", "-c", cmd).Run()
++	return exec.CommandContext(ctx, "hyprctl", "eval", lua).Run()
+ }
+ 
+ func applyMonitors(monitors []Monitor) error {
+@@ -603,10 +603,10 @@
+ 		for _, workspace := range workspaces {
+ 			// Move workspace if it's not already on the target monitor
+ 			if workspace.Monitor != targetMonitor {
+-				cmd := fmt.Sprintf("hyprctl dispatch moveworkspacetomonitor %d %s", workspace.ID, targetMonitor)
++				lua := fmt.Sprintf("hl.dsp.workspace.move({workspace=%d, monitor=%q})", workspace.ID, targetMonitor)
+ 				ctx, cancel := context.WithTimeout(context.Background(), hyprctlTimeout)
+ 				defer cancel()
+-				if err := exec.CommandContext(ctx, "sh", "-c", cmd).Run(); err != nil {
++				if err := exec.CommandContext(ctx, "hyprctl", "dispatch", lua).Run(); err != nil {
+ 					return fmt.Errorf("failed to migrate workspace %d to monitor %s: %w", workspace.ID, targetMonitor, err)
+ 				}
+ 			}
+@@ -628,10 +628,10 @@
+ 	for _, workspace := range workspaces {
+ 		for _, removedMonitor := range removedMonitors {
+ 			if workspace.Monitor == removedMonitor {
+-				cmd := fmt.Sprintf("hyprctl dispatch moveworkspacetomonitor %d current", workspace.ID)
++				lua := fmt.Sprintf("hl.dsp.workspace.move({workspace=%d, monitor=\"current\"})", workspace.ID)
+ 				ctx, cancel := context.WithTimeout(context.Background(), hyprctlTimeout)
+ 				defer cancel()
+-				if err := exec.CommandContext(ctx, "sh", "-c", cmd).Run(); err != nil {
++				if err := exec.CommandContext(ctx, "hyprctl", "dispatch", lua).Run(); err != nil {
+ 					return fmt.Errorf("failed to migrate workspace %d: %w", workspace.ID, err)
+ 				}
+ 			}
