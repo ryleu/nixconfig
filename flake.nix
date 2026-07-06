@@ -43,6 +43,8 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    calibre-plugins.url = "github:nydragon/calibre-plugins";
   };
 
   outputs =

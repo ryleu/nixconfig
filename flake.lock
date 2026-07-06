@@ -91,6 +91,24 @@
         "type": "github"
       }
     },
+    "calibre-plugins": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1773076115,
+        "narHash": "sha256-X5dmVcQgUOX7S3lsPS5KLuQaVTxZs7j+X75acz2CT3o=",
+        "owner": "nydragon",
+        "repo": "calibre-plugins",
+        "rev": "3f99ce55a85120a2408ec80284c6c14c4e701e0b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nydragon",
+        "repo": "calibre-plugins",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "nixpkgs": [
@@ -185,7 +203,7 @@
     },
     "hardware": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1782562157,
@@ -282,6 +300,21 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1742335908,
+        "narHash": "sha256-unmSiGsXmUAZ4fAcSgf1iwssLmt/FLrczhLAsosyLh8=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fb9a9ddebc6c9685d2b6b98b35f134573e1872c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1767892417,
         "narHash": "sha256-8bW3q88CEg2u4hSP66Vf4lpbLonHz7hqDNBMcCY7E9U=",
         "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
@@ -293,7 +326,7 @@
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1782375420,
         "narHash": "sha256-wiPYmEuHbJvleW489n6+lamL7JSJg3pcKUYwURU9CkI=",
@@ -337,11 +370,12 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "calibre-plugins": "calibre-plugins",
         "firefox-addons": "firefox-addons",
         "hardware": "hardware",
         "home-manager": "home-manager_2",
         "master_pkgs": "master_pkgs",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "stylix": "stylix",
         "systems": "systems_2",
         "treefmt-nix": "treefmt-nix",
