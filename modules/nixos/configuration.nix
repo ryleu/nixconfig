@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   ...
 }:
@@ -125,7 +126,8 @@
           --remember-user-session
           --user-menu
           --asterisks
-          --cmd ${pkgs.hyprland}/bin/start-hyprland
+          --sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions
+          --xsessions ${config.services.displayManager.sessionData.desktops}/share/xsessions
       '';
     };
 
