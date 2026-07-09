@@ -17,34 +17,24 @@
   networking.firewall.allowedUDPPorts = [
     # 8472 # k3s, flannel: required if using multi-node for inter-node networking
   ];
-  services.k3s.enable = true;
-  services.k3s.role = "server";
-  services.k3s.extraFlags = toString [
-    # "--debug" # Optionally add additional args to k3s
-  ];
-
-  # local docker registry
-  services.dockerRegistry = {
+  services.k3s = {
     enable = true;
-    port = 5000;
-    listenAddress = "127.0.0.1";
-    enableGarbageCollect = true;
-    garbageCollectDates = "weekly";
+    role = "server";
+    extraFlags = toString [
+      "--node-ip=127.0.0.1"
+      "--embedded-registry"
+    ];
   };
 
-  # tell k3s to pull from it
+  # enable the embedded distributed registry mirror for all registries
   environment.etc."rancher/k3s/registries.yaml".text = ''
     mirrors:
-      "localhost:5000":
-        endpoint:
-          - "http://localhost:5000"
+      "*":
   '';
 
-  # only start k3s and docker registry when wyleu logs in
+  # only start k3s when wyleu logs in
   systemd.services.k3s.wantedBy = lib.mkForce [ "wyleu-work.target" ];
   systemd.services.k3s.partOf = [ "wyleu-work.target" ];
-  systemd.services.docker-registry.wantedBy = lib.mkForce [ "wyleu-work.target" ];
-  systemd.services.docker-registry.partOf = [ "wyleu-work.target" ];
 
   systemd.targets.wyleu-work = {
     description = "Work services for wyleu";
