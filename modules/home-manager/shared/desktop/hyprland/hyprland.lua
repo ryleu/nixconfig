@@ -83,10 +83,10 @@ hl.animation({ leaf = "windowsMove", enabled = true, speed = 1, bezier = "standa
 hl.animation({ leaf = "workspaces", enabled = true, speed = 1, bezier = "standard" })
 hl.animation({
     leaf = "specialWorkspace",
-    enabled = false,
-    speed = 0,
-    bezier = "specialWorkSwitch",
-    style = "slidevert 15%",
+    enabled = true,
+    speed = 1,
+    bezier = "standard",
+    style = "slidevert top",
 })
 hl.animation({ leaf = "fade", enabled = true, speed = 1, bezier = "standard" })
 hl.animation({ leaf = "fadeDim", enabled = true, speed = 1, bezier = "standard" })
@@ -102,6 +102,8 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 
 -- see https://wiki.hypr.land/Configuring/Basics/Window-Rules/ for more
 hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
+-- fullscreen/maximized windows get a cyan border
+hl.window_rule({ match = { fullscreen = true }, border_color = "@cyan@" })
 -- float and center the file picker
 hl.window_rule({ match = { class = "yazi-picker" }, float = true })
 hl.window_rule({ match = { class = "yazi-picker" }, size = "960 540" })
@@ -166,6 +168,35 @@ hl.gesture({
     direction = "left",
     action = function()
         hl.dispatch(hl.dsp.focus({ workspace = "+1" }))
+    end,
+})
+
+-- cool gestures to full screen / special workspace
+hl.gesture({
+    fingers = 3,
+    direction = "up",
+    action = function()
+        if hl.get_active_special_workspace() then
+            hl.dispatch(hl.dsp.workspace.toggle_special("S"))
+        else
+            local win = hl.get_active_window()
+            if not (win and win.fullscreen > 0) then
+                hl.dispatch(hl.dsp.window.fullscreen({ mode = "maximized" }))
+            end
+        end
+    end,
+})
+
+hl.gesture({
+    fingers = 3,
+    direction = "down",
+    action = function()
+        local win = hl.get_active_window()
+        if win and win.fullscreen > 0 then
+            hl.dispatch(hl.dsp.window.fullscreen({ mode = "maximized" }))
+        elseif not hl.get_active_special_workspace() then
+            hl.dispatch(hl.dsp.workspace.toggle_special("S"))
+        end
     end,
 })
 

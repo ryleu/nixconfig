@@ -19,6 +19,7 @@ let
     hyprmon = "${hyprmon}/bin/hyprmon";
     wpctl = "${pkgs.wireplumber}/bin/wpctl";
     hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+    cyan = "rgb(${config.lib.stylix.colors.base0C})";
   };
 
   substitute =
