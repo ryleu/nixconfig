@@ -45,6 +45,7 @@
         extensions.packages = with pkgs.firefox-addons; [
           ublock-origin
           proton-pass
+          proton-vpn
         ];
       };
     };
