@@ -22,6 +22,7 @@ in
     qbittorrent
     hugin # panoramas for URC
     kicad # pcb viewing
+    obsidian # for documentation and ideas
 
     # media
     picard # music metadata
