@@ -76,7 +76,6 @@ in
         guess-indent-nvim
 
         # folds
-        promise-async
         nvim-ufo
       ];
 
