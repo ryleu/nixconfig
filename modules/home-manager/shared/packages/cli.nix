@@ -14,6 +14,7 @@
     dig
     pciutils
     copyparty
+    secretspec
 
     # tui
     impala
