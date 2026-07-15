@@ -17,10 +17,6 @@ let
     foldenable = true;
   };
 
-  vimOptAppends = {
-    clipboard = "unnamedplus";
-  };
-
   luaValue =
     v:
     if builtins.isBool v then
@@ -32,10 +28,6 @@ let
 
   optLines = lib.concatStringsSep "\n" (
     lib.mapAttrsToList (k: v: "vim.opt.${k} = ${luaValue v}") vimOpts
-  );
-
-  appendLines = lib.concatStringsSep "\n" (
-    lib.mapAttrsToList (k: v: "vim.opt.${k}:append(${luaValue v})") vimOptAppends
   );
 in
 {
@@ -81,7 +73,6 @@ in
 
       initLua = ''
         ${optLines}
-        ${appendLines}
 
         require'colorizer'.setup({
           user_default_options = {
