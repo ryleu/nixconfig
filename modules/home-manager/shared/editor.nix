@@ -88,6 +88,26 @@ in
         vim.keymap.set('n', 'zR', require'ufo'.openAllFolds)
         vim.keymap.set('n', 'zM', require'ufo'.closeAllFolds)
 
+        vim.api.nvim_create_autocmd('FileType', {
+          pattern = {
+            'markdown',
+            'typst',
+            'tex',
+            'plaintex',
+            'context',
+            'asciidoc',
+            'rst',
+            'org',
+            'text',
+          },
+          callback = function()
+            vim.opt_local.wrap = true
+            vim.opt_local.linebreak = true
+            vim.keymap.set({ 'n', 'x' }, 'j', 'gj', { buffer = true, desc = 'Down by display line' })
+            vim.keymap.set({ 'n', 'x' }, 'k', 'gk', { buffer = true, desc = 'Up by display line' })
+          end,
+        })
+
         local neo_enabled = true
         vim.keymap.set('n', '<leader>tn', function()
           if neo_enabled then
