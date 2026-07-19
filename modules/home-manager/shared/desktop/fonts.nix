@@ -26,6 +26,6 @@
 
   programs.kitty.settings = {
     disable_ligatures = "cursor";
-    font_family = lib.mkForce ''family="${config.stylix.fonts.monospace.name}" features="+liga +calt +cv01 +cv02 +cv04 +ss01 +ss06"'';
+    font_family = lib.mkForce ''family="${config.stylix.fonts.monospace.name}" features="+liga +calt +cv01 +cv02 +cv04 +ss01 +ss06 +ss08"'';
   };
 }

@@ -11,7 +11,9 @@ in
     signal-desktop
 
     # games
-    master_pkgs.prismlauncher
+    (master_pkgs.prismlauncher.override {
+      additionalLibs = [ pkgs.sdl3 ]; # for 26.3
+    })
 
     # 3D print slicers
     prusa-slicer
