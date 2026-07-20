@@ -19,6 +19,7 @@
     # tui
     impala
     bluetui
+    mdfried # markdown viewer
   ];
 
   xdg.desktopEntries = {
