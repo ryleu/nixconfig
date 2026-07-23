@@ -20,5 +20,6 @@ in
     master_pkgs.liteparse
     nodejs_latest
     biome # nodejs toolchain
+    libnotify
   ];
 }

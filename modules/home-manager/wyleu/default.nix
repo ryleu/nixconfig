@@ -11,6 +11,7 @@
     ./browser.nix
     ./git.nix
     ./packages.nix
+    ./services.nix
     ./ssh.nix
   ];
 }
