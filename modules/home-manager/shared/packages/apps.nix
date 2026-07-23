@@ -5,7 +5,6 @@
 {
   home.packages = with pkgs; [
     # code
-    vscode-fhs
     (python312.withPackages (
       py: with py; [
         bpython
