@@ -73,7 +73,11 @@
       "tail08389.ts.net"
     ];
   };
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    # accept DNS config
+    extraSetFlags = [ "--accept-dns=true" ];
+  };
   services.avahi = {
     enable = true;
     nssmdns4 = true;
