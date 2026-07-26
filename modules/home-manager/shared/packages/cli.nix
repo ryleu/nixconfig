@@ -5,6 +5,7 @@
     undollar
     comma
     silver-searcher
+    zip
     unzip
     nix-search
     nixfmt
