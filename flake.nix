@@ -45,6 +45,9 @@
     };
 
     calibre-plugins.url = "github:nydragon/calibre-plugins";
+
+    # AMD NPU (XDNA) inference
+    nix-amd-ai.url = "github:noamsto/nix-amd-ai";
   };
 
   outputs =

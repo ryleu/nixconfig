@@ -18,7 +18,6 @@ in
     # 3D print slicers
     prusa-slicer
     orca-slicer
-    bambu-studio
 
     # utilities
     qbittorrent

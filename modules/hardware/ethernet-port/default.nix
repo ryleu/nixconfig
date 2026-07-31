@@ -10,7 +10,41 @@
 
     # technically i have a gen 6, but this is close enough
     inputs.hardware.nixosModules.lenovo-thinkpad-p14s-amd-gen5
+
+    inputs.nix-amd-ai.nixosModules.default
   ];
+
+  # fastflowlm needs NPU firmware >= 1.1 (kernel 7+)
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # server on http://localhost:13305/api/v1
+  hardware.amd-npu = {
+    enable = true;
+    enableNPU = true;
+    enableFastFlowLM = true;
+    enableLemonade = true;
+    enableROCm = true;
+    enableVulkan = true;
+    lemonade.user = "ryleu";
+    # default GTT is half of RAM (~22.5 GiB), too small for 24 GB GGUF models
+    gpuMemory = {
+      ttmSizeGiB = 32;
+      pagePoolSizeGiB = 16;
+    };
+  };
+  users.users.ryleu.extraGroups = [
+    "video"
+    "render"
+  ];
+
+  # lemonade's backends
+  programs.nix-ld.libraries = [ pkgs.vulkan-loader ];
+
+  # binary cache for nix-amd-ai (dunno why nixConfig is ignored)
+  nix.settings = {
+    substituters = [ "https://nix-amd-ai.cachix.org" ];
+    trusted-public-keys = [ "nix-amd-ai.cachix.org-1:F4OU4vw/lV2oiG6SBHZ+nqjl4EFJuqI4X9A7pvaBmhQ=" ];
+  };
 
   # docker state on its own btrfs subvolume so it can be wiped on boot
   fileSystems."/var/lib/docker" = {

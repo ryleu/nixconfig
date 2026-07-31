@@ -1,11 +1,16 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
     inputs.hardware.nixosModules.common-pc-ssd
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages;
 
   services.logind = {
     settings.Login = {
