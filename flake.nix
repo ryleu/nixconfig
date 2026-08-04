@@ -8,6 +8,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     unstable_pkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     master_pkgs.url = "github:NixOS/nixpkgs/master";
+    # provides openssl 3.0 for the horizon client's opensc pkcs11 module
+    openssl30_pkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     stylix = {
       url = "github:nix-community/stylix/release-26.05";
