@@ -16,6 +16,7 @@
     pciutils
     copyparty
     secretspec
+    file
 
     # tui
     impala
