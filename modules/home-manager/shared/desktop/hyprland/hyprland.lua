@@ -116,6 +116,10 @@ hl.window_rule({ match = { class = "yazi-picker" }, float = true })
 hl.window_rule({ match = { class = "yazi-picker" }, size = "960 540" })
 hl.window_rule({ match = { class = "yazi-picker" }, center = true })
 
+-- don't animate slurp's selection overlay closing, or screenshots
+-- capture the gray overlay mid-slide
+hl.layer_rule({ match = { namespace = "^selection$" }, no_anim = true })
+
 -- fix some dragging issues with xwayland
 hl.window_rule({
     match = {
