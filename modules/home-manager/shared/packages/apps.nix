@@ -34,6 +34,7 @@
     yazi = {
       enable = true;
       shellWrapperName = "y";
+      plugins.duckdb = pkgs.yaziPlugins.duckdb;
     };
 
     obs-studio = {
