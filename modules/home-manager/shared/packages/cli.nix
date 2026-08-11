@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    opencode
     undollar
     comma
     silver-searcher
