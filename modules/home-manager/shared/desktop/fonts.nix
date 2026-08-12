@@ -16,6 +16,7 @@
     rubik
     vista-fonts
     carlito
+    sitelen-seli-kiwen
   ];
 
   fonts.fontconfig.defaultFonts = {
