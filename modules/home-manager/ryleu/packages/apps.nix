@@ -36,7 +36,7 @@ in
       vencord.settings = {
         themeLinks = [
           # toki ilo pi sitelen pona
-          "https://gist.githubusercontent.com/ryleu/c6428cf72d75fb82ebef7538808a123e/raw/a23ee0d1e80837ada1a6289f04ea99e6a42d856e/style.css"
+          "https://gist.githubusercontent.com/ryleu/c6428cf72d75fb82ebef7538808a123e/raw/cbcf488c3d2be18bbffc3bf95d4b9b31b6ce3205/style.css"
           # block bullshit
           "https://raw.codeberg.page/AllPurposeMat/Disblock-Origin/DisblockOrigin.theme.css"
         ];
