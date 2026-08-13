@@ -33,6 +33,36 @@ in
   programs = {
     vesktop = {
       enable = true;
+      # override vesktop's vencord to add custom plugins
+      package = pkgs.vesktop.override {
+        vencord = pkgs.vencord.overrideAttrs (
+          old:
+          let
+            latex = pkgs.fetchFromGitHub {
+              owner = "james-yap";
+              repo = "vencord-latex";
+              rev = "6f625174d03d9df6992a2ab65f768bf63a6fb0f7";
+              hash = "sha256-K5i8QojO+2wgY6mqNlOGwWpLlvzP+EYa+KpC0cO2xx0=";
+            };
+            mathjax = pkgs.fetchzip {
+              url = "https://registry.npmjs.org/mathjax-full/-/mathjax-full-3.2.2.tgz";
+              hash = "sha256-qkgdBdHPPZKJkggob16Uxo7tG/Obl3shyAity/vRk/Y=";
+            };
+          in
+          {
+            postPatch = old.postPatch + ''
+              mkdir -p src/userplugins
+              cp -r ${latex} src/userplugins/latex
+            '';
+            # the plugin imports mathjax-full, which isn't in vencord's lockfile
+            preBuild = (old.preBuild or "") + ''
+              cp -r ${mathjax} node_modules/mathjax-full
+            '';
+          }
+        );
+      };
+      # without this vesktop downloads its own vencord and ignores the special one
+      vencord.useSystem = true;
       vencord.settings = {
         themeLinks = [
           # toki ilo pi sitelen pona
