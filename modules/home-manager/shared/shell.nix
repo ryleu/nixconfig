@@ -30,6 +30,7 @@
       azure.disabled = true;
       openstack.disabled = true;
       kubernetes.disabled = true;
+      battery.disabled = true;
     };
   };
   programs.zsh.syntaxHighlighting.enable = true;
