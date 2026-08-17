@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }:
 let
-  master_pkgs = import inputs.master_pkgs {
+  unstable_pkgs = import inputs.unstable_pkgs {
     system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
@@ -11,7 +11,7 @@ in
     signal-desktop
 
     # games
-    (master_pkgs.prismlauncher.override {
+    (unstable_pkgs.prismlauncher.override {
       additionalLibs = [ pkgs.sdl3 ]; # for 26.3
     })
 

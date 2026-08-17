@@ -2,13 +2,13 @@
 let
   system = pkgs.stdenv.hostPlatform.system;
 
-  master_pkgs = import inputs.master_pkgs {
+  unstable_pkgs = import inputs.unstable_pkgs {
     inherit system;
     config.allowUnfree = true;
   };
 in
 {
-  home.packages = with master_pkgs; [
+  home.packages = with unstable_pkgs; [
     typst
     typstyle
     typst-live

@@ -7,7 +7,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     unstable_pkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    master_pkgs.url = "github:NixOS/nixpkgs/master";
     # provides openssl 3.0 for the horizon client's opensc pkcs11 module
     openssl30_pkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
 
@@ -39,7 +38,8 @@
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # zen-browser needs ffmpeg_9, which nixos-26.05 doesn't have
+      inputs.nixpkgs.follows = "unstable_pkgs";
     };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";

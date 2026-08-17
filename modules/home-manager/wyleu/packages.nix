@@ -2,7 +2,7 @@
 let
   system = pkgs.stdenv.hostPlatform.system;
 
-  master_pkgs = import inputs.master_pkgs {
+  unstable_pkgs = import inputs.unstable_pkgs {
     inherit system;
     config.allowUnfree = true;
   };
@@ -24,9 +24,9 @@ in
     # cli
     google-cloud-sdk # provides gcloud cli
     glab
-    master_pkgs.claude-code
+    unstable_pkgs.claude-code
     docker-buildx # better docker builder
-    master_pkgs.liteparse
+    unstable_pkgs.liteparse
     nodejs_latest
     biome # nodejs toolchain
     libnotify
