@@ -18,6 +18,7 @@
     copyparty
     secretspec
     file
+    devenv
 
     # tui
     impala

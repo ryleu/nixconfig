@@ -273,6 +273,7 @@
       trusted-users = [
         "root"
         "ryleu"
+        "wyleu"
         "remotebuild"
       ];
     };
