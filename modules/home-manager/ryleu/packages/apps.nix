@@ -12,7 +12,15 @@ in
 
     # games
     (unstable_pkgs.prismlauncher.override {
-      additionalLibs = [ pkgs.sdl3 ]; # for 26.3
+      # for 26.3
+      additionalLibs = with pkgs; [
+        sdl3
+        libxi
+        libxfixes
+        libxkbcommon
+        libxtst
+        libxscrnsaver
+      ];
     })
 
     # 3D print slicers
