@@ -27,6 +27,7 @@
     wiremix # tui audio mixer
     gdu # tui disk usage
     drawy # infinite whiteboard
+    openscad # 3d modeling
   ];
 
   programs = {
