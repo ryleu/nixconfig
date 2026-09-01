@@ -12,14 +12,26 @@ in
 
     # games
     (unstable_pkgs.prismlauncher.override {
-      # for 26.3
       additionalLibs = with pkgs; [
+        # for 26.3
         sdl3
         libxi
         libxfixes
         libxkbcommon
         libxtst
         libxscrnsaver
+
+        # java awt (libawt_xawt, libjawt, libfontmanager)
+        libxrender
+        freetype
+
+        # webrtc-java (e4mc & friendslistbackport)
+        libxcomposite
+        dbus
+
+        # lwjgl nfd file dialogs (axiom) and flatlaf
+        gtk3
+        glib
       ];
     })
 
