@@ -27,6 +27,11 @@ hl.config({
         no_donation_nag = true,
     },
 
+    -- no more blurry xwayland
+    xwayland = {
+        force_zero_scaling = true,
+    },
+
     -- see https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
     dwindle = {
         preserve_split = false,
