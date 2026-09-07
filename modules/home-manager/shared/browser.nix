@@ -38,15 +38,15 @@
         SearchEngines = {
           Add = [
             {
-              "Name" = "Unduck";
-              "URLTemplate" = "https://s.dunkirk.sh?q={searchTerms}";
+              "Name" = "Kagi";
+              "URLTemplate" = "https://kagi.com/search?q={searchTerms}";
               "Method" = "GET";
-              "IconURL" = "https://s.dunkirk.sh/favicon.ico";
-              "Alias" = "undk";
-              "Description" = "ddg bangs pwa";
+              "IconURL" = "https://kagi.com/favicon.ico";
+              "Alias" = "kagi";
+              "Description" = "Private search engine";
             }
           ];
-          Default = "Unduck";
+          Default = "Kagi";
           PreventInstalls = true;
         };
 

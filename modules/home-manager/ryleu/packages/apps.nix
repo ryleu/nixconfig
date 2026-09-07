@@ -226,6 +226,7 @@ in
             showIcon = false;
           };
           SupportHelper.enabled = true;
+          TenorGifSearch.enabled = true;
           UserMessagesPronouns = {
             enabled = true;
             showSelf = true;
