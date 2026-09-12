@@ -60,6 +60,9 @@ i have other peripherals that come with me in my backpack.
 - **keyboard:** i use an afternoon labs breeze with glorious pandas in it.
   it has a columnar stagger, which is more comfortable for me.
   you can find my qmk config [here](./afternoon_labs_breeze.json).
+  it can be flahsed with
+  `BOOTLOADER=atmel-dfu qmk flash /etc/nixos/hardware/afternoon_labs_breeze.json`    
+  as i use an elite c for my board.
 - **mouse:** i use a logitech lift for day-to-day use.
   it helps with my hand pain due to repetitive strain injuries.
 - **portable monitor:** i got a crummy 1080p portable monitor off of bestbuy that

@@ -78,6 +78,7 @@
       platformio-core
       openocd
       steam-devices-udev-rules
+      qmk-udev-rules
     ];
 
     gnome = {
@@ -248,6 +249,7 @@
       wget
       git
       qmk
+      dos2unix
       via
       tree
     ];
