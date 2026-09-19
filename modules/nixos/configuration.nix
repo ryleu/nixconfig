@@ -9,7 +9,14 @@
       "i2c-dev"
       "hid-playstation"
       "hidp"
+      "ext4" # need this for armbian builds
     ];
+
+    binfmt = {
+      # allow emulating aarch64-linux
+      emulatedSystems = [ "aarch64-linux" ];
+      preferStaticEmulators = true;
+    };
 
     kernel.sysctl."kernel.sysrq" = 1;
 
