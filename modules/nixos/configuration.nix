@@ -58,7 +58,7 @@
 
     steam = {
       enable = true;
-      remotePlay.openFirewall = pkgs.lib.mkDefault false;
+      remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = pkgs.lib.mkDefault false;
       package = pkgs.steam.override {
         extraPkgs =

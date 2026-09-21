@@ -111,6 +111,10 @@
       linkConfig.RequiredForOnline = "no";
     };
   };
+  services.avahi.allowInterfaces = [
+    "enp195s0f0"
+    "wlan0"
+  ];
 
   # smart card
   services.pcscd.enable = true;
