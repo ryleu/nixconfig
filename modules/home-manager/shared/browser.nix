@@ -74,6 +74,7 @@
 
         extensions.packages = with pkgs.firefox-addons; [
           ublock-origin
+          firenvim
         ];
       };
     };

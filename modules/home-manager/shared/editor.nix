@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   vimOpts = {
     termguicolors = true;
@@ -31,6 +36,12 @@ let
   );
 in
 {
+
+  # firenvim
+  home.activation.firenvimInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    $DRY_RUN_CMD ${config.programs.neovim.finalPackage}/bin/nvim --headless "+call firenvim#install(0)" +qa
+  '';
+
   programs = {
     git.settings.core.editor = "nvim";
 
@@ -69,6 +80,8 @@ in
 
         # folds
         nvim-ufo
+
+        firenvim
       ];
 
       initLua = ''
@@ -121,6 +134,21 @@ in
             vim.notify("Neo features ON")
           end
         end, { desc = "Toggle neo features (inlay hints)" })
+
+
+        -- firenvim config
+        vim.g.firenvim_config = {
+            globalSettings = { alt = "all" };
+            localSettings = {
+                [".*"] = {
+                    cmdline = "neovim",
+                    content = "text",
+                    priority = 1,
+                    selector = "textarea",
+                    takeover = "always"
+                }
+            }
+        }
       '';
 
       coc = {
