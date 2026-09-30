@@ -28,6 +28,11 @@
     gdu # tui disk usage
     drawy # infinite whiteboard
     openscad # 3d modeling
+
+    # games
+    ace-of-penguins
+    nethack
+    rogue
   ];
 
   programs = {
