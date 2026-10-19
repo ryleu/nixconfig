@@ -1,5 +1,15 @@
-{ pkgs, mkTuiLauncher, ... }:
-
+{
+  pkgs,
+  inputs,
+  mkTuiLauncher,
+  ...
+}:
+let
+  amdAiPkgs = import inputs.nix-amd-ai.inputs.nixpkgs {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    config = pkgs.config;
+  };
+in
 {
   home.packages = with pkgs; [
     opencode
@@ -10,7 +20,7 @@
     unzip
     nix-search
     nixfmt
-    ffmpeg-full
+    amdAiPkgs.ffmpeg-full
     wl-clipboard
     wget
     dig

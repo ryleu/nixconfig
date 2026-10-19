@@ -25,10 +25,7 @@
     hardware.url = "github:nixos/nixos-hardware";
     agenix = {
       url = "github:ryantm/agenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        darwin.follows = ""; # save some space because nixos not darwin
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
