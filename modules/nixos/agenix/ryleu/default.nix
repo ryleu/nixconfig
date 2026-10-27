@@ -73,6 +73,13 @@ in
       group = "users";
     };
 
+    attic-token-ryleu = lib.mkIf (builtins.pathExists ./attic-token.age) {
+      file = ./attic-token.age;
+      mode = "600";
+      owner = "ryleu";
+      group = "users";
+    };
+
     syncthing-password-ryleu = {
       file = ./syncthing-password.age;
       mode = "600";

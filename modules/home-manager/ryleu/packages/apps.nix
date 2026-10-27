@@ -50,7 +50,8 @@ in
     audacity # music editing
 
     # 2month
-    (symlinkJoin { # force xorg
+    (symlinkJoin {
+      # force xorg
       name = "arduino-ide";
       paths = [ arduino-ide ];
       buildInputs = [ makeWrapper ];

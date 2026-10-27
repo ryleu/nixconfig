@@ -9,6 +9,7 @@
 
   imports = [
     # personal configuration
+    ./attic.nix
     ./browser.nix
     ./git.nix
     ./packages

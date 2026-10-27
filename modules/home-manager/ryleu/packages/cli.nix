@@ -4,6 +4,7 @@
     packwiz
     whipper
     xwayland-satellite
+    attic-client
   ];
 
   programs.yt-dlp.enable = true;

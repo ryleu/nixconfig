@@ -20,6 +20,7 @@ in
   "monument-key.age".publicKeys = users ++ systems;
   "cosign-key.age".publicKeys = users ++ systems;
   "syncthing-password.age".publicKeys = users ++ systems;
+  "attic-token.age".publicKeys = users ++ systems;
 
   # barely better specific
   "syncthing-cert-barely-better.age".publicKeys = users ++ [ barely-better ];
