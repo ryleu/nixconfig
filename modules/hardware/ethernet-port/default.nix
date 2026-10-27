@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   inputs,
   ...
 }:
@@ -89,6 +90,10 @@
     group = "docker-registry";
     mode = "0750";
   };
+
+  # disable ssh
+  services.openssh.enable = lib.mkForce false;
+  age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
   # networking
   networking.hostName = "ethernet-port";

@@ -185,6 +185,9 @@
     rtkit.enable = true;
     polkit.enable = true;
     pam.services.hyprlock = { };
+    pki.caCertificateBlacklist = [
+      "emSign ECC Root CA - G3"
+    ];
   };
 
   # Define a user account.

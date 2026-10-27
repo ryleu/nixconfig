@@ -34,6 +34,7 @@ in
     ./waybar
     ./ethernet-port.nix
     ./portals.nix
+    ./swaync.nix
   ];
 
   wayland.windowManager.hyprland = {

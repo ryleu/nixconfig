@@ -125,6 +125,10 @@ hl.window_rule({ match = { class = "yazi-picker" }, center = true })
 -- capture the gray overlay mid-slide
 hl.layer_rule({ match = { namespace = "^selection$" }, no_anim = true })
 
+-- swaync slides in from the right instead
+hl.layer_rule({ match = { namespace = "^swaync-notification-window$" }, no_anim = true })
+hl.layer_rule({ match = { namespace = "^swaync-control-center$" }, animation = "slide right" })
+
 -- fix some dragging issues with xwayland
 hl.window_rule({
     match = {

@@ -35,7 +35,8 @@ window#waybar.hidden {
 #battery.critical,
 #battery.warning,
 #clock,
-#submap {
+#submap,
+#custom-notification {
   font-family: ${font-family}, monospace;
   font-size: 12px;
   font-weight: 800;
@@ -53,7 +54,8 @@ window#waybar.hidden {
 #battery,
 #battery.critical,
 #battery.warning,
-#memory {
+#memory,
+#custom-notification {
   margin-right: 5px;
   margin-left: 5px;
   /* all modules depend on this for some reason */
@@ -220,5 +222,12 @@ window#waybar.empty #window {
 
   padding-left: 4px;
   padding-right: 4px;
+}
+
+/* ================================= */
+
+#custom-notification {
+  color: @base05;
+  padding-right: 5px;
 }
 

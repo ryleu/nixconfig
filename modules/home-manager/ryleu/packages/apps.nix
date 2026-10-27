@@ -48,6 +48,17 @@ in
     # media
     picard # music metadata
     audacity # music editing
+
+    # 2month
+    (symlinkJoin { # force xorg
+      name = "arduino-ide";
+      paths = [ arduino-ide ];
+      buildInputs = [ makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/arduino-ide --set ELECTRON_OZONE_PLATFORM_HINT x11
+      '';
+    })
+    arduino-cli
   ];
 
   programs = {
