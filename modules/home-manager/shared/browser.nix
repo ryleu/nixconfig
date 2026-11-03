@@ -66,6 +66,14 @@
       };
 
       profiles.default = {
+        keyboardShortcuts = [
+          {
+            id = "key_inspector";
+            disabled = true;
+          }
+        ];
+        keyboardShortcutsVersion = 21;
+
         mods = [
           "1b88a6d1-d931-45e8-b6c3-bfdca2c7e9d6" # Remove Tab X
           "c01d3e22-1cee-45c1-a25e-53c0f180eea8" # Ghost Tabs

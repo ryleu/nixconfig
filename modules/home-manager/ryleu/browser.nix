@@ -22,6 +22,14 @@
       ginisight = {
         id = 1;
 
+        keyboardShortcuts = [
+          {
+            id = "key_inspector";
+            disabled = true;
+          }
+        ];
+        keyboardShortcutsVersion = 21;
+
         spacesForce = true;
         spaces = {
           "Business" = {
