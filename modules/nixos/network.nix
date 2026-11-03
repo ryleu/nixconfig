@@ -31,7 +31,6 @@
       enable = true;
       allowedTCPPorts = [
         25565 # minecraft
-        3923 # copyparty
       ];
     }
     // (

@@ -18,7 +18,6 @@
     wget
     dig
     pciutils
-    copyparty
     secretspec
     file
     devenv
