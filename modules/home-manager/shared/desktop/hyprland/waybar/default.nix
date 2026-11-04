@@ -20,11 +20,15 @@ in
 
     style =
       builtins.replaceStrings
-        [ "\${font-family}" ]
+        [
+          "\${font-family}"
+          "\${opacity}"
+        ]
         [
           "${builtins.concatStringsSep ", " (
             map (s: "\"${s}\"") config.fonts.fontconfig.defaultFonts.monospace
           )}"
+          (toString config.stylix.opacity.desktop)
         ]
         (builtins.readFile ./style.css);
 

@@ -44,6 +44,11 @@
     };
 
     calibre-plugins.url = "github:nydragon/calibre-plugins";
+
+    mcwall = {
+      url = "github:ryleu/mcwall";
+      inputs.nixpkgs.follows = "unstable_pkgs";
+    };
   };
 
   outputs =

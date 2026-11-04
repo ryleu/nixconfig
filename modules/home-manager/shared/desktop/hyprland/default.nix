@@ -31,6 +31,7 @@ in
 {
   imports = [
     ./lock.nix
+    ./mcwall.nix
     ./waybar
     ./ethernet-port.nix
     ./portals.nix

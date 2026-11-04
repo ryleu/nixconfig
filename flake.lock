@@ -258,6 +258,26 @@
         "type": "github"
       }
     },
+    "mcwall": {
+      "inputs": {
+        "nixpkgs": [
+          "unstable_pkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793831325,
+        "narHash": "sha256-cIN9qKyLQkS/huN/5UR5LR9a2QuR9NTUyaxirVAnRj8=",
+        "owner": "ryleu",
+        "repo": "mcwall",
+        "rev": "0a953f9713ceff8421eb1469afbe8696e3476f96",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ryleu",
+        "repo": "mcwall",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1742335908,
@@ -350,6 +370,7 @@
         "firefox-addons": "firefox-addons",
         "hardware": "hardware",
         "home-manager": "home-manager",
+        "mcwall": "mcwall",
         "nixpkgs": "nixpkgs_3",
         "openssl30_pkgs": "openssl30_pkgs",
         "stylix": "stylix",
