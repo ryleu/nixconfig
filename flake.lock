@@ -265,11 +265,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793831325,
-        "narHash": "sha256-cIN9qKyLQkS/huN/5UR5LR9a2QuR9NTUyaxirVAnRj8=",
+        "lastModified": 1793911483,
+        "narHash": "sha256-At3cpqkXgavYndKn7XXhNpfIYSv5yO0HRpK2ussMA3w=",
         "owner": "ryleu",
         "repo": "mcwall",
-        "rev": "0a953f9713ceff8421eb1469afbe8696e3476f96",
+        "rev": "00744c0dd7e3ff770011d7d3004dd91619ebc2da",
         "type": "github"
       },
       "original": {
