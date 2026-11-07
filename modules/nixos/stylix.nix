@@ -8,8 +8,8 @@
     polarity = "dark";
 
     opacity = {
-      terminal = 0.8;
-      desktop = 0.8;
+      terminal = 0.85;
+      desktop = 0.85;
     };
 
     fonts = {

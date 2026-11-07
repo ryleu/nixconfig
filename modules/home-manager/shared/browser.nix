@@ -6,6 +6,7 @@
 {
   imports = [
     inputs.zen-browser.homeModules.twilight
+    ./zen-transparency.nix
   ];
 
   stylix.targets.zen-browser.profileNames = [ "default" ];
