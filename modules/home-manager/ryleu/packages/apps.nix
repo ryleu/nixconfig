@@ -4,6 +4,42 @@ let
     system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
+
+  # remove once vencord >= 1.15.15
+  vencord = pkgs.vencord.overrideAttrs (
+    old:
+    let
+      version = "1.15.16";
+      src = pkgs.fetchFromGitHub {
+        owner = "Vendicated";
+        repo = "Vencord";
+        tag = "v${version}";
+        hash = "sha256-aUJubLJpyLAZWiOezqFxPY6oVPgWVPQpajFqrJvrO9U=";
+      };
+    in
+    {
+      inherit version src;
+      # 1.15.13's dependency fixups don't apply to this tree
+      patches = [ ];
+      postPatch = "";
+      pnpmDeps = pkgs.fetchPnpmDeps {
+        inherit (old) pname;
+        inherit src;
+        pnpm = pkgs.pnpm_12;
+        fetcherVersion = 5;
+        hash = "sha256-A+Lzd7LSCkC7Ia7uvxcXG1NsfjlXWIi8FqQ+DeCZafU=";
+      };
+      nativeBuildInputs = [
+        pkgs.git
+        pkgs.nodejs
+        pkgs.pnpmConfigHook
+        pkgs.pnpm_12
+      ];
+      env = old.env // {
+        VENCORD_HASH = version;
+      };
+    }
+  );
 in
 {
   home.packages = with pkgs; [
@@ -67,7 +103,7 @@ in
       enable = true;
       # override vesktop's vencord to add custom plugins
       package = pkgs.vesktop.override {
-        vencord = pkgs.vencord.overrideAttrs (
+        vencord = vencord.overrideAttrs ( # make pkgs.vencord once vesktop gets updated
           old:
           let
             latex = pkgs.fetchFromGitHub {
