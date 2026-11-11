@@ -1,10 +1,5 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 let
-  unstable_pkgs = import inputs.unstable_pkgs {
-    system = pkgs.stdenv.hostPlatform.system;
-    config.allowUnfree = true;
-  };
-
   # remove once vencord >= 1.15.15
   vencord = pkgs.vencord.overrideAttrs (
     old:
@@ -47,7 +42,7 @@ in
     signal-desktop
 
     # games
-    (unstable_pkgs.prismlauncher.override {
+    (prismlauncher.override {
       additionalLibs = with pkgs; [
         # for 26.3
         sdl3
@@ -56,6 +51,9 @@ in
         libxkbcommon
         libxtst
         libxscrnsaver
+
+        # wayland client-side decorations
+        libdecor
 
         # java awt (libawt_xawt, libjawt, libfontmanager)
         libxrender
@@ -71,19 +69,8 @@ in
       ];
     })
 
-    # 3D print slicers
-    prusa-slicer
-    bambu-studio
-
     # utilities
-    qbittorrent
     hugin # panoramas for URC
-    kicad # pcb viewing
-    obsidian # for documentation and ideas
-
-    # media
-    picard # music metadata
-    audacity # music editing
 
     # 2month
     (symlinkJoin {
@@ -103,7 +90,8 @@ in
       enable = true;
       # override vesktop's vencord to add custom plugins
       package = pkgs.vesktop.override {
-        vencord = vencord.overrideAttrs ( # make pkgs.vencord once vesktop gets updated
+        vencord = vencord.overrideAttrs (
+          # make pkgs.vencord once vesktop gets updated
           old:
           let
             latex = pkgs.fetchFromGitHub {
