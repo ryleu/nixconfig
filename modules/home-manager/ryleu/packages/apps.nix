@@ -71,6 +71,7 @@ in
 
     # utilities
     hugin # panoramas for URC
+    twinejs # EH244
 
     # 2month
     (symlinkJoin {
