@@ -19,44 +19,7 @@
     "render"
   ];
 
-  # docker state on its own btrfs subvolume so it can be wiped on boot
-  fileSystems."/var/lib/docker" = {
-    device = "/dev/disk/by-label/NIXROOT";
-    fsType = "btrfs";
-    options = [ "subvol=docker" ];
-  };
-  fileSystems."/var/lib/docker-registry" = {
-    device = "/dev/disk/by-label/NIXROOT";
-    fsType = "btrfs";
-    options = [ "subvol=docker-registry" ];
-  };
-
-  # wipe docker state on every boot
-  # boot.initrd.systemd.services.wipe-docker-state = {
-  #   description = "Wipe docker + docker-registry btrfs subvolumes on boot";
-  #   wantedBy = [ "initrd.target" ];
-  #   after = [ "dev-disk-by\\x2dlabel-NIXROOT.device" ];
-  #   before = [ "sysroot.mount" ];
-  #   unitConfig.DefaultDependencies = "no";
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #     RemainAfterExit = true;
-  #   };
-  #   script = ''
-  #     mkdir -p /btrfs_tmp
-  #     mount -t btrfs -o subvolid=5 /dev/disk/by-label/NIXROOT /btrfs_tmp
-  #     for sv in docker docker-registry; do
-  #       if [ -d "/btrfs_tmp/$sv" ]; then
-  #         btrfs subvolume delete --recursive "/btrfs_tmp/$sv" 2>/dev/null \
-  #           || btrfs subvolume delete "/btrfs_tmp/$sv"
-  #       fi
-  #       btrfs subvolume create "/btrfs_tmp/$sv"
-  #     done
-  #     umount /btrfs_tmp
-  #   '';
-  # };
-
-  # fresh subvolume have root:root, docker-registry needs its own user and group
+  # docker-registry needs its own user and group on its state dir
   systemd.tmpfiles.settings."10-docker-registry-wipe"."/var/lib/docker-registry".d = {
     user = "docker-registry";
     group = "docker-registry";
