@@ -20,10 +20,21 @@
 
     kernel.sysctl."kernel.sysrq" = 1;
 
+    # pipe down initrd & kernel. looks bad on plymouth
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "udev.log_level=3"
+      "systemd.show_status=auto"
+    ];
+
     # Bootloader.
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+      # hold space for timeout
+      timeout = 0;
     };
 
     # copyfail mitigation
@@ -188,39 +199,43 @@
   };
 
   # Define a user account.
-  users = {
-    mutableUsers = false;
-    users.ryleu = {
-      isNormalUser = true;
-      description = "Riley";
-      extraGroups = [
-        "wheel"
-        "docker"
-        "input"
-        "kvm"
-        "i2c"
-        "libvirtd"
-        "dialout"
-      ];
-      openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
-      shell = pkgs.zsh;
-      hashedPassword = "$y$j9T$G2.gK6JpQ18SsfAJ3xe7r0$l37UsbpiRZ7Q1VsYDcfSsAFHy97ZhIWXG7y4t1yRZcA";
-    };
-    users.wyleu = {
-      isNormalUser = true;
-      description = "Riley (Work)";
-      extraGroups = [
-        "wheel"
-        "docker"
-        "input"
-        "kvm"
-        "libvirtd"
-      ];
-      openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
-      shell = pkgs.zsh;
+  users =
+    let
       hashedPassword = "$y$j9T$zyMzCj7.LtjPiuCS5.XQK.$oGM3MZxbn99H0xWx7mdBcAX.RqiDS5FStYMNcCIM0v3";
+    in
+    {
+      mutableUsers = false;
+      users.ryleu = {
+        isNormalUser = true;
+        description = "Riley";
+        extraGroups = [
+          "wheel"
+          "docker"
+          "input"
+          "kvm"
+          "i2c"
+          "libvirtd"
+          "dialout"
+        ];
+        openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
+        shell = pkgs.zsh;
+        inherit hashedPassword;
+      };
+      users.wyleu = {
+        isNormalUser = true;
+        description = "Riley (Work)";
+        extraGroups = [
+          "wheel"
+          "docker"
+          "input"
+          "kvm"
+          "libvirtd"
+        ];
+        openssh.authorizedKeys.keyFiles = pkgs.lib.mkDefault [ ];
+        shell = pkgs.zsh;
+        inherit hashedPassword;
+      };
     };
-  };
 
   nixpkgs = {
     config = {

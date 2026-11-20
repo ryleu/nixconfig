@@ -1,13 +1,9 @@
 let
   users = import ./authorized_keys.nix;
 
-  rectangle = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN2CjaY+uiOHdCEpPCdlJ+2fDtm8vdu+Jvbyo9Q+abwB root@rectangle";
-  barely-better = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAWotWG7ZQEFVI5qmnsK/VAaqEqaJlhV60NYz4iJACJq root@barely-better";
   ethernet-port = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOc5p4P2Uq8vDDxQL7ssgoPFArI+c2B8ZQdXJTh+priX root@ethernet-port";
 
   systems = [
-    rectangle
-    barely-better
     ethernet-port
   ];
 in
@@ -21,10 +17,9 @@ in
   "cosign-key.age".publicKeys = users ++ systems;
   "syncthing-password.age".publicKeys = users ++ systems;
   "attic-token.age".publicKeys = users ++ systems;
-
-  # barely better specific
-  "syncthing-cert-barely-better.age".publicKeys = users ++ [ barely-better ];
-  "syncthing-key-barely-better.age".publicKeys = users ++ [ barely-better ];
+  "secureboot-pk-key.age".publicKeys = users ++ systems;
+  "secureboot-kek-key.age".publicKeys = users ++ systems;
+  "secureboot-db-key.age".publicKeys = users ++ systems;
 
   # ethernet-port specific
   "syncthing-cert-ethernet-port.age".publicKeys = users ++ [ ethernet-port ];

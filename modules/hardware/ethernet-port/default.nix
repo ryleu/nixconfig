@@ -9,6 +9,7 @@
     ../laptop.nix
     ./hardware-configuration.nix
     ./biometrics.nix
+    ../secureboot
 
     # technically i have a gen 6, but this is close enough
     inputs.hardware.nixosModules.lenovo-thinkpad-p14s-amd-gen5

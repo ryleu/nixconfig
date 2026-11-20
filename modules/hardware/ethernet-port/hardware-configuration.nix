@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   modulesPath,
   ...
 }:
@@ -9,27 +7,33 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "thunderbolt"
-    "usbhid"
-    "usb_storage"
-    "sd_mod"
-  ];
-
   boot = {
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
 
     initrd = {
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "thunderbolt"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+      ];
       kernelModules = [ ];
+
+      # systemd initrd is needed for tpm2 unlocking
+      systemd.enable = true;
 
       luks.devices = {
         luksroot = {
           device = "/dev/disk/by-label/NIXLUKS";
           allowDiscards = true;
           bypassWorkqueues = true;
+          crypttabExtraOpts = [
+            "tpm2-device=auto"
+            "tpm2-measure-pcr=yes" # tpm can only unlock 1 volume per boot
+          ];
         };
       };
     };
@@ -47,6 +51,8 @@
 
     # generally i like to have compression to save a bit of space
     # noatime is not useful except in /home
+
+    # TODO: replace with disko
 
     "/" = {
       device = "/dev/mapper/luksroot";

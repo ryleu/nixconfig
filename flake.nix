@@ -2,7 +2,7 @@
   description = "Configuration flake for ryleu's desktop";
 
   # shared configuration is stored in configuration.nix, while individual configs are in the files
-  # named for the device's hostname. eg: rectangle uses configuration.nix and rectangle.nix
+  # named for the device's hostname. eg: ethernet-port uses modules/nixos and modules/hardware/ethernet-port
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
@@ -25,6 +25,12 @@
     hardware.url = "github:nixos/nixos-hardware";
     agenix = {
       url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # secure boot
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -83,22 +89,6 @@
           };
         in
         {
-          # rectangle's nixos configuration
-          # rectangle = nixpkgs.lib.nixosSystem {
-          #   modules = baseModules ++ [
-          #     ./modules/hardware/rectangle
-          #   ];
-          #   inherit specialArgs;
-          # };
-
-          # barely-better's nixos configuration
-          barely-better = nixpkgs.lib.nixosSystem {
-            modules = baseModules ++ [
-              ./modules/hardware/barely-better
-            ];
-            inherit specialArgs;
-          };
-
           # ethernet-port's nixos configuration
           ethernet-port = nixpkgs.lib.nixosSystem {
             modules = baseModules ++ [

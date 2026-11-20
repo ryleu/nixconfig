@@ -6,6 +6,7 @@
     ./work.nix
     ./locale.nix
     ./network.nix
+    ./plymouth
     ./stylix.nix
   ];
 }

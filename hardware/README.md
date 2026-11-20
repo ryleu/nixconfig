@@ -8,22 +8,17 @@ i use in my day-to-day.
 i own a few different machines, some of which will be present in the nix config at
 any moment in time. here's a list:
 
-- [`barely-better`](../modules/hardware/barely-better)
-  - Acer Aspire A515-43
-  - this is the laptop that's getting me through college.
-    unfortunately, it is not long for this world.
-  - the name comes from the fact that it is marginally better than `mathrock`, the
-    previous free laptop i owned and daily drove.
 - `monument`
   - Dell PowerEdge R730
   - this is a server that chills in the basement.
     it operates mostly as a NAS and a minecraft server box.
     i run truenas scale on it, though i want to change it to nixos.
   - the name comes from it being a monumental effort to procure and set up
-- [`rectangle`](../modules/hardware/rectangle)
+- `rectangle` (decommissioned)
   - custom build hodgepodge of hardware
     - AM4 platform, ryzen 5800X
     - rx6700xt
+    - 32 GB DDR4 3200 MTps
   - mostly use this one for playing games. since getting `decknt`, i rarely use it.
     may repurpose into a nix build server as it's more powerful than `monument`.
   - the name comes from the shape.
@@ -44,10 +39,14 @@ any moment in time. here's a list:
     it is an omage to what it is: a deck.
 
     my handheld is not a deck, so i called it `decknt`.
+- `frame`
+  - Steam Frame!
+  - i use it for beatsaber
+- `temple`
+  - AMD BC250
+  - i play games on it and was too lazy to change the hostname
 - [`ethernet-port`](../modules/hardware/ethernet-port)
   - Thinkpad P14 Gen 6 AMD
-  - this is a new laptop that i'm hoping will last me 10 years or so.
-    its purpose is to replace `barely-better` for general computing and writing code.
   - the name comes from the fact that my Thinkpad has an ethernet port, but
     [@iggy-c](https://github.com/iggy-c)'s does not, thus making mine superior.
 
@@ -68,4 +67,3 @@ i have other peripherals that come with me in my backpack.
 - **portable monitor:** i got a crummy 1080p portable monitor off of bestbuy that
   works excellently.
   i think the brand is AOC, but it's not stand out enough that i can recommend it.
-
