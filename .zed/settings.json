@@ -1,0 +1,16 @@
+// lets nixd resolve options in this repo, so go-to-definition works: this
+// flake's own (hosts, parts and their settings) and the nixos and
+// home-manager options the part files set
+{
+  "lsp": {
+    "nixd": {
+      "settings": {
+        "options": {
+          "flake": {
+            "expr": "import /etc/nixos/nixd-options.nix"
+          }
+        }
+      }
+    }
+  }
+}

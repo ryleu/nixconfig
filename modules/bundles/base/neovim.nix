@@ -1,0 +1,164 @@
+{
+  flake.modules.homeManager.dev =
+    {
+      pkgs,
+      lib,
+      ...
+    }:
+    let
+      vimOpts = {
+        termguicolors = true;
+        autoindent = true;
+        cursorline = true;
+        number = true;
+        wildmode = "longest,list";
+        expandtab = true;
+        shiftwidth = 4;
+        tabstop = 4;
+        signcolumn = "auto";
+        linebreak = true;
+        foldcolumn = "0";
+        foldlevel = 99;
+        foldlevelstart = 99;
+        foldenable = true;
+      };
+
+      luaValue =
+        v:
+        if builtins.isBool v then
+          lib.boolToString v
+        else if builtins.isInt v then
+          toString v
+        else
+          ''"${v}"'';
+
+      optLines = lib.concatStringsSep "\n" (
+        lib.mapAttrsToList (k: v: "vim.opt.${k} = ${luaValue v}") vimOpts
+      );
+    in
+    {
+
+      programs = {
+        neovim = {
+          enable = true;
+          defaultEditor = true;
+
+          viAlias = true;
+          vimAlias = true;
+          vimdiffAlias = true;
+
+          withRuby = true;
+          withPython3 = true;
+
+          plugins = with pkgs.vimPlugins; [
+            # web
+            coc-html
+
+            # python
+            coc-pyright
+
+            # other
+            coc-sh
+            coc-json
+            coc-docker
+            coc-git
+
+            nvim-treesitter.withAllGrammars
+
+            nvim-colorizer-lua
+
+            hmts-nvim
+
+            blink-indent
+            guess-indent-nvim
+
+            # folds
+            nvim-ufo
+          ];
+
+          initLua = ''
+            ${optLines}
+
+            require'colorizer'.setup({
+              user_default_options = {
+                names = false,
+              }
+            })
+
+            require'ufo'.setup({
+              provider_selector = function(bufnr, filetype, buftype)
+                return { 'treesitter', 'indent' }
+              end,
+            })
+            vim.keymap.set('n', 'zR', require'ufo'.openAllFolds)
+            vim.keymap.set('n', 'zM', require'ufo'.closeAllFolds)
+
+            vim.api.nvim_create_autocmd('FileType', {
+              pattern = {
+                'markdown',
+                'typst',
+                'tex',
+                'plaintex',
+                'context',
+                'asciidoc',
+                'rst',
+                'org',
+                'text',
+              },
+              callback = function()
+                vim.opt_local.wrap = true
+                vim.opt_local.linebreak = true
+                vim.keymap.set({ 'n', 'x' }, 'j', 'gj', { buffer = true, desc = 'Down by display line' })
+                vim.keymap.set({ 'n', 'x' }, 'k', 'gk', { buffer = true, desc = 'Up by display line' })
+              end,
+            })
+
+            local neo_enabled = true
+            vim.keymap.set('n', '<leader>tn', function()
+              if neo_enabled then
+                vim.cmd('CocCommand document.toggleInlayHint')
+                neo_enabled = false
+                vim.notify("Neo features OFF")
+              else
+                vim.cmd('CocEnable')
+                vim.cmd('CocCommand document.toggleInlayHint')
+                neo_enabled = true
+                vim.notify("Neo features ON")
+              end
+            end, { desc = "Toggle neo features (inlay hints)" })
+
+          '';
+
+          coc = {
+            enable = true;
+            settings = {
+              languageserver = {
+                rust = {
+                  command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+                  args = [ ];
+                  rootPatterns = [
+                    "*.rs"
+                  ];
+                  filetypes = [ "rust" ];
+                };
+
+                typst = {
+                  command = "${pkgs.tinymist}/bin/tinymist";
+                  args = [ ];
+                  filetypes = [ "tpy" ];
+                };
+
+                nix = {
+                  command = "${pkgs.nil}/bin/nil";
+                  args = [ ];
+                  filetypes = [ "nix" ];
+                  settings.nil.nix.flake.autoArchive = true;
+                };
+              };
+              coc.preferences.formatOnType = true;
+            };
+          };
+        };
+      };
+    };
+}

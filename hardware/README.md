@@ -14,47 +14,21 @@ any moment in time. here's a list:
     it operates mostly as a NAS and a minecraft server box.
     i run truenas scale on it, though i want to change it to nixos.
   - the name comes from it being a monumental effort to procure and set up
-- `rectangle` (decommissioned)
-  - custom build hodgepodge of hardware
-    - AM4 platform, ryzen 5800X
-    - rx6700xt
-    - 32 GB DDR4 3200 MTps
-  - mostly use this one for playing games. since getting `decknt`, i rarely use it.
-    may repurpose into a nix build server as it's more powerful than `monument`.
-  - the name comes from the shape.
-- `decknt`
+- `amulet`
   - ROG Ally Z1 Extreme
-  - i play video games on this one. it currently runs a
-    [custom fork of bazzite](https://github.com/ryleu/ryzzite).
-  - the name comes from a play on the hostname of my brother's handheld.
-    in his naming brilliance, he decided that the valve steam deck should simply be
-    called `deck`.
-    though simple on the surface, the moniker actually harkens back to a time when
-    people called things what they were.
-    when a pair of scissors was simply "scissors".
-    when a blanket was called "Blanket", or perhaps "Blue Blanket" instead of some
-    keyword-filled god-forsaken garble of search terms like "Fleece Plush Throw
-    Blanket Navy Blue(50 by 60 Inches),Super Soft Fuzzy Cozy Flannel Blanket for
-    Couch Sofa.Microfiber Blanket Lightweight".
-    it is an omage to what it is: a deck.
-
-    my handheld is not a deck, so i called it `decknt`.
+  - i play video games on this one. it currently runs Bazzite
 - `frame`
   - Steam Frame!
   - i use it for beatsaber
 - `temple`
   - AMD BC250
-  - i play games on it and was too lazy to change the hostname
-- [`ethernet-port`](../modules/hardware/ethernet-port)
+  - i play games on it
+- [`stela`](../modules/hosts/stela) (formerly `ethernet-port`)
   - Thinkpad P14 Gen 6 AMD
-  - the name comes from the fact that my Thinkpad has an ethernet port, but
-    [@iggy-c](https://github.com/iggy-c)'s does not, thus making mine superior.
 
 ## peripherals
 
-i consider the monitors, keyboard, and mouse to be a part of rectangle, so i don't
-count those ones.
-i have other peripherals that come with me in my backpack.
+i have some peripherals that come with me in my backpack.
 
 - **keyboard:** i use an afternoon labs breeze with glorious pandas in it.
   it has a columnar stagger, which is more comfortable for me.

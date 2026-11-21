@@ -1,17 +1,15 @@
 {
-  description = "Configuration flake for ryleu's desktop";
-
-  # shared configuration is stored in configuration.nix, while individual configs are in the files
-  # named for the device's hostname. eg: ethernet-port uses modules/nixos and modules/hardware/ethernet-port
+  description = "Configuration flake for ryleu's machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    unstable_pkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     # provides openssl 3.0 for the horizon client's opensc pkcs11 module
     openssl30_pkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
 
+    # styling
     stylix = {
-      url = "github:nix-community/stylix/release-26.05";
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
@@ -22,7 +20,10 @@
     };
     systems.url = "github:nix-systems/default";
 
+    # hardware presets
     hardware.url = "github:nixos/nixos-hardware";
+
+    # secrets
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,14 +36,14 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # still not in nixpkgs because screw you
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
-      # zen-browser needs ffmpeg_9, which nixos-26.05 doesn't have
-      inputs.nixpkgs.follows = "unstable_pkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -51,58 +52,31 @@
 
     calibre-plugins.url = "github:nydragon/calibre-plugins";
 
+    # funny dynamic wallpaper
     mcwall = {
       url = "github:ryleu/mcwall";
-      inputs.nixpkgs.follows = "unstable_pkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Steam Game Mode
+    jovian = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # declarative disk layouts
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # ./modules has flake parts modules
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    import-tree.url = "github:vic/import-tree";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      ...
-    }@inputs:
-    let
-      # Small tool to iterate over each systems
-      eachSystem =
-        f: nixpkgs.lib.genAttrs (import inputs.systems) (system: f nixpkgs.legacyPackages.${system});
-
-      # Eval the treefmt modules from ./treefmt.nix
-      treefmtEval = eachSystem (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
-    in
-    {
-      nixosConfigurations =
-        let
-          baseModules = [
-            ./modules/nixos
-            ./modules/home-manager
-            {
-              nixpkgs.overlays = [
-                inputs.firefox-addons.overlays.default
-              ];
-            }
-            inputs.stylix.nixosModules.stylix
-          ];
-          specialArgs = {
-            inherit inputs;
-          };
-        in
-        {
-          # ethernet-port's nixos configuration
-          ethernet-port = nixpkgs.lib.nixosSystem {
-            modules = baseModules ++ [
-              ./modules/hardware/ethernet-port
-            ];
-            inherit specialArgs;
-          };
-        };
-
-      # for nix fmt
-      formatter = eachSystem (pkgs: treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
-      # for `nix flake check`
-      checks = eachSystem (pkgs: {
-        formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
-      });
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }
